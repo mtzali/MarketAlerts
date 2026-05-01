@@ -757,12 +757,9 @@ def run_analysis(config: Config, mode: str = "hourly") -> dict | None:
 
                 report = format_no_signal_report(mode, bull_str, bear_str, config)
                 print(report)
-                # Send if previous had an actionable signal (state changed to no-signal)
-                # or if this is the first run
-                if prev is not None:
-                    logger.info("Still no actionable signal, skipping Telegram notification")
-                else:
-                    send_telegram_message(report, config)
+                # Always send no-signal reports for premarket/weekly modes
+                # since they run infrequently (daily/weekly)
+                send_telegram_message(report, config)
 
             return None
 
