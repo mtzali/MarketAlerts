@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for f in .github/workflows/*.yml)",
+      "Bash(do sed -i 's|git pull --rebase origin main$|git pull --rebase origin main || { git rebase --abort 2>/dev/null; exit 0; }|' \"$f\")",
+      "Bash(done)",
+      "Bash(do sed -i 's/git pull --rebase origin main$/git pull --rebase origin main || { git rebase --abort 2>\\\\/dev\\\\/null; exit 0; }/' \"$f\")",
+      "Bash(grep:*)"
+    ]
+  }
+}
