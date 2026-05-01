@@ -27,26 +27,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Copy modified data files before pulling
-          tmp_dir=$(mktemp -d)
-          cp -f COT_SMI/SPY_NASDAQ/1_Core_Strategy/*.db "$tmp_dir/" 2>/dev/null || true
-          cp -f COT_SMI/SPY_NASDAQ/1_Core_Strategy/*.csv "$tmp_dir/" 2>/dev/null || true
-          cp -f COT_SMI/SPY_NASDAQ/1_Core_Strategy/*.json "$tmp_dir/" 2>/dev/null || true
-          cp -f COT_SMI/SPY_NASDAQ/1_Core_Strategy/*.png "$tmp_dir/" 2>/dev/null || true
-          for i in 1 2 3; do
-            # Reset to clean state and pull latest
-            git checkout -- . 2>/dev/null || true
-            git clean -fd 2>/dev/null || true
-            git pull origin main || true
-            # Restore our data files on top of latest
-            cp -f "$tmp_dir"/*.db COT_SMI/SPY_NASDAQ/1_Core_Strategy/ 2>/dev/null || true
-            cp -f "$tmp_dir"/*.csv COT_SMI/SPY_NASDAQ/1_Core_Strategy/ 2>/dev/null || true
-            cp -f "$tmp_dir"/*.json COT_SMI/SPY_NASDAQ/1_Core_Strategy/ 2>/dev/null || true
-            cp -f "$tmp_dir"/*.png COT_SMI/SPY_NASDAQ/1_Core_Strategy/ 2>/dev/null || true
-            git add -A -- '*.csv' '*.db' '*.json' '*.png'
-            git diff --staged --quiet && exit 0
-            git commit -m "Auto-update: ${{ github.workflow }} $(date -u +'%Y-%m-%d %H:%M UTC')"
-            git push origin main && exit 0
-            sleep $((i * 5))
-          done
-          echo "Failed to push after 3 retries" && exit 1
+          # Auto-resolve binary .db conflicts by keeping our version
+          git config merge.ours.driver true
+          echo '*.db merge=ours' >> .git/info/attributes
+          git add -A -- '*.csv' '*.db' '*.json' '*.png'
+          git diff --staged --quiet || git commit -m "Auto-update: ${{ github.workflow }} $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull origin main --no-rebase
+          git push origin main
