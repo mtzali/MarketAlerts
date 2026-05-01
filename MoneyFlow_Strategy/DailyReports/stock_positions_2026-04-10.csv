@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+AIA,iShares Asia 50 ETF,Financial,XLF,57.34613108368933,114.34,3.21,112.74,114.34,115.3,swing-based,10,1143.4,114.34,99.82,-12.7,115.28,0.8,124.84,154.85,-0.22,-0.0,21,RISK_ON,882095,,CONSIDER
+AVL,Direxion Daily AVGO Bull 2X ETF,Financial,XLF,57.34613108368933,46.92,2.8,45.52,46.92,47.76,swing-based,26,1219.92,46.92,27.55,-41.3,64.7,37.9,87.66,525.41,440.45,0.84,21,RISK_ON,1143191,,CONSIDER
+CHAT,Roundhill Generative AI & Technology ETF,Financial,XLF,57.34613108368933,69.4,2.31,68.24,69.4,70.09,swing-based,18,1249.2,69.4,57.36,-17.3,71.71,3.3,74.03,229.14,29.14,0.13,21,RISK_ON,557470,,CONSIDER
+COHX,Tradr 2X Long COHR Daily ETF,Financial,XLF,57.34613108368933,41.21,5.36,38.53,41.21,42.82,swing-based,30,1236.3,41.21,17.96,-56.4,43.16,4.7,58.73,745.83,10.23,0.01,21,RISK_ON,1001720,,CONSIDER
+DRN,Direxion Daily Real Estate Bull 3X ETF,Financial,XLF,57.34613108368933,9.85,0.4,9.65,9.85,9.97,swing-based,126,1241.1,9.85,7.85,-20.3,10.75,9.2,12.55,267.16,98.66,0.37,21,RISK_ON,1393085,,CONSIDER
+DUSB,Dimensional Ultrashort Fixed Income ETF,Financial,XLF,57.34613108368933,50.78,0.03,50.77,50.78,50.79,swing-based,24,1218.72,50.78,50.74,-0.1,50.81,0.1,50.84,1.11,0.6,0.54,21,RISK_ON,435757,,CONSIDER
+EWS,iShares MSCI Singapore ETF,Financial,XLF,57.34613108368933,28.98,0.45,28.76,28.98,29.11,swing-based,43,1246.14,28.98,26.87,-7.3,29.09,0.4,30.47,96.75,-1.07,-0.01,21,RISK_ON,3247539,,CONSIDER
+FELV,Fidelity Enhanced Large Cap Value ETF,Financial,XLF,57.34613108368933,36.22,0.5,35.97,36.22,36.37,swing-based,34,1231.48,36.22,33.78,-6.7,36.48,0.7,38.15,87.96,3.78,0.04,21,RISK_ON,366787,,CONSIDER

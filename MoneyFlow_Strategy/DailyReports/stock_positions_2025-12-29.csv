@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+SCHL,Scholastic Corp,Communication Services,XLC,59.93004261970642,30.82,1.36,30.14,30.82,31.23,swing-based,40,1232.8,30.82,25.7,-16.6,31.86,3.4,35.67,221.03,25.31,0.11,21,NEUTRAL,512840,1.0,CONSIDER
+SLVR,Sprott Silver Miners & Physical Silver ETF,Financial,XLF,59.89261003639295,56.46,2.79,55.06,56.46,57.3,swing-based,22,1242.12,56.46,46.16,-18.2,60.0,6.3,68.55,245.06,59.45,0.24,21,NEUTRAL,791309,,CONSIDER
+PLTM,GraniteShares Platinum Shares,Financial,XLF,59.89261003639295,20.38,1.11,19.82,20.38,20.71,swing-based,61,1243.18,20.38,13.95,-31.6,23.85,17.1,29.98,412.64,191.63,0.46,21,NEUTRAL,3209073,,CONSIDER
+PPH,VanEck Pharmaceutical ETF,Financial,XLF,59.89261003639295,103.92,1.32,103.26,103.92,104.32,swing-based,12,1247.04,103.92,96.86,-6.8,104.46,0.5,109.16,89.51,1.72,0.02,21,NEUTRAL,1007708,,CONSIDER
+PPLT,abrdn Physical Platinum Shares ETF,Financial,XLF,59.89261003639295,192.78,10.5,187.53,192.78,195.93,swing-based,6,1156.68,192.78,143.75,-25.4,225.71,17.1,276.36,313.07,178.69,0.57,21,NEUTRAL,3245695,,CONSIDER
+SCHY,Schwab International Dividend Equity ETF,Financial,XLF,59.89261003639295,29.83,0.18,29.74,29.83,29.88,swing-based,41,1223.03,29.83,29.29,-1.8,30.0,0.6,30.44,24.42,4.73,0.19,21,NEUTRAL,980584,,CONSIDER
+SDIV,Global X SuperDividend ETF,Financial,XLF,59.89261003639295,24.22,0.17,24.14,24.22,24.27,swing-based,51,1235.22,24.22,23.71,-2.1,24.29,0.3,24.65,28.73,1.02,0.04,21,NEUTRAL,852504,,CONSIDER
+SIL,Global X Silver Miners ETF,Financial,XLF,59.89261003639295,85.25,3.6,83.45,85.25,86.33,swing-based,14,1193.5,85.25,72.85,-14.5,90.29,5.9,101.07,188.69,55.45,0.29,21,NEUTRAL,5556913,,CONSIDER

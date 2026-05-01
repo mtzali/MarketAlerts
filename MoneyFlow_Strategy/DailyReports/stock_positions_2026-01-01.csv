@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+SCHL,Scholastic Corp,Communication Services,XLC,59.62205323422106,29.63,1.4,28.93,29.63,30.05,swing-based,42,1244.46,29.63,25.68,-13.3,30.83,4.0,34.01,183.44,32.8,0.18,21,NEUTRAL,451598,1.0,CONSIDER
+AFJK,Aimei Health Technology Co Ltd,Financial,XLF,59.37373757013599,64.01,26.79,50.61,64.01,72.05,swing-based,19,1216.19,64.01,10.6,-83.4,109.37,70.9,170.41,1167.44,709.12,0.61,21,NEUTRAL,485193,,CONSIDER
+TMV,Direxion Daily 20+ Year Treasury Bear -3X Shares,Financial,XLF,59.37373757013599,37.16,0.68,36.82,37.16,37.37,swing-based,33,1226.28,37.16,35.6,-4.2,37.32,0.4,38.39,58.33,-1.42,-0.02,21,NEUTRAL,1965427,,CONSIDER
+PFL,Pimco Income Strategy Fund,Financial,XLF,59.37373757013599,8.43,0.05,8.4,8.43,8.45,swing-based,148,1247.64,8.43,8.31,-1.4,8.46,0.4,8.55,19.41,2.16,0.11,21,NEUTRAL,768711,,CONSIDER
+NUV,Nuveen Municipal Value Fund Inc,Financial,XLF,59.37373757013599,9.06,0.07,9.03,9.06,9.08,swing-based,137,1241.22,9.06,8.9,-1.8,9.1,0.4,9.23,25.09,2.75,0.11,21,NEUTRAL,1063240,,CONSIDER
+NFJ,Virtus AllianzGI Dividend Interest & Premium Strategy Fund,Financial,XLF,59.37373757013599,12.89,0.12,12.83,12.89,12.93,swing-based,96,1237.44,12.89,12.52,-2.9,13.02,1.0,13.33,38.98,9.02,0.23,21,NEUTRAL,442613,,CONSIDER
+NEA,Nuveen AMT-Free Quality Municipal Income Fund,Financial,XLF,59.37373757013599,11.63,0.09,11.58,11.63,11.66,swing-based,107,1244.41,11.63,11.42,-1.8,11.71,0.7,11.89,25.06,5.58,0.22,21,NEUTRAL,1482123,,CONSIDER
+LION,Lionsgate Studios Corp,Financial,XLF,59.37373757013599,9.13,0.42,8.92,9.13,9.26,swing-based,136,1241.68,9.13,6.82,-25.3,9.46,3.6,11.09,331.69,27.6,0.08,21,NEUTRAL,3816123,1.82,CONSIDER

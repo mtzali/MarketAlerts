@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+ALM,Almonty Industries Inc,Basic Materials,XLB,62.936135393586326,9.61,0.57,9.32,9.61,9.78,swing-based,130,1249.3,9.61,8.27,-13.9,10.27,6.9,11.5,195.93,63.51,0.32,21,NEUTRAL,6637574,1.0,CONSIDER
+FCX,Freeport-McMoRan Inc,Basic Materials,XLB,62.936135393586326,54.41,1.45,53.68,54.41,54.85,swing-based,22,1197.02,54.41,49.93,-8.2,55.86,2.7,57.31,108.06,22.36,0.21,21,NEUTRAL,26730992,1.68,CONSIDER
+HYMC,Hycroft Mining Holding Corporation,Basic Materials,XLB,62.936135393586326,28.15,3.13,26.59,28.15,29.09,swing-based,44,1238.6,28.15,9.47,-66.4,29.8,5.9,42.37,863.43,31.3,0.04,21,NEUTRAL,6620178,,CONSIDER
+MEOH,Methanex Corp,Basic Materials,XLB,62.936135393586326,42.93,1.09,42.39,42.93,43.26,swing-based,29,1244.97,42.93,39.08,-9.0,44.02,2.5,45.11,121.25,22.1,0.18,21,NEUTRAL,806588,1.1,CONSIDER
+RYAM,Rayonier Advanced Materials Inc,Basic Materials,XLB,62.936135393586326,7.02,0.25,6.89,7.02,7.1,swing-based,178,1249.56,7.02,5.57,-20.6,7.6,8.3,8.85,270.66,89.85,0.33,21,NEUTRAL,2251111,1.0,CONSIDER
+ERO,Ero Copper Corp,Basic Materials,XLB,62.936135393586326,30.37,1.21,29.77,30.37,30.73,swing-based,41,1245.17,30.37,23.9,-21.3,31.58,4.0,32.79,280.34,34.71,0.12,21,NEUTRAL,2193277,1.94,CONSIDER
+MFSI,MFS Active International ETF,Financial,XLF,60.3077400527001,31.17,0.24,31.05,31.17,31.24,swing-based,40,1246.8,31.17,30.25,-2.9,31.41,0.8,31.64,39.6,6.65,0.17,21,NEUTRAL,403731,,CONSIDER
+IXN,iShares Global Tech ETF,Financial,XLF,60.3077400527001,106.69,1.47,105.96,106.69,107.13,swing-based,11,1173.59,106.69,104.27,-2.3,107.31,0.6,109.19,31.48,1.97,0.06,21,NEUTRAL,604557,,CONSIDER

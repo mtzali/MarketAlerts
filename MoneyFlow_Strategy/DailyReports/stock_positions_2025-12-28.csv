@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+AGQ,ProShares Ultra Silver 2x Shares,Financial,XLF,62.24620688541821,199.74,11.35,194.07,199.74,203.14,swing-based,6,1198.44,199.74,75.54,-62.2,211.09,5.7,222.43,765.64,47.65,0.06,21,NEUTRAL,10682964,,CONSIDER
+BBIN,JPMorgan BetaBuilders International Equity ETF,Financial,XLF,62.24620688541821,73.01,0.54,72.74,73.01,73.17,swing-based,17,1241.17,73.01,70.8,-3.0,73.55,0.7,74.09,40.26,6.43,0.16,21,NEUTRAL,323046,,CONSIDER
+VONV,Vanguard Russell 1000 Value Index ETF,Financial,XLF,62.24620688541821,93.22,0.76,92.84,93.22,93.45,swing-based,13,1211.86,93.22,91.11,-2.3,93.37,0.2,94.77,30.39,-1.02,-0.03,21,NEUTRAL,1942530,,CONSIDER
+UAE,iShares MSCI UAE ETF,Financial,XLF,62.24620688541821,19.54,0.18,19.45,19.54,19.59,swing-based,63,1231.02,19.54,18.98,-2.9,19.57,0.2,19.93,38.64,-1.5,-0.04,21,NEUTRAL,787588,,CONSIDER
+TRIN,Trinity Capital Inc,Financial,XLF,62.24620688541821,15.2,0.23,15.09,15.2,15.27,swing-based,82,1246.4,15.2,14.85,-2.3,15.29,0.6,15.56,34.74,1.73,0.05,21,NEUTRAL,1343816,1.6,CONSIDER
+SPPP,Sprott Physical Platinum and Palladium Trust,Financial,XLF,62.24620688541821,19.94,0.75,19.56,19.94,20.17,swing-based,62,1236.28,19.94,14.07,-29.4,20.69,3.8,21.45,377.79,32.74,0.09,21,NEUTRAL,2522401,,CONSIDER
+SPHB,Invesco S&P 500 High Beta ETF,Financial,XLF,62.24620688541821,119.61,1.85,118.69,119.61,120.16,swing-based,10,1196.1,119.61,114.28,-4.5,120.1,0.4,123.7,58.83,-0.64,-0.01,21,NEUTRAL,561196,,CONSIDER
+SLVR,Sprott Silver Miners & Physical Silver ETF,Financial,XLF,62.24620688541821,60.0,2.58,58.71,60.0,60.77,swing-based,20,1200.0,60.0,46.27,-22.9,62.58,4.3,65.15,290.1,36.05,0.12,21,NEUTRAL,676963,,CONSIDER

@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+SATS,EchoStar Corp,Communication Services,XLC,58.8334144333279,107.37,5.44,104.65,107.37,109.0,swing-based,11,1181.07,107.37,63.42,-40.9,112.81,5.1,118.24,501.36,41.85,0.08,21,NEUTRAL,7634738,2.44,CONSIDER
+HLF,Herbalife Ltd,Consumer Defensive,XLP,55.544052979953236,14.74,0.69,14.39,14.74,14.95,swing-based,84,1238.16,14.74,11.26,-23.6,15.43,4.7,16.13,309.48,40.74,0.13,21,NEUTRAL,2917252,2.25,CONSIDER
+MAMA,Mama's Creations Inc,Consumer Defensive,XLP,55.544052979953236,13.33,0.82,12.92,13.33,13.58,swing-based,93,1239.69,13.33,10.63,-20.2,14.5,8.8,16.89,273.55,85.95,0.31,21,NEUTRAL,562817,1.0,CONSIDER
+BKE,"Buckle, Inc",Consumer Cyclical,XLY,54.35211501194027,57.05,1.53,56.28,57.05,57.51,swing-based,21,1198.05,57.05,54.83,-3.9,57.69,1.1,59.45,56.18,3.79,0.07,21,NEUTRAL,781406,3.0,CONSIDER
+CVNA,Carvana Co,Consumer Cyclical,XLY,54.35211501194027,455.68,21.43,444.96,455.68,462.11,swing-based,2,911.36,455.68,297.78,-34.7,475.0,4.2,584.52,328.65,25.78,0.08,21,NEUTRAL,6025777,1.65,CONSIDER
+DBI,Designer Brands Inc,Consumer Cyclical,XLY,54.35211501194027,8.29,0.59,8.0,8.29,8.47,swing-based,150,1243.5,8.29,2.96,-64.3,8.54,3.0,11.99,825.98,10.97,0.01,21,NEUTRAL,1996983,3.0,CONSIDER
+GBTG,Global Business Travel Group Inc,Consumer Cyclical,XLY,54.35211501194027,8.06,0.29,7.92,8.06,8.15,swing-based,155,1249.3,8.06,7.26,-10.0,8.31,3.1,8.96,138.17,25.3,0.18,21,NEUTRAL,3729674,1.29,CONSIDER
+MTN,Vail Resorts Inc,Consumer Cyclical,XLY,54.35211501194027,161.76,4.68,159.42,161.76,163.17,swing-based,7,1132.32,161.76,130.32,-19.4,161.91,0.1,181.44,229.94,-8.78,-0.04,21,NEUTRAL,1537999,2.54,CONSIDER

@@ -1,0 +1,239 @@
+# SqueezeScanner Configuration
+# Daily scanner for short squeeze setups with regime filtering and retracement tracking
+
+# =============================================================================
+# TELEGRAM SETTINGS
+# =============================================================================
+telegram:
+  enabled: true
+  bot_token: ""  # Set via TELEGRAM_BOT_TOKEN_SQUEEZE env var
+  chat_id: ""    # Set via TELEGRAM_CHAT_ID_SQUEEZE env var
+
+  # What to send
+  send_new_setups: true
+  send_retracement_alerts: true
+  send_regime_changes: true
+  send_stop_alerts: true
+  send_daily_summary: true
+
+# =============================================================================
+# DATA SOURCES
+# =============================================================================
+data_sources:
+  # Paths to existing scanner downloads (relative to finviz root)
+  short_squeeze_dir: "../ShortSqueeze/downloads"
+  intraday_momentum_dir: "../IntradayMomentum/downloads"
+
+# =============================================================================
+# REGIME SETTINGS
+# =============================================================================
+regime:
+  # SPY thresholds
+  spy_sma_short: 20
+  spy_sma_long: 50
+
+  # VIX thresholds
+  vix_low: 15        # Below this = complacent (bullish)
+  vix_normal: 18     # Below this = normal
+  vix_elevated: 22   # Below this = elevated
+  vix_high: 25       # Above this = high fear
+
+  # Regime persistence (days)
+  min_bullish_persistence: 3  # Prefer 3+ consecutive bullish days
+
+# =============================================================================
+# NEW SIGNAL SCORING
+# =============================================================================
+signal_scoring:
+  # Grade thresholds (out of 100)
+  grade_a_plus: 85
+  grade_a: 70
+  grade_b: 55
+  grade_c: 40
+
+  # Only suggest these grades
+  suggest_grades: ["A+", "A"]
+
+  # Signal day change thresholds
+  ideal_signal_change_min: 5    # Minimum % change to consider
+  ideal_signal_change_max: 25   # Maximum % change (not too late)
+  max_signal_change: 50         # Skip if already up this much
+
+  # Short float thresholds
+  min_short_float: 20           # Minimum short float %
+  ideal_short_float: 30         # Ideal short float %
+
+  # Short ratio thresholds (days to cover)
+  min_short_ratio: 3
+  ideal_short_ratio: 7
+
+# =============================================================================
+# RETRACEMENT SETTINGS
+# =============================================================================
+retracement:
+  lookback_days: 30             # How far back to look for signals
+
+  # Pullback thresholds
+  min_pullback_pct: 20          # Minimum pullback from peak
+  max_pullback_pct: 45          # Maximum pullback (beyond = broken)
+  ideal_pullback_min: 25        # Ideal zone start
+  ideal_pullback_max: 38        # Ideal zone end (golden pocket)
+
+  # Minimum requirements
+  min_score: 50                 # Minimum score to consider
+  require_candlestick: true     # Must have reversal candle
+  require_momentum_confirm: true # Must have momentum confirmation
+
+  # Grade thresholds
+  grade_a_plus: 85
+  grade_a: 70
+  grade_b: 55
+
+# =============================================================================
+# STOP LOSS SETTINGS
+# =============================================================================
+stop_loss:
+  # Maximum stop distance (hard cap)
+  max_stop_pct: 20
+
+  # ATR multipliers by setup type
+  atr_mult_a_plus: 2.5
+  atr_mult_a: 2.0
+  atr_mult_retracement: 1.5
+
+  # VIX adjustments
+  vix_adjustment_low: 0.9       # VIX < 15
+  vix_adjustment_normal: 1.0    # VIX 15-18
+  vix_adjustment_elevated: 1.15 # VIX 18-22
+  vix_adjustment_high: 1.3      # VIX > 22
+
+  # Trailing stop settings
+  trailing_activation_pct: 15   # Start trailing after +15%
+  trailing_atr_mult: 2.0        # Trail at 2x ATR from high
+
+  # Time-based tightening
+  day_3_tighten: false          # Tighten after day 3
+  day_7_breakeven: true         # Move to breakeven after day 7 if profitable
+
+# =============================================================================
+# TARGETS
+# =============================================================================
+targets:
+  target_1_pct: 30              # First target +30%
+  target_2_pct: 50              # Second target +50%
+  partial_take_pct: 50          # Take 50% at target 1
+
+# =============================================================================
+# TECHNICAL ANALYSIS SETTINGS
+# =============================================================================
+technical_analysis:
+  # RSI settings
+  rsi_period: 14
+  rsi_oversold: 30
+  rsi_overbought: 70
+
+  # MACD settings
+  macd_fast: 12
+  macd_slow: 26
+  macd_signal: 9
+
+  # Stochastic settings
+  stoch_k: 14
+  stoch_d: 3
+  stoch_oversold: 20
+
+  # Moving averages
+  ema_short: 10
+  ema_medium: 20
+  sma_long: 50
+  sma_major: 200
+
+  # ATR period
+  atr_period: 14
+
+# =============================================================================
+# WATCHLIST SETTINGS
+# =============================================================================
+watchlist:
+  max_active_positions: 10      # Maximum positions to track
+  auto_remove_stopped: true     # Remove from watchlist when stopped
+  alert_approaching_stop: 5     # Alert when within 5% of stop
+
+# =============================================================================
+# SYSTEM SETTINGS
+# =============================================================================
+system:
+  database_path: "data/squeeze_scanner.db"
+  log_level: "INFO"
+  timezone: "US/Eastern"
+
+# =============================================================================
+# EXHAUSTION DETECTION SETTINGS
+# =============================================================================
+# Exhaustion zone detection for Fallen Shorts entries
+# Run at 7 AM daily after previous day's candle closes
+
+exhaustion_detection:
+  enabled: true
+
+  # Entry thresholds (out of 100)
+  entry_threshold: 60           # Minimum score to qualify for entry
+  strong_entry_threshold: 80    # High conviction entry
+
+  # Volume profile settings
+  volume_lookback_days: 10      # Days to analyze volume trend
+  volume_decline_threshold: 0.7 # Ratio below this = declining
+
+  # Support confluence settings
+  support_zone_pct: 3.0         # % zone around support level
+
+  # Price history
+  history_days: 60              # Days of history to fetch (for 200MA)
+
+  # Scoring weights (for reference - implemented in code)
+  # Volume Profile: 0-20 pts (declining volume = exhaustion)
+  # Technical Exhaustion: 0-25 pts (RSI div, MACD cross, Stochastic)
+  # Support Confluence: 0-25 pts (price at key levels)
+  # Candlestick Signal: 0-15 pts (reversal patterns at support)
+  # Short Squeeze Tension: 0-15 pts (float change, ratio, drop)
+
+  # Stop loss preference
+  prefer_structure_stop: true   # Use support-based stop when confluence >= 2
+  min_stop_pct: 5.0             # Minimum stop distance %
+  max_stop_pct: 12.0            # Maximum stop distance %
+
+# =============================================================================
+# FALLEN SHORTS TRACKER SETTINGS
+# =============================================================================
+fallen_shorts:
+  # Daily summary - sends compact overview of all tracked tickers
+  send_daily_summary: true
+  summary_threshold: 50           # Highlight tickers with score >= this
+
+# =============================================================================
+# OPTIMIZED STRATEGY (High Conviction + Trailing Stop)
+# =============================================================================
+# Recommended strategy based on backtesting analysis:
+# - 81% win rate when signal in BOTH sources
+# - 22.69% ROI vs 7% with original strategy
+# - 1.2 day average hold time (fast capital turnover)
+# - $454 expectancy per trade
+
+optimized_strategy:
+  enabled: true                 # Use optimized strategy for position management
+
+  # Signal filters (High Conviction)
+  require_both_sources: true    # Only trade if in BOTH ShortSqueeze AND IntradayMomentum
+  min_volume_ratio: 2.0         # Minimum relative volume (2x = 200% of average)
+  grade_filter: ["A+", "A"]     # Only trade A+ and A grades
+
+  # Trailing stop settings (8% trailing is optimal based on backtesting)
+  trailing_stop_pct: 8.0        # 8% trailing stop from highest price
+  initial_stop_pct: 8.0         # Initial stop 8% below entry
+
+  # Time management
+  max_hold_days: 5              # Exit after 5 days maximum (most gains happen in 1-3 days)
+
+  # Capital settings
+  capital_per_trade: 2000       # Default capital per trade
+  max_concurrent_positions: 5   # Maximum positions at once

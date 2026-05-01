@@ -1,0 +1,71 @@
+# ===========================================
+# REGIME-FILTERED PIVOT ORDERS CONFIGURATION
+# ===========================================
+# Entry at regime-appropriate pivot level with scaled bracket exits
+
+# ===========================================
+# IBKR CONNECTION (TWS)
+# ===========================================
+ibkr:
+  host: "127.0.0.1"
+  port: 7497                    # TWS Paper Trading (use 7496 for live)
+  client_id: 22                 # Unique — avoid conflicts with pivot (20) and squeeze (21)
+  timeout: 30
+
+# ===========================================
+# STRATEGY SETTINGS
+# ===========================================
+strategy:
+  name: "Regime-Filtered Pivot Orders"
+
+  # Position sizing
+  position_size: 3000           # Per position ($3000 for scaled exits)
+  max_positions: 6              # Max simultaneous positions
+
+  # Stop loss
+  stop_buffer: 0.05             # 5% below S3
+
+  # Filters
+  min_reward_risk: 0.8          # Minimum R:R ratio
+  max_risk_pct: 35              # Max % risk to stop (skip if higher)
+  min_price: 1.0                # Min stock price
+  max_price: 500                # Max stock price
+
+  # SPY correlation filter
+  spy_correlation_min: 0.50     # Minimum 60-day correlation with SPY
+  spy_correlation_days: 60      # Lookback period for correlation
+
+  # Current price check
+  near_entry_pct: 0.02          # Within 2% of entry = "at support" -> MKT
+
+# ===========================================
+# ORDER SETTINGS
+# ===========================================
+orders:
+  time_in_force: "DAY"          # DAY = Cancel if not filled today
+  transmit: true                # Set to false to preview without submitting
+
+# ===========================================
+# ACCOUNTS
+# ===========================================
+accounts:
+  - id: "DUO853478"
+    name: "Paper Account 1"
+    enabled: true
+  - id: "DUO853479"
+    name: "Paper Account 2"
+    enabled: true
+
+# ===========================================
+# PATHS (relative to finviz root)
+# ===========================================
+paths:
+  intraday_momentum: "IntradayMomentum/downloads"
+
+# ===========================================
+# LOGGING
+# ===========================================
+logging:
+  level: "INFO"
+  console: true
+  file: true

@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+AA,Alcoa Corp,Basic Materials,XLB,63.08745549253273,62.74,2.31,61.59,62.74,63.43,swing-based,19,1192.06,62.74,51.49,-17.9,65.01,3.6,73.36,226.94,29.95,0.13,21,NEUTRAL,10629835,2.24,CONSIDER
+AMR,Alpha Metallurgical Resources Inc,Basic Materials,XLB,63.08745549253273,222.22,10.05,217.2,222.22,225.23,swing-based,5,1111.1,222.22,191.75,-13.7,232.27,4.5,242.31,167.44,35.17,0.21,21,NEUTRAL,400750,2.4,CONSIDER
+SCCO,Southern Copper Corporation,Basic Materials,XLB,63.08745549253273,158.09,4.68,155.75,158.09,159.49,swing-based,7,1106.63,158.09,139.66,-11.7,161.59,2.2,175.14,138.85,14.67,0.11,21,NEUTRAL,2155380,3.53,CONSIDER
+UAMY,United States Antimony Corp,Basic Materials,XLB,63.08745549253273,7.84,0.77,7.45,7.84,8.07,swing-based,159,1246.56,7.84,4.48,-42.8,8.49,8.3,10.97,570.63,66.45,0.12,21,NEUTRAL,23968734,1.0,CONSIDER
+USAS,Americas Gold and Silver Corp,Basic Materials,XLB,63.08745549253273,5.63,0.39,5.43,5.63,5.75,swing-based,222,1249.86,5.63,5.07,-9.9,6.24,10.8,6.96,150.07,109.11,0.73,21,NEUTRAL,17078864,1.0,CONSIDER
+VTYX,Ventyx Biosciences Inc,Healthcare,XLV,61.19337533318341,13.73,2.19,12.64,13.73,14.39,swing-based,91,1249.43,13.73,6.61,-51.9,15.92,15.9,18.1,707.92,139.29,0.2,21,NEUTRAL,25996036,1.2,CONSIDER
+VCEL,Vericel Corp,Healthcare,XLV,61.19337533318341,40.35,1.44,39.63,40.35,40.78,swing-based,30,1210.5,40.35,34.67,-14.1,42.64,5.7,47.56,183.27,55.78,0.3,21,NEUTRAL,1047443,1.25,CONSIDER
+TYRA,Tyra Biosciences Inc,Healthcare,XLV,61.19337533318341,30.13,1.46,29.4,30.13,30.57,swing-based,41,1235.33,30.13,19.86,-34.1,31.59,4.8,33.05,438.97,41.85,0.1,21,NEUTRAL,749320,1.0,CONSIDER

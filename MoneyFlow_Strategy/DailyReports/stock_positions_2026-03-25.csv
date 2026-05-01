@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+DEC,Diversified Energy Co,Energy,XLE,72.67892526053993,17.38,0.68,17.04,17.38,17.58,swing-based,71,1233.98,17.38,13.86,-20.3,18.06,3.9,18.74,264.43,33.82,0.13,21,NEUTRAL,1450827,1.2,CONSIDER
+TALO,Talos Energy Inc,Energy,XLE,72.67892526053993,16.28,0.64,15.96,16.28,16.47,swing-based,76,1237.28,16.28,12.58,-22.8,16.92,3.9,17.56,296.06,33.95,0.11,21,NEUTRAL,3810330,1.93,CONSIDER
+ARMG,Leverage Shares 2X Long ARM Daily ETF,Financial,XLF,45.82353576662017,10.68,0.87,10.25,10.68,10.94,swing-based,117,1249.56,10.68,5.34,-50.0,11.55,8.1,12.41,655.05,71.02,0.11,21,NEUTRAL,3263318,,CONSIDER
+BAI,iShares A.I. Innovation and Tech Active ETF,Financial,XLF,45.82353576662017,35.18,1.18,34.59,35.18,35.53,swing-based,35,1231.3,35.18,31.97,-9.1,36.27,3.1,38.93,124.74,25.76,0.21,21,NEUTRAL,3327824,,CONSIDER
+BIL,State Street SPDR Bloomberg 1-3 Month T-Bill ETF,Financial,XLF,45.82353576662017,91.58,0.02,91.57,91.58,91.59,swing-based,13,1190.54,91.58,91.6,0.0,91.59,0.0,91.58,-0.18,0.06,0.0,21,NEUTRAL,16847520,,CONSIDER
+CLOA,iShares AAA CLO Active ETF,Financial,XLF,45.82353576662017,51.85,0.09,51.8,51.85,51.88,swing-based,24,1244.4,51.85,51.56,-0.6,51.95,0.2,52.04,7.74,1.69,0.22,21,NEUTRAL,1245455,,CONSIDER
+CORN,Teucrium Corn Fund,Financial,XLF,45.82353576662017,18.75,0.36,18.57,18.75,18.86,swing-based,66,1237.5,18.75,17.25,-8.0,18.84,0.5,19.82,105.9,-1.1,-0.01,21,NEUTRAL,1371756,,CONSIDER
+DBA,Invesco DB Agriculture Fund,Financial,XLF,45.82353576662017,26.98,0.23,26.86,26.98,27.05,swing-based,46,1241.08,26.98,26.32,-2.4,26.98,-0.0,27.39,33.33,-3.18,-0.1,21,NEUTRAL,2299919,,CONSIDER

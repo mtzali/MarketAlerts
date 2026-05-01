@@ -1,0 +1,15 @@
+apscheduler
+pytz
+requests
+pandas
+numpy
+yfinance
+beautifulsoup4
+lxml
+python-telegram-bot
+matplotlib
+pillow
+sodapy
+mplfinance
+scipy
+pyyaml

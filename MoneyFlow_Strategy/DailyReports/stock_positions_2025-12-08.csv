@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+NXST,Nexstar Media Group Inc,Communication Services,XLC,53.87902062760645,195.91,6.01,192.91,195.91,197.71,swing-based,6,1175.46,195.91,176.82,-9.7,196.9,0.5,209.32,125.38,-4.86,-0.04,21,NEUTRAL,486163,1.67,CONSIDER
+WBD,Warner Bros. Discovery Inc,Communication Services,XLC,53.87902062760645,27.23,1.01,26.72,27.23,27.53,swing-based,45,1225.35,27.23,21.36,-21.5,28.24,3.7,29.25,277.62,31.87,0.11,21,NEUTRAL,165640490,2.04,CONSIDER
+SATS,EchoStar Corp,Communication Services,XLC,53.87902062760645,88.26,3.88,86.32,88.26,89.42,swing-based,14,1235.64,88.26,64.2,-27.3,92.14,4.4,96.01,353.09,37.99,0.11,21,NEUTRAL,10483010,2.56,CONSIDER
+DG,Dollar General Corp,Consumer Defensive,XLP,51.5493344272962,124.27,4.94,121.8,124.27,125.75,swing-based,10,1242.7,124.27,97.03,-21.9,135.08,8.7,158.59,287.21,93.28,0.32,21,NEUTRAL,6739674,2.37,CONSIDER
+MTVA,MetaVia Inc,Healthcare,XLV,50.53443780316468,11.52,1.24,10.9,11.52,11.89,swing-based,108,1244.16,11.52,5.43,-52.9,12.98,12.7,17.65,698.07,117.44,0.17,21,NEUTRAL,2334826,,CONSIDER
+INSP,Inspire Medical Systems Inc,Healthcare,XLV,50.53443780316468,143.99,8.99,139.5,143.99,146.69,swing-based,8,1151.92,143.99,77.53,-46.2,152.98,6.2,161.97,553.28,50.33,0.09,21,NEUTRAL,2906545,1.72,CONSIDER
+KYMR,Kymera Therapeutics Inc,Healthcare,XLV,50.53443780316468,94.3,5.29,91.65,94.3,95.89,swing-based,13,1225.9,94.3,61.04,-35.3,99.59,5.6,104.88,452.95,48.15,0.11,21,NEUTRAL,7473141,1.04,CONSIDER
+LBRX,LB Pharmaceuticals Inc,Healthcare,XLV,50.53443780316468,22.5,1.54,21.73,22.5,22.96,swing-based,55,1237.5,22.5,13.75,-38.9,24.04,6.9,25.59,506.82,59.43,0.12,21,NEUTRAL,411787,1.0,CONSIDER

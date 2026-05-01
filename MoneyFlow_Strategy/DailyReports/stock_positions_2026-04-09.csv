@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+AAMI,Acadian Asset Management Inc,Financial,XLF,56.371186319202806,61.86,2.46,60.63,61.86,62.6,swing-based,20,1237.2,61.86,47.72,-22.9,64.33,4.0,66.79,297.59,34.51,0.12,21,RISK_ON,506970,3.0,CONSIDER
+AIPO,Defiance AI & Power Infrastructure ETF,Financial,XLF,56.371186319202806,27.24,0.98,26.75,27.24,27.53,swing-based,45,1225.8,27.24,23.16,-15.0,28.22,3.6,29.19,196.69,30.75,0.16,21,RISK_ON,767666,,CONSIDER
+ARGT,Global X MSCI Argentina ETF,Financial,XLF,56.371186319202806,93.93,2.69,92.59,93.93,94.74,swing-based,13,1221.09,93.93,83.79,-10.8,97.26,3.5,105.59,142.34,32.81,0.23,21,RISK_ON,674989,,CONSIDER
+BBJP,JPMorgan BetaBuilders Japan ETF,Financial,XLF,56.371186319202806,71.91,1.89,70.97,71.91,72.48,swing-based,17,1222.47,71.91,65.05,-9.5,73.4,2.1,78.56,126.25,15.69,0.12,21,RISK_ON,5970667,,CONSIDER
+BCAL,California BanCorp,Financial,XLF,56.371186319202806,18.56,0.38,18.37,18.56,18.67,swing-based,67,1243.52,18.56,16.86,-9.1,19.13,3.1,20.53,121.15,30.66,0.25,21,RISK_ON,454756,1.0,CONSIDER
+CBC,Central Bancompany Inc,Financial,XLF,56.371186319202806,25.09,0.57,24.8,25.09,25.26,swing-based,49,1229.41,25.09,23.04,-8.2,25.26,0.7,26.63,108.94,-0.09,-0.0,21,RISK_ON,795116,1.4,CONSIDER
+CHAT,Roundhill Generative AI & Technology ETF,Financial,XLF,56.371186319202806,68.57,2.44,67.35,68.57,69.3,swing-based,18,1234.26,68.57,57.3,-16.4,71.01,3.6,73.44,215.97,30.69,0.14,21,RISK_ON,538967,,CONSIDER
+CHI,Calamos Convertible Opportunities and Income Fund,Financial,XLF,56.371186319202806,11.75,0.36,11.57,11.75,11.86,swing-based,106,1245.5,11.75,10.08,-14.2,12.11,3.0,12.46,188.23,26.5,0.14,21,RISK_ON,320006,,CONSIDER

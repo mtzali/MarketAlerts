@@ -1,0 +1,7 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+SATS,EchoStar Corp,Communication Services,XLC,54.008907876365,93.54,4.52,91.28,93.54,94.89,swing-based,17,1590.18,93.54,63.88,-31.7,98.06,4.8,102.57,527.22,53.75,0.1,21,NEUTRAL,9985001,2.67,CONSIDER
+WBD,Warner Bros. Discovery Inc,Communication Services,XLC,54.008907876365,28.26,0.98,27.77,28.26,28.55,swing-based,58,1639.08,28.26,21.38,-24.3,29.24,3.5,30.21,415.93,39.64,0.1,21,NEUTRAL,106637134,2.04,CONSIDER
+MAMA,Mama's Creations Inc,Consumer Defensive,XLP,53.90312433238519,14.32,0.68,13.98,14.32,14.52,swing-based,116,1661.12,14.32,10.71,-25.2,15.0,4.7,15.67,442.72,54.87,0.12,21,NEUTRAL,3194692,1.0,CONSIDER
+AR,Antero Resources Corp,Energy,XLE,49.41269102947745,37.35,1.43,36.63,37.35,37.78,swing-based,44,1643.4,37.35,32.55,-12.8,38.78,3.8,40.22,229.99,44.16,0.19,21,NEUTRAL,7411658,1.72,CONSIDER
+TRGP,Targa Resources Corp,Energy,XLE,49.41269102947745,183.69,4.62,181.38,183.69,185.08,swing-based,9,1653.21,183.69,165.44,-9.9,188.31,2.5,192.94,176.75,29.13,0.16,21,NEUTRAL,2574254,1.3,CONSIDER
+XOM,Exxon Mobil Corp,Energy,XLE,49.41269102947745,118.25,2.38,117.06,118.25,118.96,swing-based,14,1655.5,118.25,113.0,-4.4,119.48,1.0,123.48,83.45,7.24,0.09,21,NEUTRAL,23782194,2.13,CONSIDER

@@ -1,0 +1,42 @@
+name: Market Regime Scanner
+
+on:
+  schedule:
+    # Every hour :55 from 9 AM to 2 PM ET (13-18 UTC) Mon-Fri
+    - cron: '55 13 * * 1-5'
+    - cron: '55 14 * * 1-5'
+    - cron: '55 15 * * 1-5'
+    - cron: '55 16 * * 1-5'
+    - cron: '55 17 * * 1-5'
+    - cron: '55 18 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run market regime scanner
+        env:
+          TELEGRAM_BOT_TOKEN_MAIN: ${{ secrets.TELEGRAM_BOT_TOKEN_MAIN }}
+          TELEGRAM_CHAT_ID_MAIN: ${{ secrets.TELEGRAM_CHAT_ID_MAIN }}
+          FINVIZ_AUTH: ${{ secrets.FINVIZ_AUTH }}
+        working-directory: MarketRegime
+        run: python market_regime_scanner.py
+
+      - name: Commit data changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A -- '*.csv' '*.db' '*.json' '*.png'
+          git diff --staged --quiet || git commit -m "Auto-update: ${{ github.workflow }} $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase origin main
+          git push origin main

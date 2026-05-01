@@ -1,0 +1,51 @@
+name: Fear & Greed Strategy
+
+on:
+  schedule:
+    # Pre-market signal (9:15 AM ET = 13:15 UTC)
+    - cron: '15 13 * * 1-5'
+    # Pre-market returns tracker (9:17 AM ET = 13:17 UTC)
+    - cron: '17 13 * * 1-5'
+    # Post-market signal (4:30 PM ET = 20:30 UTC)
+    - cron: '30 20 * * 1-5'
+    # Post-market returns tracker (4:32 PM ET = 20:32 UTC)
+    - cron: '32 20 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run signal generator
+        if: github.event.schedule == '15 13 * * 1-5' || github.event.schedule == '30 20 * * 1-5' || github.event_name == 'workflow_dispatch'
+        env:
+          TELEGRAM_BOT_TOKEN_MAIN: ${{ secrets.TELEGRAM_BOT_TOKEN_MAIN }}
+          TELEGRAM_CHAT_ID_MAIN: ${{ secrets.TELEGRAM_CHAT_ID_MAIN }}
+        working-directory: FearGreedStrategy/CombineBoth
+        run: python test_local.py
+
+      - name: Run returns tracker
+        if: github.event.schedule == '17 13 * * 1-5' || github.event.schedule == '32 20 * * 1-5' || github.event_name == 'workflow_dispatch'
+        env:
+          TELEGRAM_BOT_TOKEN_MAIN: ${{ secrets.TELEGRAM_BOT_TOKEN_MAIN }}
+          TELEGRAM_CHAT_ID_MAIN: ${{ secrets.TELEGRAM_CHAT_ID_MAIN }}
+        working-directory: FearGreedStrategy/CombineBoth
+        run: python returns_tracker.py
+
+      - name: Commit data changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A -- '*.csv' '*.db' '*.json' '*.png'
+          git diff --staged --quiet || git commit -m "Auto-update: ${{ github.workflow }} $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase origin main
+          git push origin main

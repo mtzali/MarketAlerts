@@ -1,0 +1,694 @@
+#!/usr/bin/env python3
+"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  RTY ICHIMOKU SIGNAL SYSTEM
+  Analyzes Russell 2000 Futures (RTY) using Ichimoku Cloud
+  Generates URTY / SRTY buy signals with 2:1 R:R setup
+  Runs hourly analysis + Sunday weekly + 9am daily reports
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SETUP:
+    pip install yfinance pandas numpy schedule pytz
+
+RUN:
+    python rty_ichimoku.py
+
+    Optional flags:
+    python rty_ichimoku.py --now          # Run analysis immediately
+    python rty_ichimoku.py --report       # Print full report now
+    python rty_ichimoku.py --history 10   # Show last 10 signals from DB
+"""
+
+import sqlite3
+import logging
+import schedule
+import time
+import sys
+import argparse
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
+
+import yfinance as yf
+import pandas as pd
+import numpy as np
+
+# ─────────────────────────────────────────────
+#  CONFIGURATION — edit these to your liking
+# ─────────────────────────────────────────────
+DB_PATH       = "rty_ichimoku.db"
+TICKER        = "RTY=F"           # RTY futures on Yahoo Finance
+TIMEZONE      = "America/New_York"
+LOG_FILE      = "rty_ichimoku.log"
+
+# Ichimoku parameters (standard settings)
+TENKAN_PERIOD  = 9
+KIJUN_PERIOD   = 26
+SENKOU_B_PERIOD = 52
+DISPLACEMENT   = 26
+
+# Signal strength threshold to alert (out of 5 conditions)
+MIN_SIGNAL_STRENGTH = 4   # require 4 or 5 of 5 conditions to alert
+
+# ─────────────────────────────────────────────
+#  LOGGING
+# ─────────────────────────────────────────────
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s  %(levelname)-8s %(message)s",
+    handlers=[
+        logging.FileHandler(LOG_FILE),
+        logging.StreamHandler(sys.stdout),
+    ],
+)
+log = logging.getLogger(__name__)
+
+
+# ══════════════════════════════════════════════
+#  DATABASE LAYER
+# ══════════════════════════════════════════════
+
+def init_db(db_path: str) -> sqlite3.Connection:
+    """Create tables if they don't exist."""
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+
+    # 4H OHLCV candles
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS candles_4h (
+            datetime    TEXT PRIMARY KEY,
+            open        REAL,
+            high        REAL,
+            low         REAL,
+            close       REAL,
+            volume      REAL
+        )
+    """)
+
+    # Ichimoku values per candle
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS ichimoku_4h (
+            datetime        TEXT PRIMARY KEY,
+            close           REAL,
+            tenkan          REAL,
+            kijun           REAL,
+            span_a          REAL,
+            span_b          REAL,
+            chikou          REAL,
+            cloud_top       REAL,
+            cloud_bottom    REAL,
+            cloud_color     TEXT,
+            future_cloud_top    REAL,
+            future_cloud_bottom REAL,
+            future_cloud_color  TEXT
+        )
+    """)
+
+    # Signals generated
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS signals (
+            id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at      TEXT,
+            signal_time     TEXT,
+            direction       TEXT,
+            instrument      TEXT,
+            close_price     REAL,
+            entry_zone_low  REAL,
+            entry_zone_high REAL,
+            stop_loss       REAL,
+            target_1r       REAL,
+            target_2r       REAL,
+            strength        INTEGER,
+            conditions_met  TEXT,
+            notes           TEXT
+        )
+    """)
+
+    conn.commit()
+    return conn
+
+
+def save_candles(conn: sqlite3.Connection, df: pd.DataFrame):
+    """Upsert 4H candles into DB."""
+    c = conn.cursor()
+    for dt, row in df.iterrows():
+        c.execute("""
+            INSERT OR REPLACE INTO candles_4h
+            (datetime, open, high, low, close, volume)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (
+            str(dt), row["Open"], row["High"],
+            row["Low"], row["Close"], row.get("Volume", 0)
+        ))
+    conn.commit()
+
+
+def save_ichimoku(conn: sqlite3.Connection, df: pd.DataFrame):
+    """Upsert Ichimoku values into DB."""
+    c = conn.cursor()
+    for dt, row in df.iterrows():
+        c.execute("""
+            INSERT OR REPLACE INTO ichimoku_4h
+            (datetime, close, tenkan, kijun, span_a, span_b,
+             chikou, cloud_top, cloud_bottom, cloud_color,
+             future_cloud_top, future_cloud_bottom, future_cloud_color)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            str(dt),
+            row.get("close"), row.get("tenkan"), row.get("kijun"),
+            row.get("span_a"), row.get("span_b"), row.get("chikou"),
+            row.get("cloud_top"), row.get("cloud_bottom"), row.get("cloud_color"),
+            row.get("future_cloud_top"), row.get("future_cloud_bottom"),
+            row.get("future_cloud_color"),
+        ))
+    conn.commit()
+
+
+def save_signal(conn: sqlite3.Connection, signal: dict):
+    """Insert a new signal record."""
+    c = conn.cursor()
+    c.execute("""
+        INSERT INTO signals
+        (created_at, signal_time, direction, instrument, close_price,
+         entry_zone_low, entry_zone_high, stop_loss, target_1r,
+         target_2r, strength, conditions_met, notes)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        signal["created_at"], signal["signal_time"], signal["direction"],
+        signal["instrument"], signal["close_price"],
+        signal["entry_zone_low"], signal["entry_zone_high"],
+        signal["stop_loss"], signal["target_1r"], signal["target_2r"],
+        signal["strength"], signal["conditions_met"], signal["notes"],
+    ))
+    conn.commit()
+    return c.lastrowid
+
+
+def get_recent_signals(conn: sqlite3.Connection, n: int = 10) -> list:
+    """Fetch the N most recent signals."""
+    c = conn.cursor()
+    c.execute("""
+        SELECT created_at, signal_time, direction, instrument,
+               close_price, stop_loss, target_2r, strength, conditions_met, notes
+        FROM signals
+        ORDER BY id DESC
+        LIMIT ?
+    """, (n,))
+    return c.fetchall()
+
+
+# ══════════════════════════════════════════════
+#  DATA FETCHING
+# ══════════════════════════════════════════════
+
+def fetch_rtx_4h(lookback_days: int = 90) -> pd.DataFrame:
+    """
+    Download RTY hourly data and resample to 4H.
+    Yahoo Finance doesn't have a native 4H interval,
+    so we fetch 1H and resample.
+    """
+    log.info(f"Fetching {TICKER} hourly data ({lookback_days} day lookback)...")
+    try:
+        ticker = yf.Ticker(TICKER)
+        # Yahoo allows up to 730 days for 1h interval
+        df = ticker.history(period=f"{lookback_days}d", interval="1h")
+
+        if df.empty:
+            log.error("No data returned from Yahoo Finance.")
+            return pd.DataFrame()
+
+        # Resample to 4H (market sessions, starting from open)
+        df_4h = df.resample("4h", closed="left", label="left").agg({
+            "Open":   "first",
+            "High":   "max",
+            "Low":    "min",
+            "Close":  "last",
+            "Volume": "sum",
+        }).dropna(subset=["Close"])
+
+        log.info(f"Fetched {len(df_4h)} 4H candles (resampled from 1H).")
+        return df_4h
+
+    except Exception as e:
+        log.error(f"Error fetching data: {e}")
+        return pd.DataFrame()
+
+
+# ══════════════════════════════════════════════
+#  ICHIMOKU ENGINE
+# ══════════════════════════════════════════════
+
+def _midpoint(series_high: pd.Series, series_low: pd.Series, period: int) -> pd.Series:
+    """(Highest High + Lowest Low) / 2 over N periods."""
+    return (series_high.rolling(period).max() + series_low.rolling(period).min()) / 2
+
+
+def calculate_ichimoku(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Calculate all 5 Ichimoku components plus derived fields.
+    Returns enriched DataFrame.
+    """
+    high  = df["High"]
+    low   = df["Low"]
+    close = df["Close"]
+
+    tenkan = _midpoint(high, low, TENKAN_PERIOD)
+    kijun  = _midpoint(high, low, KIJUN_PERIOD)
+
+    # Senkou Span A & B — shifted 26 periods forward
+    span_a = ((tenkan + kijun) / 2).shift(DISPLACEMENT)
+    span_b = _midpoint(high, low, SENKOU_B_PERIOD).shift(DISPLACEMENT)
+
+    # Chikou Span — close shifted 26 periods backward
+    chikou = close.shift(-DISPLACEMENT)
+
+    # Current cloud top/bottom (at current candle)
+    cloud_top    = pd.concat([span_a, span_b], axis=1).max(axis=1)
+    cloud_bottom = pd.concat([span_a, span_b], axis=1).min(axis=1)
+    cloud_color  = np.where(span_a >= span_b, "GREEN", "RED")
+
+    # Future cloud = 26 bars ahead (what the cloud looks like NOW, forward-looking)
+    future_span_a = (tenkan + kijun) / 2   # not displaced — this IS the future value
+    future_span_b = _midpoint(high, low, SENKOU_B_PERIOD)
+    future_cloud_top    = pd.concat([future_span_a, future_span_b], axis=1).max(axis=1)
+    future_cloud_bottom = pd.concat([future_span_a, future_span_b], axis=1).min(axis=1)
+    future_cloud_color  = np.where(future_span_a >= future_span_b, "GREEN", "RED")
+
+    result = pd.DataFrame({
+        "close":               close,
+        "tenkan":              tenkan,
+        "kijun":               kijun,
+        "span_a":              span_a,
+        "span_b":              span_b,
+        "chikou":              chikou,
+        "cloud_top":           cloud_top,
+        "cloud_bottom":        cloud_bottom,
+        "cloud_color":         cloud_color,
+        "future_cloud_top":    future_cloud_top,
+        "future_cloud_bottom": future_cloud_bottom,
+        "future_cloud_color":  future_cloud_color,
+    }, index=df.index)
+
+    return result
+
+
+# ══════════════════════════════════════════════
+#  SIGNAL ENGINE
+# ══════════════════════════════════════════════
+
+def evaluate_signals(ichi: pd.DataFrame) -> dict:
+    """
+    Evaluate the latest 4H candle for URTY / SRTY signals.
+    Returns a dict with direction, strength, conditions, and trade levels.
+    """
+    # Need at least 3 rows to detect TK cross
+    if len(ichi) < 3:
+        return {"direction": "NEUTRAL", "strength": 0}
+
+    latest = ichi.iloc[-1]
+    prev   = ichi.iloc[-2]
+
+    price        = latest["close"]
+    tenkan       = latest["tenkan"]
+    kijun        = latest["kijun"]
+    cloud_top    = latest["cloud_top"]
+    cloud_bottom = latest["cloud_bottom"]
+    chikou       = latest["chikou"]
+    fct          = latest["future_cloud_color"]   # future cloud color
+    cloud_color  = latest["cloud_color"]
+
+    # ── BULLISH CONDITIONS (for URTY) ──────────────────────────
+    bull_conditions = {
+        "Price above cloud":      price > cloud_top,
+        "TK bullish cross":       (tenkan > kijun) and (prev["tenkan"] <= prev["kijun"]),
+        "Tenkan above Kijun":     tenkan > kijun,
+        "Future cloud is GREEN":  fct == "GREEN",
+        "Chikou above price":     (not pd.isna(chikou)) and (chikou > price),
+    }
+
+    # ── BEARISH CONDITIONS (for SRTY) ──────────────────────────
+    bear_conditions = {
+        "Price below cloud":      price < cloud_bottom,
+        "TK bearish cross":       (tenkan < kijun) and (prev["tenkan"] >= prev["kijun"]),
+        "Tenkan below Kijun":     tenkan < kijun,
+        "Future cloud is RED":    fct == "RED",
+        "Chikou below price":     (not pd.isna(chikou)) and (chikou < price),
+    }
+
+    # ── INSIDE CLOUD check ─────────────────────────────────────
+    inside_cloud = cloud_bottom <= price <= cloud_top
+
+    bull_score = sum(bull_conditions.values())
+    bear_score = sum(bear_conditions.values())
+
+    # ── DETERMINE DIRECTION ────────────────────────────────────
+    if inside_cloud:
+        direction  = "NEUTRAL (inside cloud — avoid trading)"
+        conditions = {"warning": "Price is inside the cloud — Ichimoku signals are unreliable here"}
+        strength   = 0
+        instrument = "WAIT"
+    elif bull_score >= bear_score and bull_score >= MIN_SIGNAL_STRENGTH:
+        direction  = "BULLISH"
+        conditions = bull_conditions
+        strength   = bull_score
+        instrument = "URTY"
+    elif bear_score > bull_score and bear_score >= MIN_SIGNAL_STRENGTH:
+        direction  = "BEARISH"
+        conditions = bear_conditions
+        strength   = bear_score
+        instrument = "SRTY"
+    elif bull_score > bear_score:
+        direction  = "WEAK BULLISH (wait for more confirmation)"
+        conditions = bull_conditions
+        strength   = bull_score
+        instrument = "WAIT — watch for URTY"
+    elif bear_score > bull_score:
+        direction  = "WEAK BEARISH (wait for more confirmation)"
+        conditions = bear_conditions
+        strength   = bear_score
+        instrument = "WAIT — watch for SRTY"
+    else:
+        direction  = "NEUTRAL"
+        conditions = {}
+        strength   = 0
+        instrument = "WAIT"
+
+    # ── CALCULATE TRADE LEVELS ─────────────────────────────────
+    # Stop = Kijun-sen (most logical dynamic stop)
+    # Target = 2:1 reward from entry to stop distance
+    risk = abs(price - kijun)
+
+    if "BULLISH" in direction:
+        stop_loss      = kijun - (risk * 0.05)   # slight buffer below kijun
+        target_1r      = price + risk
+        target_2r      = price + (risk * 2)
+        entry_low      = price
+        entry_high     = price + (risk * 0.3)    # entry zone (don't chase beyond 30% of risk)
+    elif "BEARISH" in direction:
+        stop_loss      = kijun + (risk * 0.05)
+        target_1r      = price - risk
+        target_2r      = price - (risk * 2)
+        entry_low      = price - (risk * 0.3)
+        entry_high     = price
+    else:
+        stop_loss = target_1r = target_2r = entry_low = entry_high = price
+
+    return {
+        "direction":        direction,
+        "instrument":       instrument,
+        "strength":         strength,
+        "conditions":       conditions,
+        "close_price":      round(price, 2),
+        "tenkan":           round(tenkan, 2),
+        "kijun":            round(kijun, 2),
+        "cloud_top":        round(cloud_top, 2),
+        "cloud_bottom":     round(cloud_bottom, 2),
+        "cloud_color":      cloud_color,
+        "future_cloud":     fct,
+        "stop_loss":        round(stop_loss, 2),
+        "target_1r":        round(target_1r, 2),
+        "target_2r":        round(target_2r, 2),
+        "entry_zone_low":   round(entry_low, 2),
+        "entry_zone_high":  round(entry_high, 2),
+        "inside_cloud":     inside_cloud,
+    }
+
+
+# ══════════════════════════════════════════════
+#  REPORT GENERATOR
+# ══════════════════════════════════════════════
+
+BARS = "━" * 58
+
+def bar(char="─", n=58):
+    return char * n
+
+
+def signal_emoji(direction: str) -> str:
+    if "BULLISH" in direction and "WEAK" not in direction:
+        return "🟢"
+    elif "BEARISH" in direction and "WEAK" not in direction:
+        return "🔴"
+    elif "WEAK BULLISH" in direction:
+        return "🟡"
+    elif "WEAK BEARISH" in direction:
+        return "🟡"
+    return "⚪"
+
+
+def strength_bar(strength: int, total: int = 5) -> str:
+    filled = "█" * strength
+    empty  = "░" * (total - strength)
+    return f"[{filled}{empty}] {strength}/{total}"
+
+
+def format_report(sig: dict, report_type: str = "HOURLY") -> str:
+    now_et = datetime.now(ZoneInfo(TIMEZONE))
+    lines = [
+        "",
+        BARS,
+        f"  RTY ICHIMOKU SIGNAL REPORT  —  {report_type}",
+        f"  {now_et.strftime('%A, %B %d %Y  %I:%M %p ET')}",
+        BARS,
+        "",
+        f"  TICKER ANALYZED : {TICKER} (Russell 2000 Futures, 4H)",
+        f"  INSTRUMENT      : {sig['instrument']}",
+        f"  DIRECTION       : {signal_emoji(sig['direction'])}  {sig['direction']}",
+        f"  SIGNAL STRENGTH : {strength_bar(sig['strength'])}",
+        "",
+        bar(),
+        "  ICHIMOKU VALUES",
+        bar(),
+        f"  Close Price     :  {sig['close_price']:>10.2f}",
+        f"  Tenkan-sen      :  {sig['tenkan']:>10.2f}",
+        f"  Kijun-sen       :  {sig['kijun']:>10.2f}",
+        f"  Cloud Top       :  {sig['cloud_top']:>10.2f}",
+        f"  Cloud Bottom    :  {sig['cloud_bottom']:>10.2f}",
+        f"  Cloud Color     :  {'🟩 GREEN' if sig['cloud_color'] == 'GREEN' else '🟥 RED'}",
+        f"  Future Cloud    :  {'🟩 GREEN (bullish ahead)' if sig['future_cloud'] == 'GREEN' else '🟥 RED (bearish ahead)'}",
+        f"  Inside Cloud?   :  {'⚠️  YES — avoid trading' if sig['inside_cloud'] else '✅  NO — signals valid'}",
+        "",
+    ]
+
+    # Conditions checklist
+    if sig.get("conditions"):
+        lines += [bar(), "  CONDITIONS MET", bar()]
+        for condition, met in sig["conditions"].items():
+            icon = "✅" if met else "❌"
+            lines.append(f"  {icon}  {condition}")
+        lines.append("")
+
+    # Trade setup
+    if sig["strength"] >= MIN_SIGNAL_STRENGTH and not sig["inside_cloud"]:
+        lines += [
+            bar(),
+            f"  TRADE SETUP — {sig['instrument']}",
+            bar(),
+            f"  Entry Zone      :  {sig['entry_zone_low']:.2f}  –  {sig['entry_zone_high']:.2f}",
+            f"  Stop Loss       :  {sig['stop_loss']:.2f}  (Kijun-sen level)",
+            f"  Target 1R       :  {sig['target_1r']:.2f}  (1:1 reward)",
+            f"  Target 2R       :  {sig['target_2r']:.2f}  ★ 2:1 reward target",
+            "",
+            f"  Risk (pts)      :  {abs(sig['close_price'] - sig['stop_loss']):.2f} RTY points",
+            f"  Reward (pts)    :  {abs(sig['target_2r'] - sig['close_price']):.2f} RTY points",
+            "",
+            "  📌 NOTE: These levels are on RTY futures.",
+            "     URTY/SRTY are 3x leveraged ETFs — a 1% RTY move",
+            "     ≈ 3% URTY/SRTY move. Size positions accordingly.",
+            "",
+        ]
+    else:
+        lines += [
+            bar(),
+            "  ⏳ NO ACTIONABLE SETUP RIGHT NOW",
+            "",
+            "  Waiting for full Ichimoku alignment (4/5 conditions).",
+            "  This is normal — patience is the edge.",
+            "",
+        ]
+
+    # Exit rules reminder
+    lines += [
+        bar(),
+        "  EXIT RULES (check every 4H candle)",
+        bar(),
+        "  • Price re-enters cloud    → Exit immediately",
+        "  • Kijun-sen breached       → Tighten stop or exit",
+        "  • TK Cross reverses        → Exit",
+        "  • 2R target hit            → Take profit",
+        "  • Hold max 3-5 days        → Avoid leveraged ETF decay",
+        "",
+        BARS,
+        "  ⚠️  NOT FINANCIAL ADVICE. Educational analysis only.",
+        "     Always use proper position sizing and risk management.",
+        BARS,
+        "",
+    ]
+
+    return "\n".join(lines)
+
+
+def print_signal_history(conn: sqlite3.Connection, n: int = 10):
+    rows = get_recent_signals(conn, n)
+    if not rows:
+        print("\n  No signals in database yet.\n")
+        return
+
+    print(f"\n{BARS}")
+    print(f"  LAST {n} SIGNALS FROM DATABASE")
+    print(BARS)
+    print(f"  {'Time':<22} {'Dir':<10} {'ETF':<6} {'Price':>8} {'Stop':>8} {'2R':>8} {'Str'}")
+    print(bar())
+    for row in rows:
+        created, sig_time, direction, instrument, price, stop, t2r, strength, conditions, _ = row
+        short_dir = direction[:9]
+        print(f"  {sig_time[:19]:<22} {short_dir:<10} {instrument:<6} {price:>8.2f} {stop:>8.2f} {t2r:>8.2f}  {strength}/5")
+    print(BARS + "\n")
+
+
+# ══════════════════════════════════════════════
+#  CORE ANALYSIS RUNNER
+# ══════════════════════════════════════════════
+
+def run_analysis(conn: sqlite3.Connection, report_type: str = "HOURLY") -> dict:
+    """Fetch data, calculate Ichimoku, evaluate signal, save to DB, print report."""
+    log.info(f"Running {report_type} analysis...")
+
+    # 1. Fetch data
+    df_4h = fetch_rtx_4h(lookback_days=90)
+    if df_4h.empty:
+        log.warning("No data available — skipping analysis.")
+        return {}
+
+    # 2. Save candles
+    save_candles(conn, df_4h)
+
+    # 3. Calculate Ichimoku
+    ichi = calculate_ichimoku(df_4h)
+    save_ichimoku(conn, ichi)
+
+    # 4. Evaluate signal
+    sig = evaluate_signals(ichi)
+    if not sig:
+        return {}
+
+    # 5. Print report
+    report = format_report(sig, report_type)
+    print(report)
+
+    # 6. Save signal to DB if actionable
+    if sig["strength"] >= MIN_SIGNAL_STRENGTH:
+        now_str     = datetime.now(ZoneInfo(TIMEZONE)).isoformat()
+        sig_time    = str(ichi.index[-1])
+        conditions_str = ", ".join(
+            k for k, v in sig.get("conditions", {}).items() if v
+        )
+        signal_record = {
+            "created_at":       now_str,
+            "signal_time":      sig_time,
+            "direction":        sig["direction"],
+            "instrument":       sig["instrument"],
+            "close_price":      sig["close_price"],
+            "entry_zone_low":   sig["entry_zone_low"],
+            "entry_zone_high":  sig["entry_zone_high"],
+            "stop_loss":        sig["stop_loss"],
+            "target_1r":        sig["target_1r"],
+            "target_2r":        sig["target_2r"],
+            "strength":         sig["strength"],
+            "conditions_met":   conditions_str,
+            "notes":            f"{report_type} scan",
+        }
+        record_id = save_signal(conn, signal_record)
+        log.info(f"Signal saved to DB (id={record_id}): {sig['direction']} | {sig['instrument']} | strength={sig['strength']}/5")
+
+    return sig
+
+
+# ══════════════════════════════════════════════
+#  SCHEDULER FUNCTIONS
+# ══════════════════════════════════════════════
+
+def hourly_job(conn):
+    run_analysis(conn, report_type="HOURLY UPDATE")
+
+
+def sunday_weekly_report(conn):
+    now = datetime.now(ZoneInfo(TIMEZONE))
+    if now.weekday() == 6:   # Sunday
+        run_analysis(conn, report_type="SUNDAY WEEKLY PREVIEW")
+    # schedule library calls this every week on Sunday regardless
+
+
+def daily_premarket_report(conn):
+    run_analysis(conn, report_type="DAILY PRE-MARKET 9AM")
+
+
+# ══════════════════════════════════════════════
+#  MAIN ENTRY POINT
+# ══════════════════════════════════════════════
+
+def main():
+    parser = argparse.ArgumentParser(description="RTY Ichimoku Signal System")
+    parser.add_argument("--now",     action="store_true", help="Run analysis immediately and exit")
+    parser.add_argument("--report",  action="store_true", help="Print full report now and keep running scheduler")
+    parser.add_argument("--history", type=int, metavar="N", help="Show last N signals from DB and exit")
+    args = parser.parse_args()
+
+    print(f"\n{BARS}")
+    print("  RTY ICHIMOKU SIGNAL SYSTEM — Starting up")
+    print(f"  Database : {DB_PATH}")
+    print(f"  Timezone : {TIMEZONE}")
+    print(f"  Min Signal Strength : {MIN_SIGNAL_STRENGTH}/5 to alert")
+    print(BARS)
+
+    # Init DB
+    conn = init_db(DB_PATH)
+    log.info("Database initialized.")
+
+    # ── CLI shortcuts ───────────────────────
+    if args.history:
+        print_signal_history(conn, args.history)
+        conn.close()
+        return
+
+    if args.now:
+        run_analysis(conn, report_type="MANUAL RUN")
+        conn.close()
+        return
+
+    if args.report:
+        run_analysis(conn, report_type="MANUAL REPORT")
+        # Fall through to scheduler
+
+    # ── Schedule jobs ───────────────────────
+    # Hourly analysis (every hour on the hour)
+    schedule.every().hour.do(hourly_job, conn=conn)
+
+    # Sunday weekly preview at 8:00 AM ET
+    schedule.every().sunday.at("08:00").do(sunday_weekly_report, conn=conn)
+
+    # Daily pre-market at 9:00 AM ET
+    schedule.every().day.at("09:00").do(daily_premarket_report, conn=conn)
+
+    log.info("Scheduler started:")
+    log.info("  • Hourly analysis (every hour)")
+    log.info("  • Sunday 8:00 AM ET — weekly preview")
+    log.info("  • Daily  9:00 AM ET — pre-market report")
+    log.info("Press Ctrl+C to stop.\n")
+
+    # Run once immediately on startup
+    run_analysis(conn, report_type="STARTUP ANALYSIS")
+
+    # Keep running
+    try:
+        while True:
+            schedule.run_pending()
+            time.sleep(30)   # check every 30 seconds
+    except KeyboardInterrupt:
+        log.info("Stopped by user.")
+    finally:
+        conn.close()
+        log.info("Database connection closed.")
+
+
+if __name__ == "__main__":
+    main()

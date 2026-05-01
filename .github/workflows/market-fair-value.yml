@@ -1,0 +1,36 @@
+name: Market Fair Value
+
+on:
+  schedule:
+    # Pre-market (9:25 AM ET = 13:25 UTC)
+    - cron: '25 13 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run market fair value
+        env:
+          TELEGRAM_BOT_TOKEN_MAIN: ${{ secrets.TELEGRAM_BOT_TOKEN_MAIN }}
+          TELEGRAM_CHAT_ID_MAIN: ${{ secrets.TELEGRAM_CHAT_ID_MAIN }}
+        working-directory: MarketFairValue
+        run: python market_fair_value.py
+
+      - name: Commit data changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A -- '*.csv' '*.db' '*.json' '*.png'
+          git diff --staged --quiet || git commit -m "Auto-update: ${{ github.workflow }} $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase origin main
+          git push origin main

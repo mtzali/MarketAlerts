@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+HLF,Herbalife Ltd,Consumer Defensive,XLP,54.67229941822562,14.16,0.8,13.76,14.16,14.4,swing-based,88,1246.08,14.16,11.21,-20.8,14.96,5.7,15.77,280.97,49.5,0.18,21,NEUTRAL,3855079,2.25,CONSIDER
+TSN,"Tyson Foods, Inc",Consumer Defensive,XLP,54.67229941822562,59.56,1.43,58.85,59.56,59.99,swing-based,20,1191.2,59.56,54.69,-8.2,60.99,2.4,62.42,106.06,20.0,0.19,21,NEUTRAL,4626424,2.43,CONSIDER
+BBGI,Beasley Broadcast Group Inc,Communication Services,XLC,54.64335240815256,8.84,2.49,7.6,8.84,9.59,swing-based,141,1246.44,8.84,2.69,-69.6,26.37,198.3,41.01,972.77,2366.56,2.43,21,NEUTRAL,3093951,1.0,BUY
+IHRT,iHeartMedia Inc,Communication Services,XLC,54.64335240815256,5.1,0.29,4.95,5.1,5.19,swing-based,245,1249.5,5.1,2.65,-47.9,5.39,5.7,5.68,620.41,49.8,0.08,21,NEUTRAL,3575519,3.5,CONSIDER
+OMC,"Omnicom Group, Inc",Communication Services,XLC,54.64335240815256,80.07,2.48,78.83,80.07,80.82,swing-based,15,1201.05,80.07,68.62,-14.3,82.5,3.0,91.08,182.95,25.27,0.14,21,NEUTRAL,9307121,1.8,CONSIDER
+ROKU,Roku Inc,Communication Services,XLC,54.64335240815256,106.3,4.14,104.23,106.3,107.54,swing-based,11,1169.3,106.3,89.7,-15.6,107.42,1.1,118.37,196.24,-1.33,-0.01,21,NEUTRAL,4731428,1.91,CONSIDER
+SATS,EchoStar Corp,Communication Services,XLC,54.64335240815256,104.39,5.34,101.72,104.39,105.99,swing-based,11,1148.29,104.39,63.47,-39.2,109.73,5.1,115.07,467.74,41.12,0.09,21,NEUTRAL,8846979,2.44,CONSIDER
+WHD,Cactus Inc,Energy,XLE,50.7590956616486,46.96,1.57,46.18,46.96,47.43,swing-based,26,1220.96,46.96,38.47,-18.1,47.37,0.9,52.87,233.02,-1.59,-0.01,21,NEUTRAL,1156122,2.33,CONSIDER

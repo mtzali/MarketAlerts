@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+ABCB,Ameris Bancorp,Financial,XLF,59.17324949214292,85.28,1.76,84.4,85.28,85.81,swing-based,14,1193.92,85.28,81.29,-4.7,86.12,1.0,89.11,63.21,4.44,0.07,21,RISK_ON,1189871,1.71,CONSIDER
+ACYN,FT Vest Laddered Autocallable Barrier & Income ETF,Financial,XLF,59.17324949214292,20.77,0.24,20.65,20.77,20.84,swing-based,60,1246.2,20.77,19.88,-4.3,20.88,0.5,21.5,57.79,2.25,0.04,21,RISK_ON,711359,,CONSIDER
+ADX,Adams Diversified Equity Fund,Financial,XLF,59.17324949214292,23.98,0.42,23.77,23.98,24.11,swing-based,52,1246.96,23.98,20.7,-13.7,24.4,1.8,24.83,177.23,15.39,0.09,21,RISK_ON,440141,,CONSIDER
+AFL,Aflac Inc,Financial,XLF,59.17324949214292,114.52,2.12,113.46,114.52,115.16,swing-based,10,1145.2,114.52,104.7,-8.6,118.69,3.6,127.33,104.54,35.34,0.34,21,RISK_ON,4898527,3.12,CONSIDER
+AIRR,First Trust RBA American Industrial Renaissance ETF,Financial,XLF,59.17324949214292,123.13,3.55,121.36,123.13,124.19,swing-based,10,1231.3,123.13,103.53,-15.9,123.16,0.0,135.29,206.62,-10.36,-0.05,21,RISK_ON,1515816,,CONSIDER
+ALLY,Ally Financial Inc,Financial,XLF,59.17324949214292,45.36,1.27,44.73,45.36,45.74,swing-based,27,1224.72,45.36,37.05,-18.3,46.93,3.5,53.04,234.61,32.24,0.14,21,RISK_ON,7516504,1.53,CONSIDER
+BALI,iShares U.S. Large Cap Premium Income Active ETF,Financial,XLF,59.17324949214292,32.86,0.39,32.66,32.86,32.98,swing-based,38,1248.68,32.86,29.41,-10.5,33.25,1.2,33.64,135.61,10.39,0.08,21,RISK_ON,615565,,CONSIDER
+BCAR,D. Boral ARC Acquisition I Corp,Financial,XLF,59.17324949214292,10.32,0.03,10.3,10.32,10.33,swing-based,121,1248.72,10.32,10.06,-2.5,10.65,3.2,11.01,32.35,38.69,1.2,21,RISK_ON,1057949,,CONSIDER

@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+GRNT,Granite Ridge Resources Inc,Energy,XLE,57.432034196814634,6.03,0.22,5.92,6.03,6.1,swing-based,207,1248.21,6.03,4.75,-21.2,6.25,3.7,6.47,278.23,32.0,0.12,21,NEUTRAL,1573947,2.14,CONSIDER
+NEXT,NextDecade Corporation,Energy,XLE,57.432034196814634,8.74,0.77,8.36,8.74,8.97,swing-based,143,1249.82,8.74,4.78,-45.4,9.51,8.8,10.27,599.74,76.83,0.13,21,NEUTRAL,7444607,2.0,CONSIDER
+REPX,Riley Exploration Permian Inc,Energy,XLE,57.432034196814634,40.0,1.47,39.26,40.0,40.44,swing-based,31,1240.0,40.0,33.45,-16.4,41.47,3.7,42.94,216.88,31.9,0.15,21,NEUTRAL,825702,1.0,CONSIDER
+SKYQ,Sky Quarry Inc,Energy,XLE,57.432034196814634,6.36,1.02,5.85,6.36,6.67,swing-based,196,1246.56,6.36,1.34,-78.9,6.69,5.2,9.99,1043.4,4.5,0.0,21,NEUTRAL,72207954,,CONSIDER
+ACYN,FT Vest Laddered Autocallable Barrier & Income ETF,Financial,XLF,53.18390797760826,20.5,0.25,20.37,20.5,20.58,swing-based,60,1230.0,20.5,19.87,-3.1,20.57,0.3,21.0,42.03,-0.31,-0.01,21,NEUTRAL,701811,,CONSIDER
+DBC,Invesco DB Commodity Index Tracking Fund,Financial,XLF,53.18390797760826,29.37,0.62,29.06,29.37,29.56,swing-based,42,1233.54,29.37,27.1,-7.7,29.61,0.8,31.16,103.2,2.25,0.02,21,NEUTRAL,2204989,,CONSIDER
+DBMF,iMGP DBi Managed Futures Strategy ETF,Financial,XLF,53.18390797760826,30.43,0.29,30.28,30.43,30.52,swing-based,41,1247.63,30.43,29.23,-4.0,30.49,0.2,31.27,52.93,-1.15,-0.02,21,NEUTRAL,4837671,,CONSIDER
+ECPG,"Encore Capital Group, Inc",Financial,XLF,53.18390797760826,73.76,2.18,72.67,73.76,74.41,swing-based,16,1180.16,73.76,66.87,-9.3,74.58,1.1,79.34,120.65,2.68,0.02,21,NEUTRAL,360688,1.5,CONSIDER

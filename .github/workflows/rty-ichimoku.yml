@@ -1,0 +1,60 @@
+name: RTY Ichimoku
+
+on:
+  schedule:
+    # Hourly during market hours Mon-Fri (9 AM - 4 PM ET = 13-20 UTC)
+    - cron: '0 13-20 * * 1-5'
+    # Sunday hourly check (futures open)
+    - cron: '0 13-23 * * 0'
+    # Sunday weekly analysis (8:00 AM ET = 12:00 UTC... using 08:00 UTC for broad coverage)
+    - cron: '0 8 * * 0'
+    # Pre-market (9:05 AM ET = 13:05 UTC)
+    - cron: '5 13 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Run mode (hourly, weekly, premarket)'
+        required: false
+        default: 'hourly'
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Determine run mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ github.event.inputs.mode || 'hourly' }}" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.schedule }}" = "0 8 * * 0" ]; then
+            echo "mode=weekly" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.schedule }}" = "5 13 * * 1-5" ]; then
+            echo "mode=premarket" >> $GITHUB_OUTPUT
+          else
+            echo "mode=hourly" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run RTY Ichimoku
+        env:
+          TELEGRAM_BOT_TOKEN_IWM: ${{ secrets.TELEGRAM_BOT_TOKEN_IWM }}
+          TELEGRAM_CHAT_ID_IWM: ${{ secrets.TELEGRAM_CHAT_ID_IWM }}
+        working-directory: RTY_Ichimoku
+        run: python rty_ichimoku.py --mode ${{ steps.mode.outputs.mode }}
+
+      - name: Commit data changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A -- '*.csv' '*.db' '*.json' '*.png'
+          git diff --staged --quiet || git commit -m "Auto-update: ${{ github.workflow }} $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase origin main
+          git push origin main

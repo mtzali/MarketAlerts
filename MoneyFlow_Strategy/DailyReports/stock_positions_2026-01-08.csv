@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+AA,Alcoa Corp,Basic Materials,XLB,65.78670698239694,61.09,2.52,59.83,61.09,61.85,swing-based,20,1221.8,61.09,51.38,-15.9,65.01,6.4,73.43,209.31,63.24,0.3,21,NEUTRAL,12056200,2.35,CONSIDER
+CLMT,Calumet Inc,Basic Materials,XLB,65.78670698239694,20.13,0.64,19.81,20.13,20.32,swing-based,62,1248.06,20.13,19.16,-4.8,20.67,2.7,21.6,72.08,21.56,0.3,21,NEUTRAL,1269358,1.8,CONSIDER
+CMC,Commercial Metals Co,Basic Materials,XLB,65.78670698239694,70.61,1.75,69.73,70.61,71.14,swing-based,17,1200.37,70.61,68.15,-3.5,75.03,6.3,79.28,50.68,66.21,1.31,21,NEUTRAL,2483768,1.92,CONSIDER
+HYMC,Hycroft Mining Holding Corporation,Basic Materials,XLB,65.78670698239694,26.18,3.5,24.43,26.18,27.23,swing-based,47,1230.46,26.18,9.28,-64.6,29.99,14.6,42.79,843.68,129.71,0.15,21,NEUTRAL,4811217,,CONSIDER
+LXU,"LSB Industries, Inc",Basic Materials,XLB,65.78670698239694,9.28,0.26,9.15,9.28,9.36,swing-based,134,1243.52,9.28,8.18,-11.9,9.69,4.4,10.62,157.85,44.49,0.28,21,NEUTRAL,699210,1.8,CONSIDER
+SCCO,Southern Copper Corporation,Basic Materials,XLB,65.78670698239694,160.55,4.99,158.06,160.55,162.05,swing-based,7,1123.85,160.55,139.51,-13.1,165.54,3.1,170.53,157.79,24.45,0.15,21,NEUTRAL,2565169,3.53,CONSIDER
+TGB,Taseko Mines Ltd,Basic Materials,XLB,65.78670698239694,5.93,0.28,5.79,5.93,6.01,swing-based,210,1245.3,5.93,5.35,-9.7,6.32,6.6,6.92,138.66,64.55,0.47,21,NEUTRAL,9868729,1.25,CONSIDER
+USAS,Americas Gold and Silver Corp,Basic Materials,XLB,65.78670698239694,5.37,0.4,5.27,5.37,5.49,swing-based,232,1245.84,5.37,5.07,-5.6,5.7,6.1,6.09,97.44,48.72,0.5,21,NEUTRAL,5962751,1.0,CONSIDER

@@ -1,0 +1,6 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+EE,Excelerate Energy Inc,Energy,XLE,55.45341575168345,27.87,0.99,27.37,27.87,28.17,swing-based,71,1978.77,27.87,25.48,-8.6,28.09,0.8,29.7,191.0,-5.51,-0.03,21,RISK_OFF,671781,1.75,CONSIDER
+KGS,Kodiak Gas Services Inc,Energy,XLE,55.45341575168345,35.19,1.06,34.66,35.19,35.51,swing-based,56,1970.64,35.19,32.22,-8.4,35.49,0.8,37.5,184.11,-1.28,-0.01,21,RISK_OFF,3990663,1.25,CONSIDER
+OIS,"Oil States International, Inc",Energy,XLE,55.45341575168345,6.36,0.27,6.23,6.36,6.44,swing-based,314,1997.04,6.36,5.73,-10.0,6.61,3.9,7.16,224.11,53.34,0.24,21,RISK_OFF,1022969,1.75,CONSIDER
+SD,Sandridge Energy Inc,Energy,XLE,55.45341575168345,14.52,0.51,14.27,14.52,14.67,swing-based,137,1989.24,14.52,13.45,-7.4,15.03,3.5,15.53,167.92,48.63,0.29,21,RISK_OFF,477568,1.0,CONSIDER
+USAC,USA Compression Partners LP,Energy,XLE,55.45341575168345,25.27,0.72,24.91,25.27,25.48,swing-based,79,1996.33,25.27,22.51,-10.9,25.99,2.8,26.7,234.88,39.62,0.17,21,RISK_OFF,453736,3.14,CONSIDER

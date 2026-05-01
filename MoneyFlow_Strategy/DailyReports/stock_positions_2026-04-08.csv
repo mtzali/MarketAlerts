@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+AAMI,Acadian Asset Management Inc,Financial,XLF,54.49264303002704,59.43,2.44,58.21,59.43,60.16,swing-based,21,1248.03,59.43,47.73,-19.7,61.87,4.1,64.31,261.02,35.87,0.14,21,RISK_ON,554754,3.0,CONSIDER
+ACT,Enact Holdings Inc,Financial,XLF,54.49264303002704,42.29,0.8,41.89,42.29,42.53,swing-based,29,1226.41,42.29,39.77,-6.0,42.79,1.2,44.66,80.06,7.53,0.09,21,RISK_ON,508236,2.86,CONSIDER
+AEF,abrdn Emerging Markets ex-China Fund Inc,Financial,XLF,54.49264303002704,8.0,0.29,7.85,8.0,8.09,swing-based,156,1248.0,8.0,6.73,-15.8,8.68,8.6,9.89,211.09,93.15,0.44,21,RISK_ON,318530,,CONSIDER
+ARGT,Global X MSCI Argentina ETF,Financial,XLF,54.49264303002704,94.66,2.75,93.28,94.66,95.49,swing-based,13,1230.58,94.66,83.75,-11.5,95.5,0.9,102.76,152.51,0.19,0.0,21,RISK_ON,467855,,CONSIDER
+ARTY,iShares Future AI & Tech ETF,Financial,XLF,54.49264303002704,50.89,1.92,49.93,50.89,51.47,swing-based,24,1221.36,50.89,42.81,-15.9,52.58,3.3,58.62,207.69,26.76,0.13,21,RISK_ON,872386,,CONSIDER
+AX,Axos Financial Inc,Financial,XLF,54.49264303002704,93.15,2.58,91.86,93.15,93.92,swing-based,13,1210.95,93.15,81.52,-12.5,99.68,7.0,110.9,161.28,74.82,0.46,21,RISK_ON,1032626,1.33,CONSIDER
+BAI,iShares A.I. Innovation and Tech Active ETF,Financial,XLF,54.49264303002704,37.24,1.56,36.46,37.24,37.71,swing-based,33,1228.92,37.24,30.09,-19.2,38.8,4.2,40.36,251.34,35.98,0.14,21,RISK_ON,3637163,,CONSIDER
+BBJP,JPMorgan BetaBuilders Japan ETF,Financial,XLF,54.49264303002704,72.93,1.88,71.99,72.93,73.49,swing-based,17,1239.81,72.93,65.06,-10.8,75.71,3.8,82.29,143.44,37.68,0.26,21,RISK_ON,4540598,,CONSIDER

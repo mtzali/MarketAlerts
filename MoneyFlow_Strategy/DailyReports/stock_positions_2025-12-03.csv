@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+AKRO,Akero Therapeutics Inc,Healthcare,XLV,56.928454979884656,54.69,0.14,54.62,54.69,54.73,swing-based,22,1203.18,54.69,53.83,-1.6,54.83,0.3,54.97,19.83,2.14,0.11,21,NEUTRAL,3675378,3.0,CONSIDER
+KALV,KalVista Pharmaceuticals Inc,Healthcare,XLV,56.928454979884656,14.66,1.01,14.15,14.66,14.96,swing-based,85,1246.1,14.66,12.5,-14.7,14.97,2.1,16.49,208.96,0.58,0.0,21,NEUTRAL,6339121,1.0,CONSIDER
+VRTX,"Vertex Pharmaceuticals, Inc",Healthcare,XLV,56.928454979884656,463.13,11.14,457.56,463.13,466.47,swing-based,2,926.26,463.13,412.96,-10.8,473.37,2.2,510.7,107.03,13.79,0.13,21,NEUTRAL,2501132,1.89,CONSIDER
+VERA,Vera Therapeutics Inc,Healthcare,XLV,56.928454979884656,41.26,2.54,39.99,41.26,42.02,swing-based,30,1237.8,41.26,26.44,-35.9,43.8,6.1,46.33,467.36,53.25,0.11,21,NEUTRAL,3238458,1.29,CONSIDER
+SYRE,Spyre Therapeutics Inc,Healthcare,XLV,56.928454979884656,32.2,1.92,31.24,32.2,32.78,swing-based,38,1223.6,32.2,21.0,-34.8,34.12,6.0,36.05,447.58,51.16,0.11,21,NEUTRAL,1313071,1.08,CONSIDER
+SVRA,Savara Inc,Healthcare,XLV,56.928454979884656,6.3,0.43,6.08,6.3,6.43,swing-based,198,1247.4,6.3,3.64,-42.2,6.73,6.9,7.17,551.91,60.19,0.11,21,NEUTRAL,4385126,1.0,CONSIDER
+ALMS,Alumis Inc,Healthcare,XLV,56.928454979884656,7.84,0.59,7.55,7.84,8.02,swing-based,159,1246.56,7.84,4.12,-47.5,8.43,7.5,9.02,620.23,65.5,0.11,21,NEUTRAL,1391256,1.12,CONSIDER
+KROS,Keros Therapeutics Inc,Healthcare,XLV,56.928454979884656,18.1,0.83,17.69,18.1,18.35,swing-based,69,1248.9,18.1,16.34,-9.7,18.93,4.6,19.75,138.79,39.93,0.29,21,NEUTRAL,2151775,1.89,CONSIDER

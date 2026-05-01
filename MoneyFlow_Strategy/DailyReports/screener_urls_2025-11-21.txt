@@ -1,0 +1,9 @@
+FinViz Screener URLs - 2025-11-21
+================================================================================
+
+XLV:
+https://elite.finviz.com/screener.ashx?v=152&f=fa_div_pos,sec_healthcare,geo_usa|canada,sh_avgvol_o200,sh_price_o5,sh_relvol_o1.5,ta_perf_1wup,ta_sma200_pa,ta_sma50_pa,ta_beta_u1&ft=3
+
+XLP:
+https://elite.finviz.com/screener.ashx?v=152&f=fa_div_pos,sec_consumerdefensive,geo_usa|canada,sh_avgvol_o200,sh_price_o5,sh_relvol_o1.5,ta_perf_1wup,ta_sma200_pa,ta_sma50_pa,ta_beta_u1&ft=3
+

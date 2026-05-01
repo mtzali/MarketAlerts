@@ -1,0 +1,167 @@
+# RTY Ichimoku Signal System
+### URTY / SRTY buy signals using Ichimoku Cloud on Russell 2000 Futures (4H)
+
+---
+
+## 🚀 Quick Start
+
+### 1. Install dependencies
+```bash
+pip install yfinance pandas numpy schedule pytz
+```
+
+### 2. Run immediately (one-off analysis)
+```bash
+python rty_ichimoku.py --now
+```
+
+### 3. Run the full scheduler (hourly + Sunday + 9am daily)
+```bash
+python rty_ichimoku.py
+```
+
+### 4. View recent signals from the database
+```bash
+python rty_ichimoku.py --history 10
+```
+
+---
+
+## ⏰ Schedule Overview
+
+| When | What |
+|---|---|
+| Every hour | Ichimoku analysis + signal check |
+| Sunday 8:00 AM ET | Weekly preview report |
+| Daily 9:00 AM ET | Pre-market report before open |
+| On startup | Immediate analysis |
+
+---
+
+## 📊 How Signals Work
+
+The system checks **5 Ichimoku conditions** for URTY (bullish) and SRTY (bearish):
+
+**URTY (3x Long Russell 2000):**
+1. Price is ABOVE the cloud
+2. TK Bullish Cross (Tenkan crosses above Kijun)
+3. Tenkan above Kijun (confirmed momentum)
+4. Future cloud is GREEN (bullish ahead)
+5. Chikou Span above price (trend confirmation)
+
+**SRTY (3x Short Russell 2000):**
+1. Price is BELOW the cloud
+2. TK Bearish Cross (Tenkan crosses below Kijun)
+3. Tenkan below Kijun
+4. Future cloud is RED
+5. Chikou Span below price
+
+A signal requires **4 or 5 out of 5 conditions** to be actionable.
+Change `MIN_SIGNAL_STRENGTH` in the config to adjust sensitivity.
+
+---
+
+## 🎯 2:1 Trade Setup (Auto-Calculated)
+
+Each signal automatically calculates:
+- **Entry Zone** — current price area (don't chase beyond 30% of risk)
+- **Stop Loss** — Kijun-sen level (with small buffer)
+- **Target 1R** — 1:1 reward
+- **Target 2R** — 2:1 reward ★ primary target
+
+---
+
+## ⚙️ Configuration
+
+Edit these variables at the top of `rty_ichimoku.py`:
+
+```python
+DB_PATH              = "rty_ichimoku.db"    # SQLite database location
+TICKER               = "RTY=F"              # Yahoo Finance ticker
+TIMEZONE             = "America/New_York"   # Your timezone
+MIN_SIGNAL_STRENGTH  = 4                    # Min conditions to alert (4 or 5)
+```
+
+---
+
+## 🗄️ Database Tables
+
+| Table | Contents |
+|---|---|
+| `candles_4h` | 4H OHLCV price data for RTY |
+| `ichimoku_4h` | All Ichimoku values per candle |
+| `signals` | Every actionable signal with trade levels |
+
+Query directly with any SQLite browser (e.g. DB Browser for SQLite).
+
+---
+
+## 🖥️ Running 24/7 (Optional)
+
+### On Mac/Linux — use a simple screen session:
+```bash
+screen -S rty
+python rty_ichimoku.py
+# Detach: Ctrl+A then D
+# Reattach: screen -r rty
+```
+
+### Or as a background process:
+```bash
+nohup python rty_ichimoku.py > rty_output.log 2>&1 &
+```
+
+---
+
+## ⚠️ Important Notes
+
+- RTY futures trade nearly 24/5 — signals can appear outside market hours
+- URTY/SRTY are **3x leveraged ETFs** — only trade in direction of strong cloud signals
+- **Never hold leveraged ETFs more than 3-5 days** due to daily decay
+- Signal levels are on **RTY points** — URTY/SRTY will move ~3x those percentages
+- This is a tool for education and analysis — NOT financial advice
+
+---
+
+## 📋 Example Output
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  RTY ICHIMOKU SIGNAL REPORT  —  DAILY PRE-MARKET 9AM
+  Friday, March 14 2026  09:00 AM ET
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  TICKER ANALYZED : RTY=F (Russell 2000 Futures, 4H)
+  INSTRUMENT      : URTY
+  DIRECTION       : 🟢  BULLISH
+  SIGNAL STRENGTH : [████░] 4/5
+
+  ICHIMOKU VALUES
+  ──────────────────────────────────────────────────────
+  Close Price     :    2490.00
+  Tenkan-sen      :    2488.50
+  Kijun-sen       :    2470.00
+  Cloud Top       :    2465.00
+  Cloud Bottom    :    2440.00
+  Cloud Color     :  🟩 GREEN
+  Future Cloud    :  🟩 GREEN (bullish ahead)
+  Inside Cloud?   :  ✅  NO — signals valid
+
+  CONDITIONS MET
+  ──────────────────────────────────────────────────────
+  ✅  Price above cloud
+  ✅  TK bullish cross
+  ✅  Tenkan above Kijun
+  ✅  Future cloud is GREEN
+  ❌  Chikou above price
+
+  TRADE SETUP — URTY
+  ──────────────────────────────────────────────────────
+  Entry Zone      :  2490.00  –  2496.00
+  Stop Loss       :  2468.50  (Kijun-sen level)
+  Target 1R       :  2511.50  (1:1 reward)
+  Target 2R       :  2533.00  ★ 2:1 reward target
+
+  Risk (pts)      :   21.50 RTY points
+  Reward (pts)    :   43.00 RTY points
+```

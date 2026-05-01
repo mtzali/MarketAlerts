@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+SCHL,Scholastic Corp,Communication Services,XLC,61.60920651675477,29.53,1.42,28.82,29.53,29.96,swing-based,42,1240.26,29.53,25.67,-13.1,30.83,4.4,34.02,180.06,36.69,0.2,21,NEUTRAL,483275,1.0,CONSIDER
+IWV,iShares Russell 3000 ETF,Financial,XLF,61.029017541272104,389.73,3.31,388.07,389.73,390.72,swing-based,3,1169.19,389.73,378.72,-2.8,392.36,0.7,400.79,36.0,4.91,0.14,21,NEUTRAL,471729,,CONSIDER
+LEO,BNY Mellon Strategic Municipals Inc,Financial,XLF,61.029017541272104,6.35,0.06,6.32,6.35,6.37,swing-based,196,1244.6,6.35,6.19,-2.5,6.36,0.2,6.46,34.66,-1.48,-0.04,21,NEUTRAL,386017,,CONSIDER
+LION,Lionsgate Studios Corp,Financial,XLF,61.029017541272104,9.25,0.43,9.04,9.25,9.38,swing-based,135,1248.75,9.25,6.82,-26.3,9.46,2.3,11.09,345.61,11.13,0.03,21,NEUTRAL,4304002,1.82,CONSIDER
+LMBS,First Trust Low Duration Opportunities ETF,Financial,XLF,61.029017541272104,50.04,0.15,49.97,50.04,50.08,swing-based,24,1200.96,50.04,49.64,-0.8,50.12,0.2,50.42,10.64,0.86,0.08,21,NEUTRAL,2523769,,CONSIDER
+MUNI,PIMCO Intermediate Municipal Bond Active ETF,Financial,XLF,61.029017541272104,52.55,0.06,52.52,52.55,52.57,swing-based,23,1208.65,52.55,52.34,-0.4,52.57,0.0,52.71,5.34,0.01,0.0,21,NEUTRAL,943056,,CONSIDER
+NAD,Nuveen Quality Municipal Income Fund,Financial,XLF,61.029017541272104,12.08,0.09,12.03,12.08,12.11,swing-based,103,1244.24,12.08,11.85,-1.9,12.1,0.2,12.25,26.21,-0.82,-0.03,21,NEUTRAL,1342721,,CONSIDER
+NEA,Nuveen AMT-Free Quality Municipal Income Fund,Financial,XLF,61.029017541272104,11.7,0.09,11.66,11.7,11.73,swing-based,106,1240.2,11.7,11.43,-2.3,11.79,0.8,11.88,32.0,6.66,0.21,21,NEUTRAL,1560536,,CONSIDER

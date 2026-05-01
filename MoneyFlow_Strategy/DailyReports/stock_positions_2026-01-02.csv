@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+ERO,Ero Copper Corp,Basic Materials,XLB,59.75931791811343,29.05,1.21,28.44,29.05,29.41,swing-based,43,1249.15,29.05,23.89,-17.7,30.26,4.2,31.48,237.36,36.5,0.15,21,NEUTRAL,2026825,1.94,CONSIDER
+ACWX,iShares MSCI ACWI ex US ETF,Financial,XLF,58.67473423507461,68.13,0.53,67.86,68.13,68.29,swing-based,18,1226.34,68.13,66.83,-1.9,68.66,0.8,69.2,26.24,6.74,0.26,21,NEUTRAL,3505581,,CONSIDER
+FDD,First Trust STOXX European Select Dividend Income Fund,Financial,XLF,58.67473423507461,17.8,0.16,17.72,17.8,17.85,swing-based,70,1246.0,17.8,15.59,-12.4,17.96,0.9,18.12,158.31,7.74,0.05,21,NEUTRAL,708230,,CONSIDER
+FEZ,SPDR EURO Stoxx 50 ETF,Financial,XLF,58.67473423507461,65.37,0.52,65.11,65.37,65.53,swing-based,19,1242.03,65.37,63.0,-3.6,65.89,0.8,66.41,47.96,6.93,0.14,21,NEUTRAL,3478632,,CONSIDER
+FXI,iShares China Large-Cap ETF,Financial,XLF,58.67473423507461,39.82,0.54,39.55,39.82,39.98,swing-based,31,1234.42,39.82,37.92,-4.8,40.52,1.8,42.13,64.01,16.65,0.26,21,NEUTRAL,63119479,,CONSIDER
+FXR,First Trust Industrials/Producer Durables AlphaDEX Fund,Financial,XLF,58.67473423507461,81.39,0.87,80.95,81.39,81.65,swing-based,15,1220.85,81.39,79.43,-2.4,81.69,0.4,83.08,33.26,0.55,0.02,21,NEUTRAL,435687,,CONSIDER
+GRID,First Trust NASDAQ Clean Edge Smart Grid Infrastructure Index Fund,Financial,XLF,58.67473423507461,155.82,1.73,154.95,155.82,156.34,swing-based,8,1246.56,155.82,152.08,-2.4,159.62,2.4,164.28,34.05,26.26,0.77,21,NEUTRAL,538654,,CONSIDER
+ICLN,iShares Global Clean Energy ETF,Financial,XLF,58.67473423507461,17.1,0.3,16.95,17.1,17.19,swing-based,73,1248.3,17.1,16.2,-5.3,18.06,5.6,19.21,72.25,63.48,0.88,21,NEUTRAL,6495837,,CONSIDER

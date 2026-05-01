@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+ACEL,Accel Entertainment Inc,Consumer Cyclical,XLY,62.647917841401096,11.02,0.28,10.88,11.02,11.1,swing-based,113,1245.26,11.02,9.47,-14.0,11.31,2.6,12.45,184.22,23.44,0.13,21,NEUTRAL,520593,1.33,CONSIDER
+ROL,"Rollins, Inc",Consumer Cyclical,XLY,62.647917841401096,60.24,1.16,59.66,60.24,60.59,swing-based,20,1204.8,60.24,56.96,-5.4,61.7,2.4,64.63,72.56,22.24,0.31,21,NEUTRAL,3893099,2.0,CONSIDER
+HLT,Hilton Worldwide Holdings Inc,Consumer Cyclical,XLY,62.647917841401096,293.0,5.33,290.34,293.0,294.6,swing-based,4,1172.0,293.0,266.28,-9.1,298.33,1.8,303.65,113.28,14.91,0.13,21,NEUTRAL,3664830,2.21,CONSIDER
+MGA,Magna International Inc,Consumer Cyclical,XLY,62.647917841401096,53.6,0.93,53.13,53.6,53.88,swing-based,23,1232.8,53.6,44.86,-16.3,54.53,1.7,55.47,207.4,15.04,0.07,21,NEUTRAL,2437678,2.71,CONSIDER
+SLV,iShares Silver Trust,Financial,XLF,61.38309988554957,60.26,2.0,59.26,60.26,60.86,swing-based,20,1205.2,60.26,43.76,-27.4,62.26,3.3,64.26,342.02,28.02,0.08,21,NEUTRAL,64561787,,CONSIDER
+PAAA,PGIM AAA CLO ETF,Financial,XLF,61.38309988554957,51.36,0.02,51.35,51.36,51.37,swing-based,24,1232.64,51.36,50.85,-1.0,51.38,0.0,51.41,12.32,0.41,0.03,21,NEUTRAL,1871025,,CONSIDER
+PFFA,Virtus InfraCap U.S. Preferred Stock ETF,Financial,XLF,61.38309988554957,21.79,0.11,21.74,21.79,21.82,swing-based,57,1242.03,21.79,21.0,-3.6,21.84,0.2,22.36,47.02,1.09,0.02,21,NEUTRAL,1088722,,CONSIDER
+PLTM,GraniteShares Platinum Shares,Financial,XLF,61.38309988554957,18.27,0.52,18.01,18.27,18.43,swing-based,68,1242.36,18.27,14.24,-22.0,18.79,2.8,19.31,284.31,24.76,0.09,21,NEUTRAL,1282066,,CONSIDER

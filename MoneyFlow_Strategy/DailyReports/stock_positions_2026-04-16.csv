@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+ACYN,FT Vest Laddered Autocallable Barrier & Income ETF,Financial,XLF,58.23491510716749,20.72,0.25,20.59,20.72,20.8,swing-based,60,1243.2,20.72,19.87,-4.1,20.88,0.8,21.5,55.34,5.05,0.09,21,RISK_ON,669512,,CONSIDER
+AMDL,GraniteShares 2x Long AMD Daily ETF,Financial,XLF,58.23491510716749,22.49,1.39,21.8,22.49,22.91,swing-based,55,1236.95,22.49,10.3,-54.2,23.6,4.9,31.82,693.23,38.17,0.06,21,RISK_ON,18056244,,CONSIDER
+BBEU,JPMorgan BetaBuilders Europe ETF,Financial,XLF,58.23491510716749,76.88,1.27,76.25,76.88,77.26,swing-based,16,1230.08,76.88,68.52,-10.9,77.61,0.9,83.23,139.79,5.6,0.04,21,RISK_ON,1112140,,CONSIDER
+BBJP,JPMorgan BetaBuilders Japan ETF,Financial,XLF,58.23491510716749,72.76,1.48,72.02,72.76,73.2,swing-based,17,1236.92,72.76,65.26,-10.3,73.4,0.9,78.43,135.1,3.34,0.02,21,RISK_ON,4686838,,CONSIDER
+BK,Bank Of New York Mellon Corp,Financial,XLF,58.23491510716749,134.84,2.67,133.5,134.84,135.64,swing-based,9,1213.56,134.84,112.96,-16.2,137.51,2.0,140.19,204.11,16.85,0.08,21,RISK_ON,7183171,2.0,CONSIDER
+BKDV,BNY Mellon Dynamic Value ETF,Financial,XLF,58.23491510716749,31.0,0.37,30.82,31.0,31.11,swing-based,40,1240.0,31.0,28.75,-7.3,31.04,0.1,32.46,94.52,-2.79,-0.03,21,RISK_ON,656129,,CONSIDER
+BUFD,FT Vest Laddered Deep Buffer ETF,Financial,XLF,58.23491510716749,28.95,0.21,28.84,28.95,29.01,swing-based,43,1244.85,28.95,27.41,-5.3,29.16,0.7,29.37,68.76,6.33,0.09,21,RISK_ON,457467,,CONSIDER
+CHAT,Roundhill Generative AI & Technology ETF,Financial,XLF,58.23491510716749,74.24,2.23,73.13,74.24,74.91,swing-based,16,1187.84,74.24,57.41,-22.7,76.47,3.0,78.69,280.02,24.94,0.09,21,RISK_ON,564522,,CONSIDER

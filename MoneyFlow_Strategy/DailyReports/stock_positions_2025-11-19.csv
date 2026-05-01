@@ -1,0 +1,5 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+JNJ,Johnson & Johnson,Healthcare,XLV,60.88630925469115,202.51,3.1,200.96,202.51,203.44,swing-based,12,2430.12,202.51,183.85,-9.2,205.61,1.5,208.71,235.08,26.04,0.11,21,RISK_OFF,14661343,2.11,CONSIDER
+AMTM,Amentum Holdings Inc,Industrials,XLI,47.422301976030525,25.52,1.09,24.98,25.52,25.85,swing-based,97,2475.44,25.52,20.79,-18.6,26.58,4.2,30.16,491.0,71.11,0.14,21,RISK_OFF,10163459,2.36,CONSIDER
+ATKR,Atkore Inc,Industrials,XLI,47.422301976030525,66.53,2.29,65.38,66.53,67.22,swing-based,37,2461.61,66.53,62.67,-5.8,70.43,5.9,75.23,168.14,118.96,0.71,21,RISK_OFF,1185935,2.43,CONSIDER
+DY,"Dycom Industries, Inc",Industrials,XLI,47.422301976030525,325.29,14.42,318.08,325.29,329.62,swing-based,7,2277.03,325.29,272.25,-16.3,339.71,4.4,354.13,401.56,70.66,0.18,21,RISK_OFF,1068007,1.0,CONSIDER

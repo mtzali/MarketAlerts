@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+AA,Alcoa Corp,Basic Materials,XLB,65.79839258683184,63.56,2.23,62.45,63.56,64.23,swing-based,19,1207.64,63.56,51.53,-18.9,65.79,3.5,68.02,241.35,29.63,0.12,21,NEUTRAL,12309844,2.12,CONSIDER
+AUGO,Aura Minerals Inc,Basic Materials,XLB,65.79839258683184,53.21,2.53,51.94,53.21,53.97,swing-based,23,1223.83,53.21,47.54,-10.6,54.3,2.1,58.48,147.76,7.68,0.05,21,NEUTRAL,935358,1.0,CONSIDER
+CENX,Century Aluminum Co,Basic Materials,XLB,65.79839258683184,42.23,2.02,41.22,42.23,42.84,swing-based,29,1224.67,42.23,28.29,-33.0,44.34,5.0,54.26,421.86,43.6,0.1,21,NEUTRAL,4177682,1.0,CONSIDER
+CMC,Commercial Metals Co,Basic Materials,XLB,65.79839258683184,74.61,1.51,73.85,74.61,75.06,swing-based,16,1193.76,74.61,68.27,-8.5,76.12,2.0,77.63,108.63,16.93,0.16,21,NEUTRAL,1839693,1.92,CONSIDER
+CMP,Compass Minerals International Inc,Basic Materials,XLB,65.79839258683184,22.68,1.03,22.17,22.68,22.99,swing-based,55,1247.4,22.68,18.92,-16.6,23.71,4.5,24.73,223.94,39.55,0.18,21,NEUTRAL,979906,2.5,CONSIDER
+FCX,Freeport-McMoRan Inc,Basic Materials,XLB,65.79839258683184,56.15,1.54,55.38,56.15,56.61,swing-based,22,1235.3,56.15,49.89,-11.1,57.69,2.7,59.23,147.9,23.73,0.16,21,NEUTRAL,33291210,1.68,CONSIDER
+RYAM,Rayonier Advanced Materials Inc,Basic Materials,XLB,65.79839258683184,7.02,0.26,6.89,7.02,7.1,swing-based,178,1249.56,7.02,5.57,-20.7,7.6,8.3,8.85,272.09,89.32,0.33,21,NEUTRAL,1183594,1.0,CONSIDER
+ALB,Albemarle Corp,Basic Materials,XLB,65.79839258683184,158.15,6.44,154.93,158.15,160.08,swing-based,7,1107.05,158.15,137.48,-13.1,164.59,4.1,171.03,158.2,31.55,0.2,21,NEUTRAL,5577477,2.39,CONSIDER

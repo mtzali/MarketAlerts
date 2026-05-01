@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+APA,APA Corporation,Energy,XLE,55.96651333705451,41.35,1.88,40.41,41.35,41.92,swing-based,30,1240.5,41.35,26.78,-35.2,44.54,7.7,55.52,454.11,78.75,0.17,21,NEUTRAL,14710821,2.91,CONSIDER
+OXY,Occidental Petroleum Corp,Energy,XLE,55.96651333705451,62.23,2.18,61.14,62.23,62.88,swing-based,20,1244.6,62.23,42.35,-31.9,67.05,7.7,82.31,410.58,83.33,0.2,21,NEUTRAL,27830344,2.65,CONSIDER
+TDW,Tidewater Inc,Energy,XLE,55.96651333705451,83.44,3.36,81.76,83.44,84.45,swing-based,14,1168.16,83.44,70.01,-16.1,85.74,2.8,95.46,202.13,18.09,0.09,21,NEUTRAL,1310657,3.0,CONSIDER
+AAMI,Acadian Asset Management Inc,Financial,XLF,46.438279680804804,56.2,1.99,55.2,56.2,56.8,swing-based,22,1236.4,56.2,47.96,-14.7,56.86,1.2,62.36,194.53,1.29,0.01,21,NEUTRAL,482222,3.0,CONSIDER
+ACYN,FT Vest Laddered Autocallable Barrier & Income ETF,Financial,XLF,46.438279680804804,20.37,0.25,20.25,20.37,20.44,swing-based,61,1242.57,20.37,19.88,-2.4,20.55,0.9,20.97,34.63,6.46,0.19,21,NEUTRAL,951756,,CONSIDER
+ARGT,Global X MSCI Argentina ETF,Financial,XLF,46.438279680804804,93.21,2.5,91.96,93.21,93.96,swing-based,13,1211.73,93.21,83.88,-10.0,93.62,0.4,99.64,131.0,-4.41,-0.03,21,NEUTRAL,596902,,CONSIDER
+BNO,United States Brent Oil Fund LP,Financial,XLF,46.438279680804804,50.33,2.74,48.96,50.33,51.15,swing-based,24,1207.92,50.33,30.15,-40.1,54.26,7.8,69.16,504.01,74.61,0.15,21,NEUTRAL,7792805,,CONSIDER
+CBC,Central Bancompany Inc,Financial,XLF,46.438279680804804,24.55,0.56,24.27,24.55,24.72,swing-based,50,1227.5,24.55,23.05,-6.1,24.8,1.0,25.88,83.55,4.14,0.05,21,NEUTRAL,1084994,1.4,CONSIDER

@@ -1,0 +1,387 @@
+You are a senior Python quant developer.
+
+
+
+Build a modular Python project that predicts IWM market regime using four components:
+
+
+
+Macro indicators
+Market internals
+Technical indicators
+News sentiment
+
+
+
+
+The system must support TWO execution modes:
+
+
+
+MORNING_RUN (9:25 AM ET)
+CLOSE_RUN (after market close)
+
+
+
+
+Both runs should output:
+
+“BULLISH”, “CHOPPY”, or “BEARISH”.
+
+
+
+Use Python with:
+
+
+
+pandas
+numpy
+yfinance
+pandas_ta
+scikit-learn
+feedparser
+nltk (VADER sentiment)
+
+
+
+
+Project structure:
+
+
+
+IWM_MarketRegime/
+
+│
+
+├── data/
+
+├── indicators/
+
+│   ├── macro.py
+
+│   ├── internals.py
+
+│   ├── technical.py
+
+│   └── sentiment.py
+
+│
+
+├── models/
+
+│   └── regime_model.py
+
+│
+
+├── main.py
+
+└── config.py
+
+
+
+
+
+
+
+DATA REQUIREMENTS
+
+
+
+Download daily data using yfinance for:
+
+
+
+IWM, SPY, HYG, TLT
+
+^VIX, ^TNX
+
+DX-Y.NYB (DXY proxy)
+
+ES=F (S&P futures)
+
+
+
+For MORNING_RUN also fetch:
+
+
+
+latest ES futures price
+latest IWM price (1m or 5m interval)
+overnight % change in ES
+
+
+
+
+If intraday data fails, fallback to daily data.
+
+
+
+
+
+
+
+MACRO MODEL REQUIREMENTS
+
+
+
+Create features:
+
+
+
+TNX 5-day change
+VIX trend (10 SMA slope)
+HYG momentum (ROC 10)
+TLT trend (20 SMA difference)
+DXY momentum
+ES overnight return (morning run only)
+
+
+
+
+Return macro_score between 0 and 100.
+
+
+
+
+
+
+
+MARKET INTERNALS REQUIREMENTS
+
+
+
+Compute:
+
+
+
+IWM/SPY ratio
+ratio 20-day MA
+ratio ROC(10)
+
+
+
+
+Return internals_score between 0 and 100.
+
+
+
+
+
+
+
+TECHNICAL MODEL REQUIREMENTS
+
+
+
+For IWM compute:
+
+
+
+EMA 9
+EMA 20
+RSI 14
+MACD
+ATR
+
+
+
+
+MORNING_RUN:
+
+Use latest intraday price combined with prior daily indicators.
+
+
+
+CLOSE_RUN:
+
+Use daily OHLC only.
+
+
+
+Return technical_score between 0 and 100.
+
+
+
+
+
+
+
+SENTIMENT MODEL REQUIREMENTS
+
+
+
+Pull RSS feeds from:
+
+
+
+Yahoo Finance IWM news
+Federal Reserve news
+MarketWatch markets news
+
+
+
+
+Use VADER to score headlines.
+
+
+
+Return sentiment_score between 0 and 100.
+
+If no news exists → return 50.
+
+
+
+
+
+
+
+REGIME MODEL REQUIREMENTS
+
+
+
+Combine scores:
+
+
+
+macro_weight = 0.30
+
+internals_weight = 0.25
+
+technical_weight = 0.30
+
+sentiment_weight = 0.15
+
+
+
+Compute regime_score.
+
+
+
+Classification:
+
+
+
+score >= 60 → BULLISH
+
+40–59 → CHOPPY
+
+< 40 → BEARISH
+
+
+
+
+
+
+
+MAIN.PY REQUIREMENTS
+
+
+
+main.py must accept:
+
+
+
+–mode morning
+
+–mode close
+
+
+
+Workflow:
+
+
+
+Load config
+Download data
+Compute scores
+Print results
+
+
+
+
+Example output:
+
+
+
+Run mode: MORNING
+
+Macro score:
+
+Internals score:
+
+Technical score:
+
+Sentiment score:
+
+Final regime score:
+
+Market regime:
+
+
+
+
+
+
+
+CSV LOGGING REQUIREMENT
+
+
+
+Append to:
+
+
+
+data/regime_history.csv
+
+
+
+Columns:
+
+date
+
+run_mode
+
+macro
+
+internals
+
+technical
+
+sentiment
+
+regime_score
+
+regime
+
+
+
+
+
+
+
+CODE QUALITY RULES
+
+
+
+Modular functions
+Type hints
+Logging
+Graceful error handling
+No global state
+
+
+
+
+
+
+
+
+OPTIONAL (IF EASY)
+
+
+
+Add a simple confidence metric:
+
+
+
+confidence = abs(regime_score - 50)

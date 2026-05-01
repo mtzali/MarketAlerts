@@ -1,0 +1,359 @@
+#!/usr/bin/env python3
+"""
+Technical Chart Analyzer — Support/Resistance + Channel Detection
+Usage:
+    python chart_analysis.py SRTY
+    python chart_analysis.py AAPL --interval 1h --period 30d
+    python chart_analysis.py SPY --interval 4h --period 60d --save
+
+Dependencies:
+    pip install yfinance matplotlib mplfinance pandas numpy scipy
+"""
+
+import sys
+import argparse
+import warnings
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+from matplotlib.patches import FancyArrowPatch
+import matplotlib.dates as mdates
+from matplotlib.lines import Line2D
+import yfinance as yf
+from scipy.signal import argrelextrema
+from scipy.stats import linregress
+
+warnings.filterwarnings("ignore")
+
+
+# ─────────────────────────────────────────────
+#  COLOR PALETTE  (dark terminal aesthetic)
+# ─────────────────────────────────────────────
+BG        = "#080c18"
+GRID      = "#ffffff08"
+TEXT      = "#c8d0e8"
+BULL      = "#22d48a"
+BEAR      = "#ff4060"
+CHAN_FILL = "#48c88c12"
+CHAN_LINE = "#48c88c"
+S_COLORS  = ["#ff5050", "#ff8c32", "#ffd232"]   # S1 S2 S3
+R_COLORS  = ["#ff5a78", "#ff3c5a", "#cc3050"]   # R1 R2 R3
+MA50_COL  = "#f0a030"
+MA200_COL = "#a060f0"
+
+
+# ─────────────────────────────────────────────
+#  DATA FETCH
+# ─────────────────────────────────────────────
+def fetch_data(ticker: str, interval: str, period: str) -> pd.DataFrame:
+    print(f"  Fetching {ticker} | interval={interval} | period={period} …")
+    df = yf.download(ticker, interval=interval, period=period, auto_adjust=True, progress=False)
+    if df.empty:
+        raise ValueError(f"No data returned for '{ticker}'. Check the ticker symbol.")
+    df.columns = [c[0] if isinstance(c, tuple) else c for c in df.columns]
+    df = df[["Open", "High", "Low", "Close", "Volume"]].dropna()
+    print(f"  Got {len(df)} bars.")
+    return df
+
+
+# ─────────────────────────────────────────────
+#  SUPPORT / RESISTANCE DETECTION
+# ─────────────────────────────────────────────
+def find_sr_levels(df: pd.DataFrame, n_levels: int = 6, order: int = 5):
+    highs = df["High"].values
+    lows  = df["Low"].values
+
+    local_max_idx = argrelextrema(highs, np.greater, order=order)[0]
+    local_min_idx = argrelextrema(lows,  np.less,   order=order)[0]
+
+    resistance_prices = highs[local_max_idx]
+    support_prices    = lows[local_min_idx]
+
+    # Cluster nearby levels (within 0.5% of each other)
+    def cluster(prices, pct=0.005):
+        prices = sorted(prices)
+        clusters = []
+        used = [False] * len(prices)
+        for i, p in enumerate(prices):
+            if used[i]:
+                continue
+            group = [p]
+            for j in range(i + 1, len(prices)):
+                if abs(prices[j] - p) / p < pct:
+                    group.append(prices[j])
+                    used[j] = True
+            clusters.append(np.mean(group))
+        return clusters
+
+    r_levels = sorted(cluster(resistance_prices), reverse=True)[:n_levels]
+    s_levels = sorted(cluster(support_prices))[:n_levels]
+
+    # Separate levels above/below current price
+    current = float(df["Close"].iloc[-1])
+    resistances = sorted([l for l in r_levels if l > current])[:3]
+    supports    = sorted([l for l in s_levels if l < current], reverse=True)[:3]
+
+    return supports, resistances
+
+
+# ─────────────────────────────────────────────
+#  CHANNEL DETECTION
+# ─────────────────────────────────────────────
+def find_channel(df: pd.DataFrame, lookback: int = None):
+    """Fit ascending/descending channel to recent price action."""
+    if lookback is None:
+        lookback = min(60, len(df))
+
+    sub = df.iloc[-lookback:].copy()
+    x = np.arange(len(sub))
+
+    # Linear regression on highs and lows
+    slope_h, intercept_h, r_h, _, _ = linregress(x, sub["High"].values)
+    slope_l, intercept_l, r_l, _, _ = linregress(x, sub["Low"].values)
+
+    # Only return channel if both fits are reasonable
+    if abs(r_h) < 0.5 or abs(r_l) < 0.5:
+        return None
+
+    # Classify channel direction
+    avg_slope = (slope_h + slope_l) / 2
+    price_range = sub["Close"].mean()
+    slope_pct = avg_slope / price_range * 100  # % per bar
+
+    direction = "Ascending" if slope_pct > 0.05 else "Descending" if slope_pct < -0.05 else "Horizontal"
+
+    return {
+        "start_idx": len(df) - lookback,
+        "end_idx":   len(df) - 1,
+        "dates":     sub.index,
+        "high_line": intercept_h + slope_h * x,
+        "low_line":  intercept_l + slope_l * x,
+        "direction": direction,
+        "r_squared": (r_h ** 2 + r_l ** 2) / 2,
+    }
+
+
+# ─────────────────────────────────────────────
+#  MOVING AVERAGES
+# ─────────────────────────────────────────────
+def compute_mas(df: pd.DataFrame):
+    ma50  = df["Close"].rolling(50).mean()  if len(df) >= 50  else None
+    ma200 = df["Close"].rolling(200).mean() if len(df) >= 200 else None
+    return ma50, ma200
+
+
+# ─────────────────────────────────────────────
+#  MAIN CHART
+# ─────────────────────────────────────────────
+def draw_chart(df: pd.DataFrame, ticker: str, interval: str,
+               supports, resistances, channel, ma50, ma200, save: bool):
+
+    fig = plt.figure(figsize=(16, 9), facecolor=BG)
+    fig.patch.set_facecolor(BG)
+
+    # Layout: main chart 80% height, volume 20%
+    ax  = fig.add_axes([0.04, 0.22, 0.88, 0.70], facecolor=BG)
+    axv = fig.add_axes([0.04, 0.06, 0.88, 0.14], facecolor=BG, sharex=ax)
+
+    for a in [ax, axv]:
+        a.set_facecolor(BG)
+        a.tick_params(colors=TEXT, labelsize=8)
+        for spine in a.spines.values():
+            spine.set_edgecolor("#ffffff18")
+
+    ax.grid(color=GRID, linewidth=0.5, linestyle="-")
+    axv.grid(color=GRID, linewidth=0.5, linestyle="-")
+
+    dates = mdates.date2num(df.index.to_pydatetime())
+    width = (dates[1] - dates[0]) * 0.7 if len(dates) > 1 else 0.02
+
+    # ── Candlesticks ──
+    for i, (date, row) in enumerate(df.iterrows()):
+        d = mdates.date2num(date)
+        o, h, l, c = row["Open"], row["High"], row["Low"], row["Close"]
+        color = BULL if c >= o else BEAR
+        ax.plot([d, d], [l, h], color=color, linewidth=0.8, zorder=3)
+        body_bot = min(o, c)
+        body_h   = max(abs(c - o), (h - l) * 0.01)
+        rect = plt.Rectangle((d - width/2, body_bot), width, body_h,
+                              color=color, zorder=4)
+        ax.add_patch(rect)
+
+    # ── Volume ──
+    for i, (date, row) in enumerate(df.iterrows()):
+        d = mdates.date2num(date)
+        color = BULL if row["Close"] >= row["Open"] else BEAR
+        axv.bar(d, row["Volume"], width=width * 0.9,
+                color=color, alpha=0.4, zorder=3)
+
+    # ── Moving Averages ──
+    if ma50 is not None:
+        ax.plot(mdates.date2num(df.index.to_pydatetime()),
+                ma50, color=MA50_COL, linewidth=1.2, label="MA 50", zorder=5)
+    if ma200 is not None:
+        ax.plot(mdates.date2num(df.index.to_pydatetime()),
+                ma200, color=MA200_COL, linewidth=1.2, label="MA 200", zorder=5)
+
+    # ── Channel ──
+    if channel:
+        cdates = mdates.date2num(channel["dates"].to_pydatetime())
+        ax.fill_between(cdates, channel["low_line"], channel["high_line"],
+                        color=CHAN_FILL, zorder=1)
+        ax.plot(cdates, channel["high_line"],
+                color=CHAN_LINE, linewidth=1.5, linestyle="--",
+                label=f"{channel['direction']} Channel", zorder=6)
+        ax.plot(cdates, channel["low_line"],
+                color=CHAN_LINE, linewidth=1.5, linestyle="--", zorder=6)
+
+        # Channel label at right end
+        ax.annotate(f"↗ {channel['direction']} Channel",
+                    xy=(cdates[-1], channel["high_line"][-1]),
+                    xytext=(5, 5), textcoords="offset points",
+                    color=CHAN_LINE, fontsize=8, fontweight="bold")
+
+    # ── Support Levels ──
+    for i, level in enumerate(supports[:3]):
+        color = S_COLORS[i] if i < len(S_COLORS) else S_COLORS[-1]
+        ax.axhline(y=level, color=color, linewidth=1.2,
+                   linestyle="-", alpha=0.85, zorder=5)
+        ax.fill_between(ax.get_xlim(),
+                        level * 0.998, level * 1.002,
+                        color=color, alpha=0.07, zorder=1)
+        ax.annotate(f"  S{i+1}  ${level:.2f}",
+                    xy=(dates[-1], level), xytext=(6, 0),
+                    textcoords="offset points",
+                    color=color, fontsize=8, fontweight="bold",
+                    va="center")
+
+    # ── Resistance Levels ──
+    for i, level in enumerate(resistances[:3]):
+        color = R_COLORS[i] if i < len(R_COLORS) else R_COLORS[-1]
+        ax.axhline(y=level, color=color, linewidth=1.2,
+                   linestyle="--", alpha=0.85, zorder=5)
+        ax.fill_between(ax.get_xlim(),
+                        level * 0.998, level * 1.002,
+                        color=color, alpha=0.07, zorder=1)
+        ax.annotate(f"  R{i+1}  ${level:.2f}",
+                    xy=(dates[-1], level), xytext=(6, 0),
+                    textcoords="offset points",
+                    color=color, fontsize=8, fontweight="bold",
+                    va="center")
+
+    # ── X-axis formatting ──
+    ax.xaxis_date()
+    axv.xaxis_date()
+    locator = mdates.AutoDateLocator()
+    formatter = mdates.ConciseDateFormatter(locator)
+    axv.xaxis.set_major_locator(locator)
+    axv.xaxis.set_major_formatter(formatter)
+    plt.setp(ax.get_xticklabels(), visible=False)
+    axv.tick_params(axis="x", colors=TEXT, labelsize=7.5, rotation=0)
+
+    # ── Y-axis ──
+    ax.yaxis.tick_right()
+    ax.tick_params(axis="y", colors=TEXT, labelsize=8)
+    axv.yaxis.set_visible(False)
+
+    # ── Title ──
+    current_price = float(df["Close"].iloc[-1])
+    prev_price    = float(df["Close"].iloc[-2])
+    chg_pct       = (current_price - prev_price) / prev_price * 100
+    chg_color     = BULL if chg_pct >= 0 else BEAR
+    sign          = "+" if chg_pct >= 0 else ""
+
+    fig.text(0.04, 0.95, ticker.upper(), fontsize=22, fontweight="bold",
+             color=TEXT, va="top")
+    fig.text(0.16, 0.955, f"• {interval} Chart  •  Support & Resistance  •  Channel Detection",
+             fontsize=10, color="#7080a0", va="top")
+    fig.text(0.88, 0.955, f"${current_price:.2f}  {sign}{chg_pct:.2f}%",
+             fontsize=14, fontweight="bold", color=chg_color, va="top", ha="right")
+
+    # ── Legend ──
+    legend_elements = []
+    for i, l in enumerate(supports[:3]):
+        legend_elements.append(Line2D([0], [0], color=S_COLORS[i], linewidth=1.5,
+                                      label=f"S{i+1} ${l:.2f}"))
+    for i, l in enumerate(resistances[:3]):
+        legend_elements.append(Line2D([0], [0], color=R_COLORS[i], linewidth=1.5,
+                                      linestyle="--", label=f"R{i+1} ${l:.2f}"))
+    if channel:
+        legend_elements.append(Line2D([0], [0], color=CHAN_LINE, linewidth=1.5,
+                                      linestyle="--", label=f"{channel['direction']} Channel"))
+    if ma50 is not None:
+        legend_elements.append(Line2D([0], [0], color=MA50_COL, linewidth=1.5, label="MA 50"))
+    if ma200 is not None:
+        legend_elements.append(Line2D([0], [0], color=MA200_COL, linewidth=1.5, label="MA 200"))
+
+    ax.legend(handles=legend_elements, loc="upper left",
+              facecolor="#0d1220", edgecolor="#ffffff18",
+              labelcolor=TEXT, fontsize=8, framealpha=0.9)
+
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
+
+    if save:
+        fname = f"{ticker.upper()}_{interval}_chart.png"
+        plt.savefig(fname, dpi=150, bbox_inches="tight", facecolor=BG)
+        print(f"  Chart saved as: {fname}")
+    else:
+        plt.show()
+
+
+# ─────────────────────────────────────────────
+#  ENTRY POINT
+# ─────────────────────────────────────────────
+def main():
+    parser = argparse.ArgumentParser(
+        description="Technical chart: support/resistance + channel detection",
+        formatter_class=argparse.RawTextHelpFormatter,
+        epilog="""
+Examples:
+  python chart_analysis.py SRTY
+  python chart_analysis.py AAPL --interval 1h --period 30d
+  python chart_analysis.py SPY  --interval 4h --period 60d
+  python chart_analysis.py TSLA --interval 1d --period 6mo --save
+  python chart_analysis.py QQQ  --interval 15m --period 5d
+
+Intervals: 1m 2m 5m 15m 30m 60m 90m 1h 4h 1d 5d 1wk 1mo 3mo
+Periods:   1d 5d 1mo 3mo 6mo 1y 2y 5y 10y ytd max
+        """
+    )
+    parser.add_argument("ticker",   type=str,            help="Ticker symbol, e.g. SRTY")
+    parser.add_argument("--interval", default="4h",      help="Bar interval (default: 4h)")
+    parser.add_argument("--period",   default="60d",     help="Lookback period (default: 60d)")
+    parser.add_argument("--sr-levels", type=int, default=3, dest="sr_levels",
+                        help="Max support/resistance levels each side (default: 3)")
+    parser.add_argument("--channel-bars", type=int, default=None, dest="channel_bars",
+                        help="Bars to use for channel detection (default: auto)")
+    parser.add_argument("--save", action="store_true",
+                        help="Save chart as PNG instead of displaying")
+    args = parser.parse_args()
+
+    print(f"\n{'─'*50}")
+    print(f"  SRTY Chart Analyzer  |  {args.ticker.upper()}")
+    print(f"{'─'*50}")
+
+    df = fetch_data(args.ticker, args.interval, args.period)
+
+    print("  Detecting support & resistance …")
+    supports, resistances = find_sr_levels(df, n_levels=args.sr_levels + 2)
+
+    print("  Detecting channel …")
+    channel = find_channel(df, lookback=args.channel_bars)
+    if channel:
+        print(f"  ✓ {channel['direction']} channel found  (R²={channel['r_squared']:.2f})")
+    else:
+        print("  ✗ No clear channel detected")
+
+    print("  Computing moving averages …")
+    ma50, ma200 = compute_mas(df)
+
+    print("  Rendering chart …")
+    draw_chart(df, args.ticker, args.interval,
+               supports, resistances, channel, ma50, ma200, args.save)
+
+    print("  Done.\n")
+
+
+if __name__ == "__main__":
+    main()

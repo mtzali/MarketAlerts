@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+SCHL,Scholastic Corp,Communication Services,XLC,59.665935091560875,29.63,1.4,28.93,29.63,30.05,swing-based,42,1244.46,29.63,25.68,-13.3,30.83,4.0,34.01,183.44,32.8,0.18,21,NEUTRAL,450153,1.0,CONSIDER
+AFJK,Aimei Health Technology Co Ltd,Financial,XLF,59.39727962685485,64.01,26.79,50.61,64.01,72.05,swing-based,19,1216.19,64.01,10.6,-83.4,109.37,70.9,170.41,1167.44,709.12,0.61,21,NEUTRAL,469435,,CONSIDER
+BDJ,BlackRock Enhanced Equity Dividend Trust,Financial,XLF,59.39727962685485,9.48,0.09,9.44,9.48,9.51,swing-based,131,1241.88,9.48,8.48,-10.6,9.57,0.9,9.65,134.94,7.81,0.06,21,NEUTRAL,1227095,,CONSIDER
+BGY,BlackRock Enhanced International Dividend Trust,Financial,XLF,59.39727962685485,5.88,0.05,5.86,5.88,5.89,swing-based,212,1246.56,5.88,5.43,-7.7,5.89,0.2,6.18,99.04,-0.79,-0.01,21,NEUTRAL,490570,,CONSIDER
+BSCQ,Invesco BulletShares 2026 Corporate Bond ETF,Financial,XLF,59.39727962685485,19.58,0.01,19.57,19.58,19.58,swing-based,63,1233.54,19.58,19.55,-0.1,19.59,0.0,19.6,1.92,0.31,0.16,21,NEUTRAL,1193783,,CONSIDER
+DBRG,DigitalBridge Group Inc,Financial,XLF,59.39727962685485,15.34,0.69,15.0,15.34,15.55,swing-based,81,1242.54,15.34,12.49,-18.6,16.03,4.5,16.72,247.5,39.02,0.16,21,NEUTRAL,10312771,2.5,CONSIDER
+EXG,Eaton Vance Tax-Managed Global Diversified Equity Income Fund,Financial,XLF,59.39727962685485,9.53,0.08,9.49,9.53,9.55,swing-based,131,1248.43,9.53,8.69,-8.9,9.61,0.9,9.7,113.8,7.59,0.07,21,NEUTRAL,1041244,,CONSIDER
+FEZ,SPDR EURO Stoxx 50 ETF,Financial,XLF,59.39727962685485,64.39,0.5,64.14,64.39,64.54,swing-based,19,1223.41,64.39,63.01,-2.1,65.06,1.0,66.33,29.09,9.85,0.34,21,NEUTRAL,2337029,,CONSIDER

@@ -1,0 +1,4 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+EFC,Ellington Financial Inc,Real Estate,XLRE,56.948798643877666,13.94,0.25,13.81,13.94,14.02,swing-based,239,3331.66,13.94,13.14,-5.7,13.96,0.1,14.46,208.27,-13.27,-0.06,21,RISK_OFF,3178739,1.25,CONSIDER
+ELME,Elme Communities,Real Estate,XLRE,56.948798643877666,17.35,0.21,17.24,17.35,17.41,swing-based,192,3331.2,17.35,16.22,-6.5,17.56,1.2,17.77,228.21,28.32,0.12,21,RISK_OFF,3949721,3.0,CONSIDER
+WSR,Whitestone REIT,Real Estate,XLRE,56.948798643877666,13.37,0.24,13.25,13.37,13.44,swing-based,249,3329.13,13.37,12.97,-3.0,13.48,0.8,13.8,118.17,9.22,0.08,21,RISK_OFF,383939,1.29,CONSIDER

@@ -1,0 +1,282 @@
+// This Pine Script™ code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © theUltimator5
+
+//@version=6
+indicator("Fear & Greed [theUltimator5]", max_bars_back=500, precision=1)
+
+// =============================================================================
+// INPUT SETTINGS
+// =============================================================================
+
+selected_component = input.string("None", "Show Individual Component", 
+     options=["None", "Market Momentum", "Stock Strength", "Price Breadth", "Put/Call Ratio", "Market Volatility", "Safe Haven", "Junk Bond"], 
+     group="Plot Settings")
+
+show_table = input.bool(true, "Show Information Table", group="Table Settings")
+table_position = input.string("Middle Left", "Table Position", 
+     options=["Top Left", "Top Right", "Bottom Left", "Bottom Right", "Middle Left", "Middle Right"], 
+     group="Table Settings")
+
+
+// =============================================================================
+// HELPER FUNCTIONS
+// =============================================================================
+
+Scale(input) => 
+    ((input - ta.lowest(input, 100)) / (ta.highest(input, 100) - ta.lowest(input, 100))) * 100
+
+get_table_position() =>
+    switch table_position
+        "Top Left" => position.top_left
+        "Top Right" => position.top_right
+        "Bottom Left" => position.bottom_left
+        "Bottom Right" => position.bottom_right
+        "Middle Left" => position.middle_left
+        "Middle Right" => position.middle_right
+        => position.top_right
+
+normalize_cnn_style(src, len) =>
+    if na(src)
+        50.0
+    else
+        mean_val = ta.sma(src, len)
+        std_val = ta.stdev(src, len)
+        if na(std_val) or std_val == 0 or na(mean_val)
+            50.0
+        else
+            z_score = (src - mean_val) / std_val
+            normalized = 50.0 + (z_score * 15.0)
+            math.max(0.0, math.min(100.0, normalized))
+
+getSentimentColor(value) =>
+    if value <= 25
+        color.new(color.red, 0)
+    else if value <= 45
+        color.new(color.orange, 0)
+    else if value <= 55
+        color.new(color.yellow, 0)
+    else if value <= 75
+        color.new(color.lime, 0)
+    else
+        color.new(color.green, 0)
+
+getSentimentText(value) =>
+    if value <= 25
+        "Extreme Fear"
+    else if value <= 45
+        "Fear"
+    else if value <= 55
+        "Neutral"
+    else if value <= 75
+        "Greed"
+    else
+        "Extreme Greed"
+
+// =============================================================================
+// DATA RETRIEVAL
+// =============================================================================
+
+sp500_close = request.security("SP:SPX", "D", close)
+sp500_high = request.security("SP:SPX", "D", high)
+sp500_low = request.security("SP:SPX", "D", low)
+
+spy_close = request.security("AMEX:SPY", "D", close)
+spy_high = request.security("AMEX:SPY", "D", high) 
+spy_low = request.security("AMEX:SPY", "D", low)
+
+main_close = na(sp500_close) ? spy_close : sp500_close
+main_high = na(sp500_high) ? spy_high : sp500_high
+main_low = na(sp500_low) ? spy_low : sp500_low
+
+vix = request.security("TVC:VIX", "D", close)
+advn = request.security("INDEX:ADVN", "D", close)
+decn = request.security("INDEX:DECN", "D", close)
+advance_decline_diff = request.security("USI:ADD", "D", close)
+new_highs_52w = request.security("INDEX:HIGN", "D", close)
+new_lows_52w = request.security("INDEX:LOWN", "D", close)
+put_call_equity = request.security("USI:PCCE", "D", close)
+put_call_total = request.security("USI:PCC", "D", close)
+qqq_close = request.security("NASDAQ:QQQ", "D", close)
+iwm_close = request.security("AMEX:IWM", "D", close)
+
+junkBondYield = request.security("AMEX:JNK", "D", close)
+treasuryYield = request.security("US10Y", "D", close)
+treasury_10y = request.security("TVC:TNX", "D", close)
+
+norm_period = 252
+// =============================================================================
+// FEAR & GREED COMPONENTS
+// =============================================================================
+
+// 1. Market Momentum: S&P 500 vs 125-day moving average
+sp_ma125 = ta.sma(main_close, 125)
+momentum_raw = na(sp_ma125) or sp_ma125 == 0 ? 0 : (main_close / sp_ma125 - 1) * 100
+market_momentum = normalize_cnn_style(momentum_raw, norm_period)
+
+// 2. Stock Price Strength: SPX RSI scaled
+spx_rsi = ta.rsi(main_close, 14)
+rsi_252_min = ta.lowest(spx_rsi, 252)
+rsi_252_max = ta.highest(spx_rsi, 252)
+
+stock_price_strength = 0.0
+if not na(spx_rsi) and not na(rsi_252_min) and not na(rsi_252_max) and (rsi_252_max - rsi_252_min) != 0
+    stock_price_strength := 100 * (spx_rsi - rsi_252_min) / (rsi_252_max - rsi_252_min)
+else
+    stock_price_strength := na(spx_rsi) ? 50.0 : spx_rsi
+
+// 3. Stock Price Breadth: McClellan Oscillator
+breadth_raw = 0.0
+
+if not na(advn) and not na(decn)
+    adv_19 = ta.sma(advn, 7)
+    dec_19 = ta.sma(decn, 7)
+    mcsi_raw = ta.sma(adv_19 - dec_19, 7)
+    breadth_raw := mcsi_raw
+else if not na(advance_decline_diff)
+    adv_dec_19 = ta.sma(advance_decline_diff, 7)
+    breadth_raw := ta.sma(adv_dec_19, 7)
+else
+    spy_5d_return = na(spy_close) or na(spy_close[5]) or spy_close[5] == 0 ? 0 : (spy_close / spy_close[5] - 1)
+    iwm_5d_return = na(iwm_close) or na(iwm_close[5]) or iwm_close[5] == 0 ? 0 : (iwm_close / iwm_close[5] - 1)
+    qqq_5d_return = na(qqq_close) or na(qqq_close[5]) or qqq_close[5] == 0 ? 0 : (qqq_close / qqq_close[5] - 1)
+    
+    outperforming = 0
+    total_sectors = 0
+    
+    if not na(iwm_5d_return) and not na(spy_5d_return)
+        total_sectors := total_sectors + 1
+        if iwm_5d_return > spy_5d_return
+            outperforming := outperforming + 1
+    
+    if not na(qqq_5d_return) and not na(spy_5d_return)
+        total_sectors := total_sectors + 1
+        if qqq_5d_return > spy_5d_return
+            outperforming := outperforming + 1
+    
+    breadth_pct = total_sectors > 0 ? (outperforming / total_sectors) * 100 : 50
+    breadth_raw := (breadth_pct - 50) * 2
+
+stock_price_breadth = Scale(breadth_raw)
+
+// 4. Put/Call Options
+pcr_value = na(put_call_equity) ? (na(put_call_total) ? 0.94 : put_call_total) : put_call_equity
+pcr_5day = ta.sma(pcr_value, 5)
+put_call_sentiment = normalize_cnn_style(-pcr_5day, norm_period)
+
+// 5. Market Volatility: VIX
+vix_50sma = ta.sma(vix, 50)
+vix_ratio = na(vix) or na(vix_50sma) or vix_50sma == 0 ? 1.0 : vix / vix_50sma
+market_volatility_raw = vix_ratio - 1.0
+market_volatility = normalize_cnn_style(-market_volatility_raw, norm_period)
+
+// 6. Safe Haven Demand: Stock vs Bond performance
+stockReturns = ta.sma(main_close - main_close[20], 20)
+bond_current = na(treasuryYield) ? treasury_10y : treasuryYield
+bond_20_ago = na(treasuryYield[20]) ? treasury_10y[20] : treasuryYield[20]
+bond_change = bond_current - bond_20_ago
+safe_haven_raw = stockReturns - bond_change
+safe_haven_demand = Scale(safe_haven_raw)
+
+// 7. Junk Bond Demand
+junk_bond_demand = 0.0
+if not na(junkBondYield) and not na(treasuryYield)
+    yieldSpread = (junkBondYield - treasuryYield) - ta.sma(junkBondYield - treasuryYield, 6)
+    junk_bond_demand := Scale(yieldSpread)
+else
+    junk_bond_demand := 50.0
+
+// =============================================================================
+// COMBINED SENTIMENT
+// =============================================================================
+
+combined_sentiment = (market_momentum + stock_price_strength + stock_price_breadth + 
+                     put_call_sentiment + market_volatility + safe_haven_demand + 
+                     junk_bond_demand) / 7
+
+// =============================================================================
+// PLOTTING
+// =============================================================================
+
+component_value = switch selected_component
+    "Market Momentum" => market_momentum
+    "Stock Strength" => stock_price_strength
+    "Price Breadth" => stock_price_breadth
+    "Put/Call Ratio" => put_call_sentiment
+    "Market Volatility" => market_volatility
+    "Safe Haven" => safe_haven_demand
+    "Junk Bond" => junk_bond_demand
+    => na
+
+component_color = switch selected_component
+    "Market Momentum" => color.blue
+    "Stock Strength" => color.purple
+    "Price Breadth" => color.orange
+    "Put/Call Ratio" => color.silver
+    "Market Volatility" => color.fuchsia
+    "Safe Haven" => color.teal
+    "Junk Bond" => color.maroon
+    => color.gray
+
+plot(component_value, title="Selected Component", color=component_color, linewidth=1, 
+     display=selected_component == "None" ? display.none : display.all)
+
+plot(combined_sentiment, title="", color=getSentimentColor(combined_sentiment), linewidth=3)
+
+if barstate.islast
+    current_sentiment_text = getSentimentText(combined_sentiment)
+    current_sentiment_color = getSentimentColor(combined_sentiment)
+    label.new(bar_index, combined_sentiment, 
+              text=current_sentiment_text + "\n" + str.tostring(combined_sentiment, "#.0"), 
+              color=color.new(color.white, 100), 
+              textcolor=current_sentiment_color, 
+              style=label.style_label_left, 
+              size=size.normal)
+
+// Reference lines
+hline(0, "Minimum", color=color.gray, linestyle=hline.style_solid)
+hline(25, "Extreme Fear", color=color.new(color.red, 70), linestyle=hline.style_dashed)
+hline(45, "Fear", color=color.new(color.orange, 70), linestyle=hline.style_dashed)
+hline(50, "Neutral", color=color.new(color.gray, 70), linestyle=hline.style_dashed)
+hline(55, "Greed", color=color.new(color.lime, 70), linestyle=hline.style_dashed)
+hline(75, "Extreme Greed", color=color.new(color.green, 70), linestyle=hline.style_dashed)
+hline(100, "Maximum", color=color.gray, linestyle=hline.style_solid)
+
+// =============================================================================
+// INFORMATION TABLE
+// =============================================================================
+
+if barstate.islast and show_table
+    var table info_table = table.new(get_table_position(), 3, 8, bgcolor=color.new(color.navy, 20), 
+                                     border_width=1)
+    
+    table.cell(info_table, 0, 0, "Component", text_color=color.white, text_size=size.small, bgcolor=color.navy)
+    table.cell(info_table, 1, 0, "Value", text_color=color.white, text_size=size.small, bgcolor=color.navy)
+    table.cell(info_table, 2, 0, "Status", text_color=color.white, text_size=size.small, bgcolor=color.navy)
+    
+    components = array.from("Market Momentum", "Stock Strength", "Price Breadth", "Put/Call Ratio", "Market Volatility", "Safe Haven", "Junk Bond")
+    values = array.from(market_momentum, stock_price_strength, stock_price_breadth, put_call_sentiment, market_volatility, safe_haven_demand, junk_bond_demand)
+    
+    for i = 0 to 6
+        row = i + 1
+        component = array.get(components, i)
+        value = array.get(values, i)
+        is_selected = selected_component == component
+        
+        // Get component color for highlighting
+        component_highlight_color = switch component
+            "Market Momentum" => color.new(color.blue, 60)
+            "Stock Strength" => color.new(color.purple, 60)
+            "Price Breadth" => color.new(color.orange, 60)
+            "Put/Call Ratio" => color.new(color.silver, 60)
+            "Market Volatility" => color.new(color.fuchsia, 60)
+            "Safe Haven" => color.new(color.teal, 60)
+            "Junk Bond" => color.new(color.maroon, 60)
+            => color.new(color.navy, 90)
+        
+        // Highlight selected component row with its line color
+        row_bg_color = is_selected ? component_highlight_color : color.new(color.navy, 90)
+        row_text_color = is_selected ? color.white : color.silver
+        
+        table.cell(info_table, 0, row, component, text_color=row_text_color, text_size=size.tiny, bgcolor=row_bg_color)
+        table.cell(info_table, 1, row, str.tostring(value, "#.0"), text_color=row_text_color, text_size=size.tiny, bgcolor=row_bg_color)
+        table.cell(info_table, 2, row, getSentimentText(value), text_color=getSentimentColor(value), text_size=size.tiny, bgcolor=row_bg_color)

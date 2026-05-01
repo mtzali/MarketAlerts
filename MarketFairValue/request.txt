@@ -1,0 +1,118 @@
+Create a Python script that calculates US market pre-open context using yfinance.
+
+Goal:
+Produce a market bias summary at 9:25 AM ET using ES futures and SPY.
+
+--------------------------------
+DATA SOURCES
+--------------------------------
+
+Futures ticker:
+ES=F
+
+ETF ticker:
+SPY
+
+Download:
+5-minute data for ES
+5-minute data for SPY
+Daily data for SPY (for yesterday levels)
+
+Convert all timestamps to US/Eastern.
+
+--------------------------------
+SESSION LOGIC
+--------------------------------
+
+Overnight session definition:
+
+If today is Monday:
+    overnight_start = Sunday 6:00 PM ET
+Else:
+    overnight_start = previous day 6:00 PM ET
+
+overnight_end = today 9:25 AM ET
+
+--------------------------------
+CALCULATIONS
+--------------------------------
+
+From ES futures:
+- Overnight High
+- Overnight Low
+- Overnight Midpoint
+- Current ES price (last close)
+
+From SPY daily:
+- Yesterday High
+- Yesterday Low
+- Yesterday Close
+
+From SPY intraday:
+- Premarket price (last value before 9:25 AM)
+
+Gap % calculation:
+gap_percent = (premarket_price - yesterday_close) / yesterday_close * 100
+
+--------------------------------
+MARKET REGIME LOGIC
+--------------------------------
+
+Determine futures bias:
+
+If current_ES_price > overnight_high:
+    futures_bias = "Bullish breakout"
+elif current_ES_price < overnight_low:
+    futures_bias = "Bearish breakdown"
+else:
+    futures_bias = "Inside overnight range"
+
+Determine gap type:
+
+If abs(gap_percent) < 0.3:
+    gap_type = "Flat open likely"
+elif gap_percent > 0:
+    gap_type = "Gap up"
+else:
+    gap_type = "Gap down"
+
+--------------------------------
+OUTPUT
+--------------------------------
+
+Print a formatted pre-market summary:
+
+Example:
+
+----- MARKET PREP -----
+Overnight High: XXXX
+Overnight Low: XXXX
+Current ES: XXXX
+Futures Bias: XXXX
+
+SPY Premarket: XXXX
+Yesterday Close: XXXX
+Gap %: X.XX%
+Gap Type: XXXX
+
+-----------------------
+
+--------------------------------
+STRUCTURE
+--------------------------------
+
+Organize the script using functions:
+
+get_es_data()
+get_spy_data()
+calculate_overnight_levels()
+calculate_gap()
+determine_market_regime()
+main()
+
+Include error handling for missing data.
+
+Make the script runnable from the command line.
+Use clean, readable Python code.
+
+Save data in csv format, make a single csv and add to it in same folder

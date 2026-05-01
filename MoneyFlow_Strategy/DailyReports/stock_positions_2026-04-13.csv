@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+ACWI,iShares MSCI ACWI ETF,Financial,XLF,58.229217430463464,146.41,2.38,145.22,146.41,147.12,swing-based,8,1171.28,146.41,132.46,-9.5,148.75,1.6,158.82,117.3,13.01,0.11,21,RISK_ON,8908024,,CONSIDER
+BALI,iShares U.S. Large Cap Premium Income Active ETF,Financial,XLF,58.229217430463464,31.77,0.4,31.57,31.77,31.89,swing-based,39,1239.03,31.77,29.4,-7.5,31.87,0.3,33.39,97.04,-0.81,-0.01,21,RISK_ON,342724,,CONSIDER
+BKGI,BNY Mellon Global Infrastructure Income ETF,Financial,XLF,58.229217430463464,45.24,0.51,44.99,45.24,45.39,swing-based,27,1221.48,45.24,42.84,-5.3,45.87,1.4,47.74,68.83,12.83,0.19,21,RISK_ON,393745,,CONSIDER
+BKLC,BNY Mellon US Large Cap Core Equity ETF,Financial,XLF,58.229217430463464,131.31,1.89,130.36,131.31,131.88,swing-based,9,1181.79,131.31,119.29,-9.2,132.16,0.6,140.11,113.27,2.52,0.02,21,RISK_ON,579203,,CONSIDER
+BOXX,Alpha Architect 1-3 Month Box ETF,Financial,XLF,58.229217430463464,116.28,0.05,116.26,116.28,116.29,swing-based,10,1162.8,116.28,116.34,0.1,116.32,0.0,116.3,-0.5,0.25,0.0,21,RISK_ON,3697466,,CONSIDER
+BSCQ,Invesco BulletShares 2026 Corporate Bond ETF,Financial,XLF,58.229217430463464,19.57,0.02,19.56,19.57,19.57,swing-based,63,1232.91,19.57,19.54,-0.1,19.58,0.1,19.6,2.1,0.38,0.18,21,RISK_ON,1560041,,CONSIDER
+BUFR,FT Vest Laddered Buffer ETF,Financial,XLF,58.229217430463464,34.91,0.33,34.74,34.91,35.01,swing-based,35,1221.85,34.91,32.87,-5.8,35.24,1.0,35.58,74.96,8.16,0.11,21,RISK_ON,2412502,,CONSIDER
+CBC,Central Bancompany Inc,Financial,XLF,58.229217430463464,24.72,0.56,24.44,24.72,24.89,swing-based,50,1236.0,24.72,23.04,-6.8,25.51,3.2,27.04,92.28,31.3,0.34,21,RISK_ON,988780,1.4,CONSIDER

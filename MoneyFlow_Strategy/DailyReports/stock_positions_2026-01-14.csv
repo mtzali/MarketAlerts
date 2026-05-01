@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+AA,Alcoa Corp,Basic Materials,XLB,67.34176026066365,64.57,2.56,63.29,64.57,65.34,swing-based,19,1226.83,64.57,51.36,-20.5,66.05,2.3,75.13,265.64,13.51,0.05,21,NEUTRAL,10856542,2.47,CONSIDER
+MEOH,Methanex Corp,Basic Materials,XLB,67.34176026066365,46.84,1.29,46.2,46.84,47.23,swing-based,26,1217.84,46.84,38.98,-16.8,48.02,2.5,53.61,214.51,20.63,0.1,21,NEUTRAL,1144287,1.2,CONSIDER
+VMC,Vulcan Materials Co,Basic Materials,XLB,67.34176026066365,298.48,7.38,294.79,298.48,300.69,swing-based,4,1193.92,298.48,281.45,-5.7,311.92,4.5,330.75,76.98,44.9,0.58,21,NEUTRAL,1583072,1.92,CONSIDER
+TGB,Taseko Mines Ltd,Basic Materials,XLB,67.34176026066365,7.29,0.34,7.12,7.29,7.39,swing-based,171,1246.59,7.29,5.32,-27.0,7.63,4.6,7.97,354.17,40.57,0.11,21,NEUTRAL,14647778,1.25,CONSIDER
+SCCO,Southern Copper Corporation,Basic Materials,XLB,67.34176026066365,180.26,5.99,177.27,180.26,182.06,swing-based,6,1081.56,180.26,139.01,-22.9,186.25,3.3,192.23,258.3,25.15,0.1,21,NEUTRAL,2184633,3.5,CONSIDER
+RYAM,Rayonier Advanced Materials Inc,Basic Materials,XLB,67.34176026066365,7.79,0.34,7.62,7.79,7.89,swing-based,160,1246.4,7.79,5.53,-29.0,7.89,1.3,9.35,378.38,-0.49,-0.0,21,NEUTRAL,1240449,1.0,CONSIDER
+NTR,Nutrien Ltd,Basic Materials,XLB,67.34176026066365,66.2,1.72,65.34,66.2,66.71,swing-based,18,1191.6,66.2,57.9,-12.5,67.92,2.6,69.63,158.64,21.63,0.14,21,NEUTRAL,6645223,2.12,CONSIDER
+MLM,"Martin Marietta Materials, Inc",Basic Materials,XLB,67.34176026066365,636.71,16.01,628.71,636.71,641.51,swing-based,1,636.71,636.71,614.54,-3.5,667.66,4.9,700.49,26.98,26.15,0.97,21,NEUTRAL,724304,2.16,CONSIDER

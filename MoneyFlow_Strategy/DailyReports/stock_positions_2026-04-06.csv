@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+GRNT,Granite Ridge Resources Inc,Energy,XLE,54.4579484952947,5.87,0.21,5.76,5.87,5.93,swing-based,212,1244.44,5.87,4.76,-19.0,6.05,3.1,6.85,249.94,24.52,0.1,21,NEUTRAL,1418037,2.14,CONSIDER
+SKYQ,Sky Quarry Inc,Energy,XLE,54.4579484952947,5.0,0.82,4.59,5.0,5.25,swing-based,250,1250.0,5.0,1.44,-71.2,5.89,17.8,8.64,951.5,161.0,0.17,21,NEUTRAL,21139354,,CONSIDER
+LWLG,Lightwave Logic Inc,Basic Materials,XLB,53.678725357835255,7.87,0.94,7.4,7.87,8.15,swing-based,158,1243.46,7.87,6.0,-23.8,8.79,11.7,10.51,339.93,100.84,0.3,21,NEUTRAL,7549275,,CONSIDER
+AAOX,Tradr 2X Long AAOI Daily ETF,Financial,XLF,52.29266735032047,28.0,7.31,24.35,28.0,30.19,swing-based,44,1232.0,28.0,17.04,-39.2,35.31,26.1,42.62,578.86,225.11,0.39,21,NEUTRAL,2798081,,CONSIDER
+BAI,iShares A.I. Innovation and Tech Active ETF,Financial,XLF,52.29266735032047,34.37,1.37,33.68,34.37,34.78,swing-based,36,1237.32,34.37,30.18,-12.2,35.57,3.5,38.9,165.5,28.39,0.17,21,NEUTRAL,5079756,,CONSIDER
+BNO,United States Brent Oil Fund LP,Financial,XLF,52.29266735032047,54.67,2.86,53.24,54.67,55.53,swing-based,22,1202.74,54.67,30.09,-45.0,57.53,5.2,60.4,559.7,44.1,0.08,21,NEUTRAL,7668751,,CONSIDER
+CCIX,Churchill Capital Corp IX,Financial,XLF,52.29266735032047,10.7,0.02,10.69,10.7,10.71,swing-based,116,1241.2,10.7,10.64,-0.6,10.71,0.1,10.76,8.03,0.55,0.07,21,NEUTRAL,494743,,CONSIDER
+CERY,State Street SPDR Bloomberg Enhanced Roll Yld Comdty Straty No K-1 ETF,Financial,XLF,52.29266735032047,35.54,0.55,35.27,35.54,35.7,swing-based,35,1243.9,35.54,33.37,-6.1,36.09,1.5,36.64,81.87,13.45,0.16,21,NEUTRAL,495998,,CONSIDER

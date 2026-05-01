@@ -1,0 +1,6 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+MRK,Merck & Co Inc,Healthcare,XLV,63.34220441199544,96.43,2.91,94.98,96.43,97.3,swing-based,20,1928.6,96.43,80.89,-16.1,99.34,3.0,102.24,328.28,40.67,0.12,21,RISK_OFF,28047440,1.97,CONSIDER
+NESR,National Energy Services Reunited Corp,Energy,XLE,57.58003501627654,14.25,0.64,13.93,14.25,14.44,swing-based,140,1995.0,14.25,11.52,-19.1,14.5,1.8,16.34,408.69,8.16,0.02,21,RISK_OFF,2018450,1.2,CONSIDER
+SUN,Sunoco LP,Energy,XLE,57.58003501627654,54.37,1.72,53.51,54.37,54.89,swing-based,36,1957.32,54.37,49.12,-9.7,56.09,3.2,57.8,207.49,43.27,0.21,21,RISK_OFF,1245354,1.25,CONSIDER
+D,Dominion Energy Inc,Utilities,XLU,46.73223863947599,61.45,1.07,60.91,61.45,61.77,swing-based,32,1966.4,61.45,59.88,-2.5,61.61,0.3,62.68,60.43,-5.18,-0.09,21,RISK_OFF,7127186,2.9,CONSIDER
+FE,Firstenergy Corp,Utilities,XLU,46.73223863947599,46.61,0.63,46.3,46.61,46.8,swing-based,42,1957.62,46.61,44.8,-3.9,47.37,1.6,48.95,83.78,23.83,0.28,21,RISK_OFF,6386780,2.18,CONSIDER

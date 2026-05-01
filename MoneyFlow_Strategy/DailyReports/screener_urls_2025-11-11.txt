@@ -1,0 +1,12 @@
+FinViz Screener URLs - 2025-11-11
+================================================================================
+
+XLV:
+https://elite.finviz.com/screener.ashx?v=152&f=sec_healthcare,sh_avgvol_o200,sh_price_o5,sh_relvol_o1.5,ta_perf_1wup,ta_sma200_pa,ta_sma50_pa&ft=3
+
+XLE:
+https://elite.finviz.com/screener.ashx?v=152&f=sec_energy,sh_avgvol_o200,sh_price_o5,sh_relvol_o1.5,ta_perf_1wup,ta_sma200_pa,ta_sma50_pa&ft=3
+
+XLK:
+https://elite.finviz.com/screener.ashx?v=152&f=sec_technology,sh_avgvol_o200,sh_price_o5,sh_relvol_o1.5,ta_perf_1wup,ta_sma200_pa,ta_sma50_pa&ft=3
+

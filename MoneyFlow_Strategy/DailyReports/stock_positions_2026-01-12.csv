@@ -1,0 +1,9 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+AAUC,Allied Gold Corp,Basic Materials,XLB,66.69529749863739,26.21,1.17,25.63,26.21,26.56,swing-based,47,1231.87,26.21,22.19,-15.4,27.38,4.5,28.55,205.63,38.45,0.19,21,NEUTRAL,1237046,,CONSIDER
+ERO,Ero Copper Corp,Basic Materials,XLB,66.69529749863739,31.03,1.4,30.33,31.03,31.45,swing-based,40,1241.2,31.03,23.8,-23.3,32.43,4.5,33.84,306.15,39.33,0.13,21,NEUTRAL,2004217,1.94,CONSIDER
+FUL,H.B. Fuller Company,Basic Materials,XLB,66.69529749863739,66.11,1.51,65.36,66.11,66.56,swing-based,18,1189.98,66.11,58.68,-11.2,67.62,2.3,69.13,141.95,19.0,0.13,21,NEUTRAL,592701,2.29,CONSIDER
+HYMC,Hycroft Mining Holding Corporation,Basic Materials,XLB,66.69529749863739,33.0,3.88,31.06,33.0,34.16,swing-based,37,1221.0,33.0,9.09,-72.5,36.88,11.8,40.76,927.69,100.45,0.11,21,NEUTRAL,6869459,,CONSIDER
+RYAM,Rayonier Advanced Materials Inc,Basic Materials,XLB,66.69529749863739,7.51,0.32,7.35,7.51,7.61,swing-based,166,1246.66,7.51,5.54,-26.3,7.6,1.2,8.87,343.43,-1.17,-0.0,21,NEUTRAL,1536058,1.0,CONSIDER
+SCCO,Southern Copper Corporation,Basic Materials,XLB,66.69529749863739,176.0,5.7,173.15,176.0,177.71,swing-based,7,1232.0,176.0,139.15,-20.9,181.7,3.2,187.39,269.9,27.91,0.1,21,NEUTRAL,2698730,3.5,CONSIDER
+USAS,Americas Gold and Silver Corp,Basic Materials,XLB,66.69529749863739,6.09,0.42,5.88,6.09,6.22,swing-based,205,1248.45,6.09,5.06,-16.9,6.24,2.5,6.97,237.68,4.66,0.02,21,NEUTRAL,6389256,1.0,CONSIDER
+DC,Dakota Gold Corp,Basic Materials,XLB,66.69529749863739,6.33,0.3,6.18,6.33,6.42,swing-based,197,1247.01,6.33,5.3,-16.3,6.63,4.7,6.93,220.47,41.22,0.19,21,NEUTRAL,2237438,1.0,CONSIDER

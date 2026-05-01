@@ -1,0 +1,4 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+RGNX,Regenxbio Inc,Healthcare,XLV,66.11122652572274,13.39,0.79,12.99,13.39,13.63,swing-based,248,3320.72,13.39,10.43,-22.1,13.65,1.9,15.64,791.88,5.6,0.01,21,NEUTRAL,1097378,1.42,CONSIDER
+SVRA,Savara Inc,Healthcare,XLV,66.11122652572274,6.29,0.36,6.11,6.29,6.4,swing-based,529,3327.41,6.29,3.68,-41.5,6.65,5.7,7.0,1436.76,132.38,0.09,21,NEUTRAL,6563258,1.0,CONSIDER
+VRCA,Verrica Pharmaceuticals Inc,Healthcare,XLV,66.11122652572274,9.1,0.74,8.73,9.1,9.32,swing-based,366,3330.6,9.1,2.91,-68.0,9.84,8.2,10.59,2347.84,190.51,0.08,21,NEUTRAL,2618529,2.0,CONSIDER

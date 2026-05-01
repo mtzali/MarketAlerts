@@ -1,0 +1,78 @@
+name: Squeeze Scanner
+
+on:
+  schedule:
+    # Pre-market optimized scan (7:00 AM ET = 11:00 UTC)
+    - cron: '0 11 * * 1-5'
+    # Pre-market fallen shorts (7:05 AM ET = 11:05 UTC)
+    - cron: '5 11 * * 1-5'
+    # Pre-market intraday premarket mode (7:10 AM ET = 11:10 UTC)
+    - cron: '10 11 * * 1-5'
+    # Market open confirm (9:35 AM ET = 13:35 UTC)
+    - cron: '35 13 * * 1-5'
+    # Post-market close summary (4:05 PM ET = 20:05 UTC)
+    - cron: '5 20 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run optimized scanner
+        if: github.event.schedule == '0 11 * * 1-5' || github.event_name == 'workflow_dispatch'
+        env:
+          TELEGRAM_BOT_TOKEN_SQUEEZE: ${{ secrets.TELEGRAM_BOT_TOKEN_SQUEEZE }}
+          TELEGRAM_CHAT_ID_SQUEEZE: ${{ secrets.TELEGRAM_CHAT_ID_SQUEEZE }}
+        working-directory: SqueezeScanner
+        run: python optimized_scanner.py
+
+      - name: Run fallen shorts tracker
+        if: github.event.schedule == '5 11 * * 1-5' || github.event_name == 'workflow_dispatch'
+        env:
+          TELEGRAM_BOT_TOKEN_SQUEEZE: ${{ secrets.TELEGRAM_BOT_TOKEN_SQUEEZE }}
+          TELEGRAM_CHAT_ID_SQUEEZE: ${{ secrets.TELEGRAM_CHAT_ID_SQUEEZE }}
+          FINVIZ_AUTH: ${{ secrets.FINVIZ_AUTH }}
+        working-directory: SqueezeScanner
+        run: python fallen_shorts_tracker.py
+
+      - name: Run intraday scanner (premarket)
+        if: github.event.schedule == '10 11 * * 1-5'
+        env:
+          TELEGRAM_BOT_TOKEN_SQUEEZE: ${{ secrets.TELEGRAM_BOT_TOKEN_SQUEEZE }}
+          TELEGRAM_CHAT_ID_SQUEEZE: ${{ secrets.TELEGRAM_CHAT_ID_SQUEEZE }}
+        working-directory: SqueezeScanner
+        run: python intraday_scanner.py --mode premarket
+
+      - name: Run intraday scanner (open)
+        if: github.event.schedule == '35 13 * * 1-5'
+        env:
+          TELEGRAM_BOT_TOKEN_SQUEEZE: ${{ secrets.TELEGRAM_BOT_TOKEN_SQUEEZE }}
+          TELEGRAM_CHAT_ID_SQUEEZE: ${{ secrets.TELEGRAM_CHAT_ID_SQUEEZE }}
+        working-directory: SqueezeScanner
+        run: python intraday_scanner.py --mode open
+
+      - name: Run intraday scanner (close)
+        if: github.event.schedule == '5 20 * * 1-5'
+        env:
+          TELEGRAM_BOT_TOKEN_SQUEEZE: ${{ secrets.TELEGRAM_BOT_TOKEN_SQUEEZE }}
+          TELEGRAM_CHAT_ID_SQUEEZE: ${{ secrets.TELEGRAM_CHAT_ID_SQUEEZE }}
+        working-directory: SqueezeScanner
+        run: python intraday_scanner.py --mode close
+
+      - name: Commit data changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A -- '*.csv' '*.db' '*.json' '*.png'
+          git diff --staged --quiet || git commit -m "Auto-update: ${{ github.workflow }} $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase origin main
+          git push origin main

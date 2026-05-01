@@ -1,0 +1,47 @@
+name: IWM Market Regime
+
+on:
+  schedule:
+    # Morning run (9:15 AM ET = 13:15 UTC)
+    - cron: '15 13 * * 1-5'
+    # Close run (4:15 PM ET = 20:15 UTC)
+    - cron: '15 20 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run IWM regime (morning)
+        if: github.event.schedule == '15 13 * * 1-5' || github.event_name == 'workflow_dispatch'
+        env:
+          TELEGRAM_BOT_TOKEN_IWM: ${{ secrets.TELEGRAM_BOT_TOKEN_IWM }}
+          TELEGRAM_CHAT_ID_IWM: ${{ secrets.TELEGRAM_CHAT_ID_IWM }}
+        working-directory: IWM_MarketRegime
+        run: python main.py --mode morning
+
+      - name: Run IWM regime (close)
+        if: github.event.schedule == '15 20 * * 1-5' || github.event_name == 'workflow_dispatch'
+        env:
+          TELEGRAM_BOT_TOKEN_IWM: ${{ secrets.TELEGRAM_BOT_TOKEN_IWM }}
+          TELEGRAM_CHAT_ID_IWM: ${{ secrets.TELEGRAM_CHAT_ID_IWM }}
+        working-directory: IWM_MarketRegime
+        run: python main.py --mode close
+
+      - name: Commit data changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A -- '*.csv' '*.db' '*.json' '*.png'
+          git diff --staged --quiet || git commit -m "Auto-update: ${{ github.workflow }} $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase origin main
+          git push origin main
