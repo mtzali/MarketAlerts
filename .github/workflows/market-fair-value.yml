@@ -30,14 +30,25 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A -- '*.csv' '*.db' '*.json' '*.png'
-          git diff --staged --quiet && exit 0
-          git commit -m "Auto-update: ${{ github.workflow }} $(date -u +'%Y-%m-%d %H:%M UTC')"
+          # Copy modified data files before pulling
+          tmp_dir=$(mktemp -d)
+          cp -f MarketFairValue/*.db "$tmp_dir/" 2>/dev/null || true
+          cp -f MarketFairValue/*.csv "$tmp_dir/" 2>/dev/null || true
+          cp -f MarketFairValue/*.json "$tmp_dir/" 2>/dev/null || true
+          cp -f MarketFairValue/*.png "$tmp_dir/" 2>/dev/null || true
           for i in 1 2 3; do
-            git pull --rebase origin main && git push origin main && exit 0
-            # If rebase fails due to binary DB conflict, accept theirs and re-run the script's DB changes
-            git rebase --abort 2>/dev/null || true
-            git pull origin main --no-rebase -X theirs
+            # Reset to clean state and pull latest
+            git checkout -- . 2>/dev/null || true
+            git clean -fd 2>/dev/null || true
+            git pull origin main || true
+            # Restore our data files on top of latest
+            cp -f "$tmp_dir"/*.db MarketFairValue/ 2>/dev/null || true
+            cp -f "$tmp_dir"/*.csv MarketFairValue/ 2>/dev/null || true
+            cp -f "$tmp_dir"/*.json MarketFairValue/ 2>/dev/null || true
+            cp -f "$tmp_dir"/*.png MarketFairValue/ 2>/dev/null || true
+            git add -A -- '*.csv' '*.db' '*.json' '*.png'
+            git diff --staged --quiet && exit 0
+            git commit -m "Auto-update: ${{ github.workflow }} $(date -u +'%Y-%m-%d %H:%M UTC')"
             git push origin main && exit 0
             sleep $((i * 5))
           done
