@@ -103,3 +103,4 @@ date,run_mode,macro,internals,technical,sentiment,regime_score,regime,confidence
 2026-05-01 09:15,MORNING,51.9,48.9,68.5,51.9,56.1,CHOPPY,6.1
 2026-05-01 15:14,MORNING,51.4,36.7,69.4,50.0,52.9,CHOPPY,2.9
 2026-05-01 15:14,CLOSE,51.8,36.8,69.4,50.0,53.1,CHOPPY,3.1
+2026-05-01 20:33,CLOSE,49.4,50.1,73.2,50.0,56.8,CHOPPY,6.8
