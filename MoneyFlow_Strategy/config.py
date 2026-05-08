@@ -104,7 +104,7 @@ SECTOR_SCREENERS = {
 
 # ==================== POSITION SIZING ====================
 INVEST_AMOUNT = 10000  # Total capital
-MAX_POSITIONS = 8      # Max number of stocks
+MAX_POSITIONS = 15      # Max number of stocks
 MIN_SHARES = 1         # Minimum shares per position
 
 # Risk management for stocks
