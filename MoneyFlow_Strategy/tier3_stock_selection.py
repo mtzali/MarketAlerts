@@ -27,7 +27,8 @@ from config import (
     STOCK_TAKE_PROFIT_PCT, STOCK_MAX_HOLD_DAYS,
     USE_STOP_TP_DETECTOR, STOP_TP_LOOKBACK_DAYS, STOP_TP_SWING_ORDER,
     ATR_STOP_MULTIPLIER, ATR_TP1_MULTIPLIER, ATR_TP2_MULTIPLIER,
-    ENTRY_ZONE_ATR_BUFFER, MAX_CHASE_ATR
+    ENTRY_ZONE_ATR_BUFFER, MAX_CHASE_ATR,
+    STOCKS_PER_SECTOR
 )
 
 
@@ -108,38 +109,49 @@ class StockSelector:
             return None, None
 
     def screen_top_sectors(self, market_mode, top_sectors):
-        """Screen stocks from top sectors"""
+        """Screen stocks from top sectors with weighted allocation"""
         print("\n" + "="*80)
         print("TIER 3: STOCK SELECTION")
         print("="*80)
         print(f"Market Mode: {market_mode}")
         print(f"Screening top {len(top_sectors)} sectors...")
+
+        # Show per-sector allocation
+        for i, sector_info in enumerate(top_sectors):
+            limit = STOCKS_PER_SECTOR[i] if i < len(STOCKS_PER_SECTOR) else STOCKS_PER_SECTOR[-1]
+            print(f"  Sector #{i+1} ({sector_info['Ticker']}): up to {limit} stocks")
         print("-"*80)
 
         all_stocks = []
         screener_urls = {}
+        seen_tickers = set()
 
-        for sector_info in top_sectors:
+        for rank_idx, sector_info in enumerate(top_sectors):
             df, web_url = self.download_stocks(market_mode, sector_info)
 
             if df is not None and len(df) > 0:
+                # Remove tickers already selected from higher-ranked sectors
+                df = df[~df['Ticker'].isin(seen_tickers)]
+
+                # Apply per-sector stock limit
+                limit = STOCKS_PER_SECTOR[rank_idx] if rank_idx < len(STOCKS_PER_SECTOR) else STOCKS_PER_SECTOR[-1]
+                df = df.head(limit)
+
+                seen_tickers.update(df['Ticker'].tolist())
                 all_stocks.append(df)
                 screener_urls[sector_info['Ticker']] = web_url
+
+                print(f"  --> Selected {len(df)}/{limit} stocks from {sector_info['Sector_Name']}")
 
         if len(all_stocks) == 0:
             print("\n[ERROR] No stocks found from any sector")
             return None, screener_urls
 
-        # Combine all stocks
+        # Combine all stocks (already deduplicated and limited)
         combined = pd.concat(all_stocks, ignore_index=True)
 
-        # Remove duplicates (keep stock from highest-ranked sector)
-        combined = combined.sort_values('Sector_Score', ascending=False)
-        combined = combined.drop_duplicates(subset=['Ticker'], keep='first')
-
         print("\n" + "-"*80)
-        print(f"Total stocks found: {len(combined)}")
-        print(f"After deduplication: {len(combined)}")
+        print(f"Total stocks selected: {len(combined)}")
         print("="*80)
 
         return combined, screener_urls
