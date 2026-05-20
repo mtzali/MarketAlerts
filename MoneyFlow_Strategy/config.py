@@ -60,7 +60,7 @@ TOP_SECTORS_COUNT = 3
 
 # Stocks per sector by rank (1st sector gets most, descending)
 # Sum should equal MAX_POSITIONS for optimal capital usage
-STOCKS_PER_SECTOR = [10, 3, 2]  # Sector #1: 10, #2: 3, #3: 2 = 15 total
+STOCKS_PER_SECTOR = [10, 5, 5]  # Sector #1: 10, #2: 5, #3: 5 = 20 total
 
 # ==================== TIER 3: STOCK SELECTION ====================
 # FinViz Elite Authentication
