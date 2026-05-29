@@ -1,3 +1,4 @@
 timestamp,score,regime,strength_count,weakness_count,momentum_count,SPY_price,SPY_chg,QQQ_price,QQQ_chg,IWM_price,IWM_chg,XLK_price,XLK_chg,XLF_price,XLF_chg
 2026-05-29 14:58:15,2,CHOPPY,286,286,113,756.41,0.24,737.97,0.32,289.48,-0.87,190.52,1.96,51.58,0.61
 2026-05-29 16:12:21,3,CHOPPY,298,212,97,757.34,0.36,739.29,0.5,290.56,-0.5,190.8,2.11,51.72,0.89
+2026-05-29 17:01:40,3,CHOPPY,256,195,94,756.87,0.3,738.47,0.39,290.32,-0.59,190.6,2.01,51.69,0.81
