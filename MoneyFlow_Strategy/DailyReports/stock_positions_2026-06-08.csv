@@ -1,0 +1,7 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+HAE,Haemonetics Corp,Healthcare,XLV,57.80477268429293,74.88,2.84,73.46,75.73,75.73,ATR-based,22,1647.36,74.88,69.2,-7.6,83.4,11.4,89.08,143.7,168.7,1.17,21,RISK_OFF,1343236,1.73,CONSIDER
+ARCB,ArcBest Corp,Industrials,XLI,55.563565091747314,166.22,6.0,163.22,168.02,168.02,ATR-based,10,1662.2,166.22,154.22,-7.2,184.22,10.8,196.22,138.0,162.0,1.17,21,RISK_OFF,511685,2.0,CONSIDER
+BBCP,Concrete Pumping Holdings Inc,Industrials,XLI,55.563565091747314,10.8,0.59,10.51,10.98,10.98,ATR-based,154,1663.2,10.8,9.62,-10.9,12.57,16.4,13.75,208.98,245.32,1.17,21,RISK_OFF,1045275,3.0,CONSIDER
+CNI,Canadian National Railway Co,Industrials,XLI,55.563565091747314,120.81,2.27,119.67,121.49,121.49,ATR-based,13,1570.53,120.81,116.27,-3.8,127.62,5.6,132.16,67.87,79.68,1.17,21,RISK_OFF,5907768,2.03,CONSIDER
+CXW,CoreCivic Inc,Industrials,XLI,55.563565091747314,24.72,0.9,24.27,24.99,24.99,ATR-based,67,1656.24,24.72,22.92,-7.3,27.42,10.9,29.22,138.69,162.81,1.17,21,RISK_OFF,1712572,1.0,CONSIDER
+EXPD,Expeditors International Of Washington Inc,Industrials,XLI,55.563565091747314,163.44,3.63,161.62,164.53,164.53,ATR-based,10,1634.4,163.44,156.18,-4.4,174.33,6.7,181.59,83.49,98.01,1.17,21,RISK_OFF,1837427,3.44,CONSIDER
