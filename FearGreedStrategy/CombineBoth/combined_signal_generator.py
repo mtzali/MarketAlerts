@@ -37,6 +37,14 @@ TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN_MAIN", "")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID_MAIN", "")
 SEND_TO_TELEGRAM = True  # Set to False to disable
 
+# ==================== TQQQ STRATEGY CONFIG ====================
+# Dip-buy mode: also BUY TQQQ on a deep-fear washout inside an uptrend
+# (QQQ extreme fear < 30, price stretched below the 20-DMA, still above the
+# 200-DMA). This is the discretionary overlay -- higher reward but lower-sample
+# than the core momentum entry. Set False for the strict backtested rule only.
+TQQQ_DIPBUY_MODE = True
+TQQQ_DIPBUY_FG = 30   # extreme-fear threshold that arms the dip-buy
+
 
 class CombinedSignalGenerator:
     """Generate signals for both stocks and Bitcoin"""
@@ -152,6 +160,80 @@ class CombinedSignalGenerator:
         else:
             return "HOLD"
 
+    def _tqqq_decision(self, fg, price, ma20, ma50, ma200):
+        """
+        Pure decision logic for the TQQQ signal -> (signal_text, entry_type).
+
+          MOMENTUM BUY : F&G >= 58  AND  price >= 20-DMA  AND  price >= 200-DMA
+          DIP-BUY      : (if TQQQ_DIPBUY_MODE) F&G < 30 AND price < 20-DMA
+                         AND price >= 200-DMA   (deep-fear washout in an uptrend)
+          SELL -> CASH : price < 50-DMA  OR  F&G < 42   (never short)
+          HOLD         : otherwise
+        BUY conditions take precedence over SELL (a dip-buy overrides the
+        F&G<42 exit when it's a washout inside an uptrend).
+        """
+        regime_up = price >= ma200
+        mom_up = price >= ma20
+        momentum_buy = (fg >= 58) and mom_up and regime_up
+        dip_buy = (TQQQ_DIPBUY_MODE and regime_up and (fg < TQQQ_DIPBUY_FG)
+                   and (price < ma20))
+
+        if momentum_buy or dip_buy:
+            return 'BUY', ('dip-buy' if (dip_buy and not momentum_buy) else 'momentum')
+        if (price < ma50) or (fg < 42):
+            return 'SELL', None
+        return 'HOLD', None
+
+    def get_tqqq_signal(self) -> dict:
+        """
+        TQQQ (3x QQQ) swing signal, from the QQQ Fear&Greed + 20/50/200-DMA rules
+        validated by backtest (see tqqq_sqqq_strategy.py and _tqqq_decision()).
+
+        Signal is derived from QQQ (the clean underlying); the price logged is the
+        actual TQQQ close. Reuses the QQQ DataFrame cached during signal generation.
+        """
+        try:
+            df = self._dfs.get('QQQ')
+            fg, _ = self._signals.get('QQQ', (None, None))
+            if df is None or 'close' not in df.columns or fg is None:
+                print("[WARN] TQQQ signal skipped (no QQQ data cached)")
+                return None
+            s = df['close'].dropna().astype(float)
+            if len(s) < 200:
+                return None
+
+            price = float(s.iloc[-1])
+            ma20 = float(s.rolling(20).mean().iloc[-1])
+            ma50 = float(s.rolling(50).mean().iloc[-1])
+            ma200 = float(s.rolling(200).mean().iloc[-1])
+
+            signal_text, entry_type = self._tqqq_decision(fg, price, ma20, ma50, ma200)
+
+            # actual TQQQ price for the log
+            try:
+                import yfinance as yf
+                td = yf.download('TQQQ', period='5d', progress=False)
+                tc = td['Close'].squeeze() if hasattr(td['Close'], 'squeeze') else td['Close']
+                tqqq_price = float(tc.dropna().iloc[-1])
+            except Exception:
+                tqqq_price = float('nan')
+
+            return {
+                'ticker': 'TQQQ',
+                'type': 'LEVERAGED',
+                'signal_text': signal_text,
+                'entry_type': entry_type,
+                'fg_index': fg,
+                'close_price': tqqq_price,
+                'qqq_price': price,
+                'regime': 'UPTREND' if price >= ma200 else 'DOWNTREND',
+                'above_20dma': price >= ma20,
+                'above_50dma': price >= ma50,
+            }
+        except Exception as e:
+            print(f"Error computing TQQQ signal: {e}")
+            return None
+
     def generate_all_signals(self) -> dict:
         """Generate signals for all tickers"""
         print("\n" + "="*80)
@@ -163,7 +245,8 @@ class CombinedSignalGenerator:
         results = {
             'timestamp': datetime.now(),
             'stocks': [],
-            'crypto': []
+            'crypto': [],
+            'leveraged': []
         }
 
         # Get stock signals
@@ -174,6 +257,13 @@ class CombinedSignalGenerator:
             if signal:
                 results['stocks'].append(signal)
                 print(f"[OK] {ticker}: {signal['signal_text']} (FG: {signal['fg_index']:.1f})")
+
+        # Derive the TQQQ (3x QQQ) swing signal from the QQQ data just computed
+        tqqq = self.get_tqqq_signal()
+        if tqqq:
+            results['leveraged'].append(tqqq)
+            print(f"[OK] TQQQ: {tqqq['signal_text']} "
+                  f"(QQQ FG: {tqqq['fg_index']:.1f}, {tqqq['regime']})")
 
         print("\n" + "-" * 80)
 
@@ -255,6 +345,30 @@ class CombinedSignalGenerator:
                 msg += f"├ Volume: {vol:.1f}\n"
                 msg += f"├ Trend: {trend:.1f}\n"
                 msg += f"└ Volatility: {volatility:.1f}%\n"
+
+        # Leveraged ETF (TQQQ) signal
+        for lev in results.get('leveraged', []):
+            emoji = self._get_signal_emoji(lev['signal_text'])
+            etype = lev.get('entry_type')
+            if lev['signal_text'] == 'BUY' and etype == 'dip-buy':
+                action = 'BUY (dip-buy) — small size'
+            elif lev['signal_text'] == 'BUY':
+                action = 'BUY / hold TQQQ (momentum)'
+            elif lev['signal_text'] == 'SELL':
+                action = 'SELL → CASH (do not short)'
+            else:
+                action = 'HOLD position'
+            msg += "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            msg += "⚡ *LEVERAGED (TQQQ 3x QQQ)*\n"
+            msg += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            msg += f"\n*TQQQ* {emoji} *{action}*\n"
+            msg += f"├ QQQ F&G: {lev['fg_index']:.1f}\n"
+            msg += f"├ Regime: {lev['regime']} (vs 200-DMA)\n"
+            msg += f"└ QQQ {'above' if lev['above_20dma'] else 'below'} 20-DMA, " \
+                   f"{'above' if lev['above_50dma'] else 'below'} 50-DMA\n"
+            if etype == 'dip-buy':
+                msg += "  ⚠️ Deep-fear dip-buy: aggressive, smaller position, " \
+                       "stop under recent low\n"
 
         # Summary
         msg += "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
@@ -486,10 +600,11 @@ class CombinedSignalGenerator:
             print(f"[ERROR] Error sending chart: {e}")
 
     async def send_all_telegram(self, message: str):
-        """Send the text report followed by the SPY and Bitcoin trend charts."""
+        """Send the text report followed by SPY, QQQ and Bitcoin trend charts."""
         await self.send_telegram_message(message)
 
         for ticker, label in [('SPY', 'SPY (S&P 500)'),
+                              ('QQQ', 'QQQ (Nasdaq-100)'),
                               ('BTC-USD', 'Bitcoin')]:
             buf, caption = self.create_dma_chart(ticker, label)
             await self.send_telegram_photo(buf, caption)
@@ -523,6 +638,18 @@ class CombinedSignalGenerator:
         try:
             log_file = 'combined_signals_log.csv'
 
+            # Load existing log first (used for append + TQQQ signal_changed lookup)
+            try:
+                existing = pd.read_csv(log_file)
+            except FileNotFoundError:
+                existing = None
+
+            def last_logged_signal(ticker):
+                if existing is None or 'ticker' not in existing.columns:
+                    return None
+                rows = existing[existing['ticker'] == ticker]
+                return rows['signal'].iloc[-1] if len(rows) else None
+
             log_entries = []
             for signal in results['stocks'] + results['crypto']:
                 log_entries.append({
@@ -535,14 +662,22 @@ class CombinedSignalGenerator:
                     'signal_changed': signal['signal_changed']
                 })
 
-            df = pd.DataFrame(log_entries)
+            # Leveraged ETF signals (TQQQ) -- compute signal_changed vs last log row
+            for signal in results.get('leveraged', []):
+                prev = last_logged_signal(signal['ticker'])
+                log_entries.append({
+                    'timestamp': results['timestamp'],
+                    'ticker': signal['ticker'],
+                    'type': signal['type'],
+                    'signal': signal['signal_text'],
+                    'fg_index': signal['fg_index'],
+                    'price': signal['close_price'],
+                    'signal_changed': bool(prev is not None and signal['signal_text'] != prev)
+                })
 
-            # Append to existing log
-            try:
-                existing = pd.read_csv(log_file)
+            df = pd.DataFrame(log_entries)
+            if existing is not None:
                 df = pd.concat([existing, df], ignore_index=True)
-            except FileNotFoundError:
-                pass
 
             df.to_csv(log_file, index=False)
             print(f"\n[OK] Signals saved to {log_file}")

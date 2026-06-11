@@ -5,7 +5,8 @@
       "Bash(do sed -i 's|git pull --rebase origin main$|git pull --rebase origin main || { git rebase --abort 2>/dev/null; exit 0; }|' \"$f\")",
       "Bash(done)",
       "Bash(do sed -i 's/git pull --rebase origin main$/git pull --rebase origin main || { git rebase --abort 2>\\\\/dev\\\\/null; exit 0; }/' \"$f\")",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(python tqqq_sqqq_strategy.py)"
     ]
   }
 }
