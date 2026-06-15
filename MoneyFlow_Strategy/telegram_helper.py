@@ -263,6 +263,19 @@ def format_daily_report_message(report_data):
 
     msg += "\n"
 
+    # Risk-On / Risk-Off swing-candidate pools (both shown, any market mode).
+    # Broad FinViz pre-filter (trend + liquidity + volatility); feed these tickers
+    # to Claude for short-term swing-setup analysis.
+    risk_baskets = report_data.get('risk_baskets')
+    if risk_baskets:
+        on = risk_baskets.get('risk_on') or []
+        off = risk_baskets.get('risk_off') or []
+        msg += "━━━━━━━━━━━━━━━━━━━━━━\n"
+        msg += "<b>🎯 SWING CANDIDATES (for Claude analysis)</b>\n"
+        msg += "<i>Broad sector pre-filter — trend + liquidity + volatility</i>\n"
+        msg += f"<b>🟢 Risk-On ({len(on)}):</b> {', '.join(on) if on else '—'}\n"
+        msg += f"<b>🔴 Risk-Off ({len(off)}):</b> {', '.join(off) if off else '—'}\n\n"
+
     # Overall recommendation (considering COT + Daily signals)
     msg += "━━━━━━━━━━━━━━━━━━━━━━\n"
     msg += "<b>💡 RECOMMENDATION:</b>\n"

@@ -28,7 +28,9 @@ from config import (
     USE_STOP_TP_DETECTOR, STOP_TP_LOOKBACK_DAYS, STOP_TP_SWING_ORDER,
     ATR_STOP_MULTIPLIER, ATR_TP1_MULTIPLIER, ATR_TP2_MULTIPLIER,
     ENTRY_ZONE_ATR_BUFFER, MAX_CHASE_ATR,
-    STOCKS_PER_SECTOR
+    STOCKS_PER_SECTOR,
+    SWING_BASE_FILTERS, SWING_MIN_ATR_PCT, SWING_CANDIDATES_PER_BASKET,
+    SWING_RISK_ON_SECTORS, SWING_RISK_OFF_SECTORS
 )
 
 
@@ -155,6 +157,75 @@ class StockSelector:
         print("="*80)
 
         return combined, screener_urls
+
+    def screen_risk_basket(self, mode, limit=SWING_CANDIDATES_PER_BASKET):
+        """
+        SWING-CANDIDATE FEEDER. Screen an entire risk basket directly via FinViz
+        and return a flat list of up to `limit` de-duplicated tickers meant to be
+        handed to Claude for short-term (few-day) swing-setup analysis.
+
+        This is NOT the Tier-3 position-sizing screen and NOT a watchlist. It uses
+        the BROAD `SWING_BASE_FILTERS` (trend + liquidity only, no short-term
+        direction filter) plus a client-side ATR% >= SWING_MIN_ATR_PCT floor so
+        every candidate has enough range to actually swing in a few days. Results
+        are ranked by 4-week performance, so the RISK_OFF basket naturally surfaces
+        relative-strength leaders (defensives holding up) rather than slow low-beta
+        names. Both baskets are produced regardless of the live market mode.
+
+        Args:
+            mode: 'RISK_ON' or 'RISK_OFF'
+            limit: max tickers to return
+
+        Returns:
+            list[str]: ticker symbols (empty if FinViz auth is missing or nothing
+            passes the filters)
+        """
+        sectors = (SWING_RISK_ON_SECTORS if mode == 'RISK_ON'
+                   else SWING_RISK_OFF_SECTORS)
+
+        print(f"\nBuilding {mode} swing-candidate pool from {len(sectors)} sectors...")
+
+        tickers = []
+        seen = set()
+
+        for sector_code in sectors:
+            filters = f'{sector_code},{SWING_BASE_FILTERS}'
+            # Rank by 4-week performance (relative-strength leaders first)
+            export_url = (
+                f'https://elite.finviz.com/export.ashx?v=152&f={filters}'
+                f'&ft=3&o=-perf4w&c=0,1,2,3,4,5,6,49,62,65,66,67&auth={self.auth}'
+            )
+
+            try:
+                response = requests.get(export_url, timeout=30)
+                response.raise_for_status()
+                df = pd.read_csv(StringIO(response.text))
+
+                if 'Ticker' not in df.columns or len(df) == 0:
+                    continue
+
+                # Volatility floor: keep only names with ATR% >= SWING_MIN_ATR_PCT
+                # (computed client-side from the returned ATR and Price columns).
+                price_col = next((c for c in ('Price', 'Close') if c in df.columns), None)
+                atr_col = next((c for c in ('ATR', 'Average True Range') if c in df.columns), None)
+                if price_col and atr_col:
+                    price = pd.to_numeric(df[price_col], errors='coerce')
+                    atr = pd.to_numeric(df[atr_col], errors='coerce')
+                    atr_pct = (atr / price) * 100
+                    df = df[atr_pct >= SWING_MIN_ATR_PCT]
+
+                for t in df['Ticker'].tolist():
+                    if t not in seen:
+                        seen.add(t)
+                        tickers.append(t)
+
+            except Exception as e:
+                print(f"  [X] {sector_code} ({mode}): {e}")
+                continue
+
+        print(f"  [OK] {mode} swing pool: {len(tickers)} names (capping at {limit})")
+
+        return tickers[:limit]
 
     def calculate_position_sizing(self, stocks_df):
         """Calculate position sizes and risk management"""

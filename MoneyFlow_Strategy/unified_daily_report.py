@@ -109,6 +109,14 @@ class UnifiedDailyReport:
                 'screener_urls': screener_urls
             }
 
+        # Risk-On / Risk-Off watchlists (independent of Tier-2 momentum ranking)
+        # Screens the whole offensive and defensive sector universe via FinViz and
+        # returns up to 15 quality-filtered tickers each, shown in the Telegram msg.
+        self.report_data['risk_baskets'] = {
+            'risk_on': self.tier3.screen_risk_basket('RISK_ON', limit=15),
+            'risk_off': self.tier3.screen_risk_basket('RISK_OFF', limit=15),
+        }
+
         # Add COT confirmation if available
         if USE_COT_CONFIRMATION:
             cot_signal = self.check_cot_confirmation()

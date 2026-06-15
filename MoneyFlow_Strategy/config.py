@@ -106,6 +106,34 @@ SECTOR_SCREENERS = {
     }
 }
 
+# ==================== SWING CANDIDATE FEEDER (Risk-On / Risk-Off) ====================
+# A BROAD pre-filter whose output (ticker lists) is handed to Claude for
+# short-term (few-day) SWING-setup analysis. This is NOT a watchlist and NOT the
+# Tier-3 position-sizing screen above.
+#
+# Design (per design discussion):
+#   - Broad gates only: trend (above 50/200-DMA) + liquidity + volatility.
+#   - NO short-term direction filter (no perf_1w/relvol) -- Claude classifies
+#     each name as breakout vs pullback vs avoid itself.
+#   - Both baskets are always produced, regardless of the live market mode.
+#   - Ranked by 4-week performance so relative-strength leaders surface first
+#     (this is how the RISK_OFF basket finds defensives that are holding up,
+#     instead of slow low-beta dividend names).
+SWING_BASE_FILTERS = "geo_usa|canada,sh_avgvol_o500,sh_price_o10,ta_sma50_pa,ta_sma200_pa"
+SWING_MIN_ATR_PCT = 3.0          # keep names whose ATR >= 3% of price (room to swing)
+SWING_CANDIDATES_PER_BASKET = 15  # max tickers per basket handed to Claude
+
+# Offensive/cyclical sectors (RISK_ON) vs defensive sectors (RISK_OFF).
+# Same broad base is applied to both; only the sector universe differs.
+SWING_RISK_ON_SECTORS = [
+    'sec_technology', 'sec_financial', 'sec_consumercyclical',
+    'sec_industrials', 'sec_communicationservices', 'sec_energy',
+    'sec_basicmaterials',
+]
+SWING_RISK_OFF_SECTORS = [
+    'sec_healthcare', 'sec_consumerdefensive', 'sec_utilities', 'sec_realestate',
+]
+
 # ==================== POSITION SIZING ====================
 INVEST_AMOUNT = 10000  # Total capital
 MAX_POSITIONS = 15      # Max number of stocks
