@@ -1,0 +1,6 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+ABX,Abacus Global Management Inc,Financial,XLF,58.411533650745696,10.75,0.46,10.52,10.89,10.89,ATR-based,186,1999.5,10.75,9.83,-8.6,12.13,12.8,13.05,196.79,231.01,1.17,21,RISK_OFF,1038765,1.29,CONSIDER
+AMA,Defiance Daily Target 2X Long AMAT ETF,Financial,XLF,58.411533650745696,55.0,5.51,52.24,56.65,56.65,ATR-based,36,1980.0,55.0,43.98,-20.0,71.53,30.1,82.55,456.23,535.57,1.17,21,RISK_OFF,826224,,CONSIDER
+AMTB,Amerant Bancorp Inc,Financial,XLF,58.411533650745696,25.19,0.67,24.86,25.39,25.39,ATR-based,79,1990.01,25.19,23.85,-5.3,27.2,8.0,28.54,121.74,142.91,1.17,21,RISK_OFF,497002,1.75,CONSIDER
+ARKG,ARK Genomic Revolution ETF,Financial,XLF,58.411533650745696,42.36,1.71,41.51,42.87,42.87,ATR-based,47,1990.92,42.36,38.94,-8.1,47.49,12.1,50.91,184.85,217.0,1.17,21,RISK_OFF,5822688,,CONSIDER
+AUB,Atlantic Union Bankshares Corp,Financial,XLF,58.411533650745696,42.27,0.91,41.82,42.54,42.54,ATR-based,47,1986.69,42.27,40.45,-4.3,45.0,6.5,46.82,98.37,115.48,1.17,21,RISK_OFF,1927506,1.67,CONSIDER
