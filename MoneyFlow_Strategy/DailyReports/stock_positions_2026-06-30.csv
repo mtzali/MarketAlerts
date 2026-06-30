@@ -1,0 +1,7 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+OGE,Oge Energy Corp,Utilities,XLU,60.83091876230736,48.66,0.82,48.25,48.91,48.91,ATR-based,34,1654.44,48.66,47.02,-3.4,51.12,5.1,52.76,64.12,75.28,1.17,21,RISK_OFF,2368214,2.67,CONSIDER
+AAL,American Airlines Group Inc,Industrials,XLI,58.54439889631706,18.07,0.68,17.73,18.27,18.27,ATR-based,92,1662.44,18.07,16.71,-7.5,20.11,11.3,21.47,143.89,168.91,1.17,21,RISK_OFF,157846493,2.3,CONSIDER
+AIRJ,AirJoule Technologies Corp,Industrials,XLI,58.54439889631706,5.54,0.53,5.28,5.7,5.7,ATR-based,300,1662.0,5.54,4.48,-19.1,7.13,28.7,8.19,365.7,429.3,1.17,21,RISK_OFF,2936538,1.0,CONSIDER
+AZZ,AZZ Inc,Industrials,XLI,58.54439889631706,155.05,5.83,152.14,156.8,156.8,ATR-based,10,1550.5,155.05,143.39,-7.5,172.54,11.3,184.2,134.09,157.41,1.17,21,RISK_OFF,376032,1.8,CONSIDER
+CDNL,Cardinal Infrastructure Group Inc,Industrials,XLI,58.54439889631706,94.2,6.39,91.01,96.12,96.12,ATR-based,17,1601.4,94.2,81.42,-13.6,113.37,20.4,126.15,249.85,293.3,1.17,21,RISK_OFF,995808,1.75,CONSIDER
+CSL,Carlisle Companies Inc,Industrials,XLI,58.54439889631706,362.75,16.22,354.64,367.62,367.62,ATR-based,4,1451.0,362.75,330.31,-8.9,411.41,13.4,443.85,149.22,175.18,1.17,21,RISK_OFF,923420,2.0,CONSIDER
