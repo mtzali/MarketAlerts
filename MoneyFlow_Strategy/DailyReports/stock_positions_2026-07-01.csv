@@ -1,0 +1,7 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+CON,Concentra Group Holdings Parent Inc,Healthcare,XLV,63.222266876405655,30.77,0.78,30.38,31.0,31.0,ATR-based,54,1661.58,30.77,29.21,-5.1,33.11,7.6,34.67,96.88,113.72,1.17,21,RISK_OFF,2194126,1.0,CONSIDER
+ABX,Abacus Global Management Inc,Financial,XLF,60.9004833518596,11.68,0.53,11.41,11.84,11.84,ATR-based,142,1658.56,11.68,10.62,-9.1,13.27,13.6,14.33,173.1,203.2,1.17,21,RISK_OFF,1044340,1.29,CONSIDER
+AMA,Defiance Daily Target 2X Long AMAT ETF,Financial,XLF,60.9004833518596,47.33,6.21,44.23,49.19,49.19,ATR-based,35,1656.55,47.33,34.91,-26.2,65.96,39.4,78.38,499.91,586.84,1.17,21,RISK_OFF,878253,,CONSIDER
+AMAU,Leverage Shares 2X Long AMAT Daily ETF,Financial,XLF,60.9004833518596,28.73,3.73,26.87,29.85,29.85,ATR-based,58,1666.34,28.73,21.27,-26.0,39.92,38.9,47.38,497.58,584.12,1.17,21,RISK_OFF,736509,,CONSIDER
+ARKG,ARK Genomic Revolution ETF,Financial,XLF,60.9004833518596,42.62,1.64,41.8,43.11,43.11,ATR-based,39,1662.18,42.62,39.34,-7.7,47.54,11.5,50.82,147.11,172.69,1.17,21,RISK_OFF,4734891,,CONSIDER
+BALT,Innovator Defined Wealth Shield ETF,Financial,XLF,60.9004833518596,34.28,0.06,34.25,34.3,34.3,ATR-based,48,1645.44,34.28,34.16,-0.4,34.46,0.5,34.58,6.62,7.78,1.17,21,RISK_OFF,1910409,,CONSIDER
