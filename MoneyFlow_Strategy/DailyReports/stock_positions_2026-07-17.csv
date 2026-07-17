@@ -1,0 +1,6 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+ACYS,FT Vest Laddered Autocallable Barrier & Resilient Income ETF,Financial,XLF,56.831462261124955,20.42,0.17,20.34,20.47,20.47,ATR-based,97,1980.74,20.42,20.08,-1.7,20.93,2.5,21.27,37.93,44.52,1.17,21,RISK_OFF,382783,,CONSIDER
+AFL,Aflac Inc,Financial,XLF,56.831462261124955,124.72,2.24,123.6,125.39,125.39,ATR-based,16,1995.52,124.72,120.24,-3.6,131.44,5.4,135.92,82.43,96.77,1.17,21,RISK_OFF,3975960,3.12,CONSIDER
+AIG,American International Group Inc,Financial,XLF,56.831462261124955,80.5,1.85,79.58,81.06,81.06,ATR-based,24,1932.0,80.5,76.8,-4.6,86.05,6.9,89.75,102.12,119.88,1.17,21,RISK_OFF,6847610,2.37,CONSIDER
+AMTB,Amerant Bancorp Inc,Financial,XLF,56.831462261124955,26.18,0.66,25.85,26.38,26.38,ATR-based,76,1989.68,26.18,24.86,-5.0,28.16,7.6,29.48,115.37,135.43,1.17,21,RISK_OFF,453309,1.75,CONSIDER
+ASB,Associated Banc-Corp,Financial,XLF,56.831462261124955,31.34,0.65,31.02,31.54,31.54,ATR-based,63,1974.42,31.34,30.04,-4.1,33.29,6.2,34.59,94.19,110.56,1.17,21,RISK_OFF,4194374,2.2,CONSIDER
