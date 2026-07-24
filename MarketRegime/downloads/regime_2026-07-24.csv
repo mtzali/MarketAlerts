@@ -1,3 +1,4 @@
 timestamp,score,regime,strength_count,weakness_count,momentum_count,SPY_price,SPY_chg,QQQ_price,QQQ_chg,IWM_price,IWM_chg,XLK_price,XLK_chg,XLF_price,XLF_chg,spy_vwap,vwap_diff_pct
 2026-07-24 14:29:31,1,BEARISH,164,180,31,739.4,0.17,687.13,-0.7,291.61,-0.16,176.87,-0.88,55.91,0.14,738.71,0.1
 2026-07-24 15:25:09,3,CHOPPY,205,143,29,742.55,0.59,689.91,-0.3,293.39,0.45,177.77,-0.38,56.31,0.87
+2026-07-24 16:34:55,3,CHOPPY,161,121,26,742.53,0.59,690.53,-0.21,293.49,0.48,178.29,-0.09,56.24,0.74
