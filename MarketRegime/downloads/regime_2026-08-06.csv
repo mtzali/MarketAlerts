@@ -1,0 +1,2 @@
+timestamp,score,regime,strength_count,weakness_count,momentum_count,SPY_price,SPY_chg,QQQ_price,QQQ_chg,IWM_price,IWM_chg,XLK_price,XLK_chg,XLF_price,XLF_chg,UPRO_price,UPRO_S1,UPRO_PP,UPRO_R1,TQQQ_price,TQQQ_S1,TQQQ_PP,TQQQ_R1
+2026-08-06 14:43:14,4,TRENDING,315,243,79,770.53,0.1,717.51,0.03,300.99,0.41,186.41,0.27,57.91,-0.16,153.24,149.59,152.51,157.05,72.84,71.5,73.46,76.77
