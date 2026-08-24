@@ -1,0 +1,5 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+ANDG,Andersen Group Inc,Consumer Cyclical,XLY,62.16790401264186,49.99,2.61,48.69,50.77,50.77,ATR-based,50,2499.5,49.99,44.77,-10.4,57.82,15.7,63.04,300.15,352.35,1.17,21,RISK_OFF,748961,1.71,CONSIDER
+ETSY,Etsy Inc,Consumer Cyclical,XLY,62.16790401264186,87.03,3.43,85.31,88.06,88.06,ATR-based,28,2436.84,87.03,80.17,-7.9,97.32,11.8,104.18,220.89,259.31,1.17,21,RISK_OFF,4500710,2.46,CONSIDER
+FIVE,Five Below Inc,Consumer Cyclical,XLY,62.16790401264186,262.72,8.98,258.23,265.41,265.41,ATR-based,9,2364.48,262.72,244.76,-6.8,289.66,10.3,307.62,185.89,218.21,1.17,21,RISK_OFF,1978406,1.69,CONSIDER
+FWDI,Forward Industries Inc,Consumer Cyclical,XLY,62.16790401264186,5.73,0.37,5.55,5.84,5.84,ATR-based,436,2498.28,5.73,4.99,-12.9,6.84,19.4,7.58,371.04,435.56,1.17,21,RISK_OFF,4722738,1.0,CONSIDER
