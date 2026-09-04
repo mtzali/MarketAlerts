@@ -1,0 +1,2 @@
+timestamp,score,regime,strength_count,weakness_count,momentum_count,SPY_price,SPY_chg,QQQ_price,QQQ_chg,IWM_price,IWM_chg,XLK_price,XLK_chg,XLF_price,XLF_chg,spy_vwap,vwap_diff_pct
+2026-09-04 13:59:42,1,BEARISH,188,227,39,772.21,-0.12,721.55,0.54,294.65,-0.18,188.06,1.12,58.05,-0.87,772.3,-0.01
