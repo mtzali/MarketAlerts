@@ -1,0 +1,5 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+GFR,Greenfire Resources Ltd,Energy,XLE,69.33690178249853,6.16,0.23,6.04,6.23,6.23,ATR-based,405,2494.8,6.16,5.7,-7.5,6.85,11.2,7.31,214.24,251.51,1.17,21,RISK_OFF,845638,,CONSIDER
+REPX,Riley Exploration Permian Inc,Energy,XLE,69.33690178249853,41.93,1.27,41.3,42.31,42.31,ATR-based,59,2473.87,41.93,39.39,-6.1,45.74,9.1,48.28,172.34,202.31,1.17,21,RISK_OFF,342958,1.0,CONSIDER
+DOCU,DocuSign Inc,Technology,XLK,54.50710190059479,68.41,2.85,66.98,69.27,69.27,ATR-based,36,2462.76,68.41,62.71,-8.3,76.96,12.5,82.66,235.98,277.02,1.17,21,RISK_OFF,7930271,2.62,CONSIDER
+OOMA,Ooma Inc,Technology,XLK,54.50710190059479,23.2,1.29,22.55,23.59,23.59,ATR-based,107,2482.4,23.2,20.62,-11.1,27.07,16.7,29.65,317.47,372.68,1.17,21,RISK_OFF,663106,1.29,CONSIDER
