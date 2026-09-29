@@ -1,0 +1,5 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+IDT,IDT Corp,Communication Services,XLC,48.67170045797196,75.56,2.39,74.37,76.28,76.28,ATR-based,33,2493.48,75.56,70.78,-6.3,82.73,9.5,87.51,181.4,212.95,1.17,21,RISK_OFF,800614,1.0,CONSIDER
+MGNI,Magnite Inc,Communication Services,XLC,48.67170045797196,25.67,1.13,25.11,26.01,26.01,ATR-based,97,2489.99,25.67,23.41,-8.8,29.06,13.2,31.32,252.1,295.95,1.17,21,RISK_OFF,4134175,1.33,CONSIDER
+PPLI,People Inc,Communication Services,XLC,48.67170045797196,40.74,1.44,40.02,41.17,41.17,ATR-based,61,2485.14,40.74,37.86,-7.1,45.06,10.6,47.94,202.03,237.17,1.17,21,RISK_OFF,1920574,1.67,CONSIDER
+WBD,Warner Bros. Discovery Inc,Communication Services,XLC,48.67170045797196,30.85,0.4,30.65,30.97,30.97,ATR-based,81,2498.85,30.85,30.05,-2.6,32.05,3.9,32.85,74.52,87.48,1.17,21,RISK_OFF,46711280,3.09,CONSIDER
