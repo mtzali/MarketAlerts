@@ -1,0 +1,5 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+CHRD,Chord Energy Corp,Energy,XLE,65.80345242095406,150.85,4.61,148.54,152.23,152.23,ATR-based,16,2413.6,150.85,141.63,-6.1,164.68,9.2,173.9,169.65,199.15,1.17,21,RISK_OFF,1113481,1.52,CONSIDER
+KMI,Kinder Morgan Inc,Energy,XLE,65.80345242095406,33.97,0.75,33.59,34.2,34.2,ATR-based,73,2479.81,33.97,32.47,-4.4,36.22,6.6,37.72,125.93,147.82,1.17,21,RISK_OFF,18309154,2.14,CONSIDER
+HAS,Hasbro Inc,Consumer Cyclical,XLY,62.26389632007864,114.0,3.21,112.39,114.96,114.96,ATR-based,21,2394.0,114.0,107.58,-5.6,123.63,8.4,130.05,155.04,182.01,1.17,21,RISK_OFF,5178862,1.41,CONSIDER
+MAT,Mattel Inc,Consumer Cyclical,XLY,62.26389632007864,16.95,0.64,16.63,17.14,17.14,ATR-based,147,2491.65,16.95,15.67,-7.6,18.87,11.3,20.15,216.38,254.02,1.17,21,RISK_OFF,8653110,2.0,CONSIDER
