@@ -1,0 +1,6 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+AR,Antero Resources Corp,Energy,XLE,68.97778650043507,41.54,1.32,40.88,41.94,41.94,ATR-based,48,1993.92,41.54,38.9,-6.4,45.5,9.5,48.14,145.73,171.07,1.17,21,RISK_OFF,8516543,1.58,CONSIDER
+KMI,Kinder Morgan Inc,Energy,XLE,68.97778650043507,33.94,0.88,33.5,34.2,34.2,ATR-based,58,1968.52,33.94,32.18,-5.2,36.58,7.8,38.34,117.39,137.81,1.17,21,RISK_OFF,22038078,2.07,CONSIDER
+RRC,Range Resources Corp,Energy,XLE,68.97778650043507,53.56,1.72,52.7,54.08,54.08,ATR-based,37,1981.72,53.56,50.12,-6.4,58.72,9.6,62.16,146.37,171.83,1.17,21,RISK_OFF,26468048,2.57,CONSIDER
+SOBO,South Bow Corp,Energy,XLE,68.97778650043507,35.69,0.75,35.31,35.91,35.91,ATR-based,56,1998.64,35.69,34.19,-4.2,37.94,6.3,39.44,96.6,113.4,1.17,21,RISK_OFF,1074699,3.15,CONSIDER
+DOW,Dow Inc,Basic Materials,XLB,62.60563227784066,33.99,1.02,33.48,34.3,34.3,ATR-based,58,1971.42,33.99,31.95,-6.0,37.05,9.0,39.09,136.07,159.73,1.17,21,RISK_OFF,14061565,2.5,CONSIDER
