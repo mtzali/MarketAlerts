@@ -1,0 +1,5 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+REGN,Regeneron Pharmaceuticals Inc,Healthcare,XLV,66.97087922414613,965.48,28.52,951.22,974.04,974.04,ATR-based,2,1930.96,965.48,908.44,-5.9,1051.04,8.9,1108.08,131.19,154.01,1.17,21,RISK_OFF,1337447,1.84,CONSIDER
+KDP,Keurig Dr Pepper Inc,Consumer Defensive,XLP,66.00754879049445,36.67,0.8,36.27,36.91,36.91,ATR-based,68,2493.56,36.67,35.07,-4.4,39.07,6.5,40.67,125.12,146.88,1.17,21,RISK_OFF,17130413,1.86,CONSIDER
+NWL,Newell Brands Inc,Consumer Defensive,XLP,66.00754879049445,5.97,0.32,5.81,6.07,6.07,ATR-based,418,2495.46,5.97,5.33,-10.7,6.93,16.1,7.57,307.65,361.15,1.17,21,RISK_OFF,12338985,2.8,CONSIDER
+TAP,Molson Coors Beverage Company,Consumer Defensive,XLP,66.00754879049445,43.01,1.17,42.42,43.36,43.36,ATR-based,58,2494.58,43.01,40.67,-5.4,46.52,8.2,48.86,156.08,183.22,1.17,21,RISK_OFF,5473825,2.96,CONSIDER
