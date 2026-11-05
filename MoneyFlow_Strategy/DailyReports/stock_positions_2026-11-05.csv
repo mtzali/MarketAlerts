@@ -1,0 +1,5 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+COST,Costco Wholesale Corp,Consumer Defensive,XLP,62.85923796536247,1064.6,20.01,1054.59,1070.6,1070.6,ATR-based,2,2129.2,1064.6,1024.58,-3.8,1124.63,5.6,1164.65,92.05,108.05,1.17,21,RISK_OFF,3236224,1.95,CONSIDER
+PRMB,Primo Brands Corp,Consumer Defensive,XLP,62.85923796536247,21.92,0.72,21.56,22.14,22.14,ATR-based,114,2498.88,21.92,20.48,-6.6,24.08,9.9,25.52,188.78,221.62,1.17,21,RISK_OFF,8686437,1.42,CONSIDER
+BDX,Becton Dickinson & Co,Healthcare,XLV,61.72713281712869,211.81,4.57,209.53,213.18,213.18,ATR-based,11,2329.91,211.81,202.67,-4.3,225.52,6.5,234.66,115.62,135.73,1.17,21,RISK_OFF,2745088,2.21,CONSIDER
+COLD,Americold Realty Trust Inc,Real Estate,XLRE,60.1271067919211,15.79,0.45,15.56,15.92,15.92,ATR-based,158,2494.82,15.79,14.89,-5.7,17.14,8.5,18.04,163.53,191.97,1.17,21,RISK_OFF,8096592,2.35,CONSIDER
