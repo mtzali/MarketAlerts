@@ -1,0 +1,4 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+CLX,Clorox Co,Consumer Defensive,XLP,59.30579965488389,107.82,3.47,106.08,108.86,108.86,ATR-based,30,3234.6,107.82,100.88,-6.4,118.23,9.7,125.17,239.43,281.07,1.17,21,RISK_OFF,6749448,3.14,CONSIDER
+COLD,Americold Realty Trust Inc,Real Estate,XLRE,57.44895187062464,16.15,0.5,15.9,16.3,16.3,ATR-based,206,3326.9,16.15,15.15,-6.2,17.65,9.3,18.65,236.9,278.1,1.17,21,RISK_OFF,5208584,2.35,CONSIDER
+SMA,Smartstop Self Storage REIT Inc,Real Estate,XLRE,57.44895187062464,38.16,1.07,37.62,38.48,38.48,ATR-based,87,3319.92,38.16,36.02,-5.6,41.37,8.4,43.51,214.11,251.34,1.17,21,RISK_OFF,4794589,2.36,CONSIDER
