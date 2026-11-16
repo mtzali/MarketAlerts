@@ -1,0 +1,4 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+FTS,Fortis Inc,Utilities,XLU,65.59527066291913,59.97,0.89,59.52,60.24,60.24,ATR-based,55,3298.35,59.97,58.19,-3.0,62.64,4.5,64.42,112.59,132.16,1.17,21,RISK_OFF,1734912,2.94,CONSIDER
+TSN,Tyson Foods Inc,Consumer Defensive,XLP,57.268959410547296,63.67,1.81,62.77,64.21,64.21,ATR-based,52,3310.84,63.67,60.05,-5.7,69.1,8.5,72.72,216.48,254.12,1.17,21,RISK_OFF,5949045,2.4,CONSIDER
+UTZ,Utz Brands Inc,Consumer Defensive,XLP,57.268959410547296,14.29,0.04,14.27,14.3,14.3,ATR-based,233,3329.57,14.29,14.21,-0.6,14.41,0.8,14.49,21.44,25.16,1.17,21,RISK_OFF,3297132,3.0,CONSIDER
