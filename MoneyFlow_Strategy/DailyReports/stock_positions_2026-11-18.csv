@@ -1,0 +1,5 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+AES,AES Corp,Utilities,XLU,61.72427798312491,15.02,0.05,14.99,15.04,15.04,ATR-based,166,2493.32,15.02,14.92,-0.7,15.17,1.0,15.27,19.09,22.41,1.17,21,RISK_OFF,92818602,3.0,CONSIDER
+BIPC,Brookfield Infrastructure Corp,Utilities,XLU,61.72427798312491,41.38,1.05,40.86,41.7,41.7,ATR-based,60,2482.8,41.38,39.28,-5.1,44.53,7.6,46.63,144.9,170.1,1.17,21,RISK_OFF,5879775,5.0,CONSIDER
+JJSF,J&J Snack Foods Corp,Consumer Defensive,XLP,55.30694115052435,99.27,3.05,97.74,100.19,100.19,ATR-based,25,2481.75,99.27,93.17,-6.1,108.42,9.2,114.52,175.38,205.87,1.17,21,RISK_OFF,392876,1.25,CONSIDER
+TGT,Target Corp,Consumer Defensive,XLP,55.30694115052435,166.65,5.53,163.89,168.31,168.31,ATR-based,15,2499.75,166.65,155.59,-6.6,183.24,10.0,194.3,190.78,223.97,1.17,21,RISK_OFF,9793858,2.61,CONSIDER
