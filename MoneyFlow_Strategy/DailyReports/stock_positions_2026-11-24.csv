@@ -1,0 +1,2 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+EMBC,Embecta Corp,Healthcare,XLV,51.48714434987296,8.05,0.51,7.8,8.2,8.2,ATR-based,1242,9998.1,8.05,7.03,-12.7,9.58,19.0,10.6,1456.87,1710.23,1.17,21,RISK_OFF,6309014,3.0,CONSIDER
