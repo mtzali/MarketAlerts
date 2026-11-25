@@ -1,0 +1,2 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+BIP,Brookfield Infrastructure Partners Inc,Utilities,XLU,61.7379883362169,44.35,1.51,43.59,44.8,44.8,ATR-based,225,9978.75,44.35,41.33,-6.8,48.88,10.2,51.9,781.43,917.32,1.17,21,RISK_OFF,2847799,1.54,CONSIDER
