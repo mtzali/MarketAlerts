@@ -1,0 +1,5 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+BIP,Brookfield Infrastructure Partners Inc,Utilities,XLU,61.64624192833102,44.62,1.51,43.86,45.07,45.07,ATR-based,56,2498.72,44.62,41.6,-6.8,49.15,10.2,52.17,194.49,228.31,1.17,21,RISK_OFF,5811540,1.5,CONSIDER
+HZN,Bright Horizon Energy Corp,Utilities,XLU,61.64624192833102,81.37,2.33,80.2,82.07,82.07,ATR-based,30,2441.1,81.37,76.71,-5.7,88.36,8.6,93.02,160.77,188.73,1.17,21,RISK_OFF,2418013,1.44,CONSIDER
+AMH,American Homes 4 Rent,Real Estate,XLRE,55.093486875431715,33.39,0.64,33.07,33.58,33.58,ATR-based,74,2470.86,33.39,32.11,-3.8,35.31,5.8,36.59,108.93,127.87,1.17,21,RISK_OFF,4624263,1.81,CONSIDER
+EPR,EPR Properties,Real Estate,XLRE,55.093486875431715,60.5,1.32,59.84,60.9,60.9,ATR-based,41,2480.5,60.5,57.86,-4.4,64.46,6.5,67.1,124.48,146.12,1.17,21,RISK_OFF,1616852,2.25,CONSIDER
