@@ -1,0 +1,4 @@
+Ticker,Company,Sector,Sector_ETF,Sector_Score,Price,ATR,Entry_Zone_Low,Entry_Zone_High,Limit_Buy_Price,Entry_Method,Shares,Investment,Entry_Price,Stop_Loss,Stop_Loss_Pct,Take_Profit,Take_Profit_Pct,Take_Profit_Extended,Potential_Loss,Potential_Gain,Risk_Reward,Max_Hold_Days,Market_Mode,Volume,Analyst_Rating,Recommendation
+BIP,Brookfield Infrastructure Partners Inc,Utilities,XLU,60.42107104693844,45.88,1.52,45.12,46.34,46.34,ATR-based,72,3303.36,45.88,42.84,-6.6,50.44,9.9,53.48,251.71,295.49,1.17,21,RISK_OFF,2311123,1.5,CONSIDER
+DV,DoubleVerify Holdings Inc,Communication Services,XLC,57.83528059937173,13.62,0.03,13.6,13.63,13.63,ATR-based,244,3323.28,13.62,13.56,-0.4,13.71,0.7,13.77,16.84,19.76,1.17,21,RISK_OFF,21190923,3.11,CONSIDER
+LFTO,Liftoff Mobile Inc,Communication Services,XLC,57.83528059937173,26.14,1.69,25.3,26.65,26.65,ATR-based,127,3319.78,26.14,22.76,-12.9,31.21,19.4,34.59,493.65,579.5,1.17,21,RISK_OFF,1505899,1.55,CONSIDER
